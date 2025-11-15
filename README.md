@@ -57,18 +57,43 @@ Then visit `http://localhost:8000`
 
 ## Deployment to GitHub Pages
 
+This repository uses GitHub Actions for automated deployment to GitHub Pages.
+
+### Automatic Deployment
+
+Every push to the `main` branch automatically triggers a deployment:
+
+1. Push your changes to the `main` branch
+2. GitHub Actions workflow runs automatically
+3. Site is deployed to GitHub Pages
+4. Access at: `https://bombfork.github.io/open-secret-santa/`
+
+### Manual Deployment
+
+You can also trigger deployment manually:
+
+1. Go to Actions tab in GitHub
+2. Select "Deploy to GitHub Pages" workflow
+3. Click "Run workflow"
+
+### Initial Setup
+
+If deploying for the first time:
+
 1. Push this repository to GitHub
 2. Go to Settings → Pages
-3. Set Source to "Deploy from a branch"
-4. Select the `main` branch and `/root` folder
-5. Click Save
+3. Set Source to "GitHub Actions"
+4. The workflow will deploy on the next push to `main`
 
-Your Secret Santa app will be live at: `https://[username].github.io/[repository]/`
+**Live URL**: https://bombfork.github.io/open-secret-santa/
 
 ## File Structure
 
 ```
 /
+├── .github/
+│   └── workflows/
+│       └── deploy.yml # GitHub Actions deployment workflow
 ├── index.html          # Main HTML file
 ├── styles/
 │   └── main.css       # Custom styles
