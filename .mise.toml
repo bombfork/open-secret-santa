@@ -1,12 +1,13 @@
 [tools]
-python = "latest"
+jq = "latest"
+node = "latest"
 
 [tasks.dev]
 description = "Start local development server"
 run = """
 echo "Starting server on http://localhost:8000"
 trap 'echo "\nServer stopped"; exit 0' SIGINT
-python -m http.server 8000
+npx http-server -p 8000
 """
 
 [tasks.test]
@@ -14,7 +15,7 @@ description = "Open the application in browser after starting server"
 run = """
 echo "Starting server on http://localhost:8000"
 trap 'kill $SERVER_PID 2>/dev/null; echo "\nServer stopped"; exit 0' SIGINT
-python -m http.server 8000 > /dev/null 2>&1 &
+npx http-server -p 8000 --silent &
 SERVER_PID=$!
 echo "Server starting on http://localhost:8000"
 sleep 2
@@ -28,3 +29,23 @@ fi
 echo "Press Ctrl+C to stop the server"
 wait $SERVER_PID
 """
+
+[tasks.lint]
+description = "Run ESLint on JavaScript files"
+run = "npm run lint"
+
+[tasks.format]
+description = "Check code formatting with Prettier"
+run = "npm run format"
+
+[tasks.format-fix]
+description = "Fix code formatting with Prettier"
+run = "npm run format:fix"
+
+[tasks.validate-i18n]
+description = "Validate i18n JSON files against schema"
+run = "npm run validate:i18n"
+
+[tasks.validate-all]
+description = "Run all validation checks (lint, format, i18n)"
+run = "npm run validate:all"

@@ -1,0 +1,27 @@
+{
+  "name": "open-secret-santa",
+  "version": "1.0.0",
+  "description": "A client-side Secret Santa gift exchange organizer with no backend",
+  "type": "module",
+  "scripts": {
+    "lint": "oxlint --deny-warnings js",
+    "format": "oxfmt --check js",
+    "format:fix": "oxfmt js",
+    "validate:i18n": "node scripts/validate-i18n.js",
+    "validate:all": "npm run lint && npm run format && npm run validate:i18n",
+    "dev": "npx http-server -p 8000"
+  },
+  "keywords": [
+    "secret-santa",
+    "gift-exchange",
+    "vanilla-js",
+    "client-side"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "ajv": "^8.12.0",
+    "oxfmt": "^0.13.0",
+    "oxlint": "^1.28.0"
+  }
+}
