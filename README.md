@@ -122,13 +122,35 @@ The application supports multiple languages with automatic detection and persist
 
 ### Supported Languages
 
+**22 languages total!**
+
+**Practical Languages:**
 - 🇬🇧 **English** (default)
 - 🇫🇷 **French** (Français)
 - 🇪🇸 **Spanish** (Español)
 - 🇩🇪 **German** (Deutsch)
+- 🇮🇹 **Italian** (Italiano)
+- 🇵🇹 **Portuguese** (Português)
+- 🇳🇱 **Dutch** (Nederlands)
+- 🇵🇱 **Polish** (Polski)
+- 🇷🇺 **Russian** (Русский)
+- 🇯🇵 **Japanese** (日本語)
+- 🇨🇳 **Chinese** (中文)
+
+**Regional Languages:**
 - 🏴 **Catalan** (Català)
-- 🖖 **Klingon** (tlhIngan Hol) - For the glory of the Empire!
-- 🧝 **Sindarin** (Elvish) - Speak friend and enter!
+- 🟥 **Basque** (Euskara)
+- 🏴 **Galician** (Galego)
+- 🏴 **Occitan** (Occitan)
+
+**Geek/Fantasy Languages:**
+- 🖖 **Klingon** (tlhIngan Hol) - Qapla'!
+- 🧝 **Sindarin** (Elvish/LOTR) - Mae govannen!
+- ✨ **Quenya** (High Elvish/LOTR) - Aiya!
+- 🐴 **Dothraki** (Game of Thrones) - Anha vazhak yeraan!
+- 💙 **Na'vi** (Avatar) - Oel ngati kameie!
+- 🖖 **Vulcan** (Star Trek) - Dif-tor heh smusma!
+- 🪖 **Mando'a** (Star Wars) - This is the Way!
 
 ### Language Detection
 

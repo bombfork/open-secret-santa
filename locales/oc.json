@@ -1,0 +1,81 @@
+{
+  "landing": {
+    "title": "Papèl Noèl Secret",
+    "subtitle": "Organizatz vòstre escambi de dons amb facilitat",
+    "howItWorks": "Cossí fonciona",
+    "instructions": [
+      "Crear un nòu Papèl Noèl Secret amb los noms dels participants",
+      "Definir una grana aleatòria per d'assignacions reproduziblas",
+      "Partejar los ligams individuals amb cada participant",
+      "Cada persona vesi sonque a qui deu far un don",
+      "L'administrator pòt veire totas las assignacions amb lo senhal"
+    ],
+    "securityNoticeTitle": "🎄 Fach per Jogaires Onèstes",
+    "securityNoticeText": "Aquesta aplicacion fonciona sul sistèma de l'onor! Los ligams son encodats (pas criptats), doncas es ideal per de grops de fisança coma la familha, los amics o los collègas. Se vos cal una seguretat de tipe Fort Knox, aquò es benlèu pas vòstra aplicacion! 😊",
+    "createButton": "Crear un Nòu Papèl Noèl Secret",
+    "viewButton": "Veire Vòstra Assignacion"
+  },
+  "create": {
+    "title": "Crear un Papèl Noèl Secret",
+    "participantsLabel": "Noms dels Participants",
+    "participantsHelp": "Picatz un nom per linha (minimum 3, maximum 50 participants)",
+    "participantsPlaceholder": "Alícia\nBob\nCarlòs\nDiana",
+    "seedLabel": "Grana Aleatòria",
+    "seedHelp": "Utilizatz la meteissa grana per obténer las meteissas assignacions",
+    "seedPlaceholder": "ex: nadal2024",
+    "passwordLabel": "Senhal d'Administrator",
+    "passwordHelp": "Necessari per veire totas las assignacions",
+    "passwordPlaceholder": "Picatz lo senhal d'administrator",
+    "backButton": "Tornar",
+    "submitButton": "Generar lo Papèl Noèl Secret"
+  },
+  "results": {
+    "title": "Papèl Noèl Secret Creat!",
+    "adminLinkTitle": "Ligam d'Administrator",
+    "adminLinkHelp": "Partejatz aquò amb l'organizator per veire totas las assignacions",
+    "participantLinksTitle": "Ligams dels Participants",
+    "participantLinksHelp": "Partejatz cada ligam amb lo participant correspondent",
+    "copyButton": "Copiar",
+    "copiedButton": "✓ Copiat!",
+    "createAnotherButton": "Crear un Autre"
+  },
+  "viewParticipant": {
+    "title": "Vòstra Assignacion de Papèl Noèl Secret",
+    "youAre": "Sètz lo Papèl Noèl Secret de:",
+    "keepSecret": "🤫 Gardatz lo secret!",
+    "backButton": "Tornar a l'Acuèlh"
+  },
+  "viewAdmin": {
+    "title": "Vista d'Administrator",
+    "participantLinksTitle": "Ligams dels Participants",
+    "participantLinksHelp": "Partejatz aquestes ligams amb los participants se ne an besonh tornarmai",
+    "passwordLabel": "Picatz lo Senhal d'Administrator",
+    "passwordPlaceholder": "Senhal d'administrator",
+    "unlockButton": "Veire Totas las Assignacions",
+    "incorrectPassword": "Senhal incorrèct",
+    "allAssignmentsTitle": "Totas las Assignacions del Papèl Noèl Secret",
+    "giverColumn": "Donaire",
+    "receiverColumn": "Recebedor",
+    "backButton": "Tornar a l'Acuèlh"
+  },
+  "error": {
+    "title": "⚠️ Error",
+    "backButton": "Tornar a l'Acuèlh"
+  },
+  "validation": {
+    "minParticipants": "Vos cal al mens 3 participants pel Papèl Noèl Secret",
+    "maxParticipants": "Maximum 50 participants autorizats (limitacion de longor d'URL)",
+    "seedRequired": "Mercés de picar una grana aleatòria",
+    "passwordRequired": "Mercés de picar un senhal d'administrator",
+    "passwordTooShort": "Lo senhal d'administrator deu aver al mens 4 caractèrs",
+    "noAssignmentFound": "Cap d'assignacion pas trobada per {name}",
+    "failedToLoad": "Fracàs del cargament de l'assignacion: {error}",
+    "failedToCreate": "Error en crear lo Papèl Noèl Secret: {error}",
+    "invalidUrl": "URL invalid: paramètre d'utilizaire o d'administrator mancant",
+    "invalidData": "Format de donadas invalid",
+    "failedToCopy": "Fracàs de la còpia dins lo quichapapièrs"
+  },
+  "alerts": {
+    "viewInstructions": "Per veire vòstra assignacion, clicatz sul ligam personalizat qu'es estat partejat amb vos."
+  }
+}

@@ -1,0 +1,81 @@
+{
+  "landing": {
+    "title": "Olentzero Sekretua",
+    "subtitle": "Antolatu zure opari-trukeeta erraz",
+    "howItWorks": "Nola funtzionatzen duen",
+    "instructions": [
+      "Sortu Olentzero Sekretua partaideenekin",
+      "Ezarri hazi ausazkoa erreproduzitzeko moduko esleipenetarako",
+      "Partekatu esteka indibidualak partaide bakoitzarekin",
+      "Pertsona bakoitzak bere oparitua nori emango dion ikusteko",
+      "Administratzaileak esleipen guztiak ikus ditzake pasahitzarekin"
+    ],
+    "securityNoticeTitle": "🎄 Jokari Zintzoetarako Egina",
+    "securityNoticeText": "Aplikazio hau ohorezko sisteman funtzionatzen du! Estekak kodetuak daude (enkriptatuak ez), beraz, familia, lagunak edo lankideak bezalako talde fidagarrietarako egokia da. Fort Knox mailako segurtasuna behar baduzu, agian ez da zure aplikazioa! 😊",
+    "createButton": "Sortu Olentzero Sekretua",
+    "viewButton": "Ikusi Zure Esleipena"
+  },
+  "create": {
+    "title": "Sortu Olentzero Sekretua",
+    "participantsLabel": "Partaideen Izenak",
+    "participantsHelp": "Sartu izen bat lerro bakoitzean (gutxienez 3, gehienez 50 partaide)",
+    "participantsPlaceholder": "Ane\nBob\nKarlos\nDiana",
+    "seedLabel": "Hazi Ausazkoa",
+    "seedHelp": "Erabili hazi bera esleipen berdinak lortzeko",
+    "seedPlaceholder": "adib: gabonak2024",
+    "passwordLabel": "Administratzailearen Pasahitza",
+    "passwordHelp": "Esleipen guztiak ikusteko beharrezkoa",
+    "passwordPlaceholder": "Sartu administratzailearen pasahitza",
+    "backButton": "Atzera",
+    "submitButton": "Sortu Olentzero Sekretua"
+  },
+  "results": {
+    "title": "Olentzero Sekretua Sortuta!",
+    "adminLinkTitle": "Administratzailearen Esteka",
+    "adminLinkHelp": "Partekatu hau antolatzailearekin esleipen guztiak ikusteko",
+    "participantLinksTitle": "Partaideen Estekak",
+    "participantLinksHelp": "Partekatu esteka bakoitza dagokion partaidearekin",
+    "copyButton": "Kopiatu",
+    "copiedButton": "✓ Kopiatuta!",
+    "createAnotherButton": "Sortu Beste Bat"
+  },
+  "viewParticipant": {
+    "title": "Zure Olentzero Sekretuaren Esleipena",
+    "youAre": "Hauxe da zure Olentzero Sekretua:",
+    "keepSecret": "🤫 Gorde sekretuan!",
+    "backButton": "Itzuli Hasierara"
+  },
+  "viewAdmin": {
+    "title": "Administratzailearen Ikuspegia",
+    "participantLinksTitle": "Partaideen Estekak",
+    "participantLinksHelp": "Partekatu esteka hauek partaideekin behar badute",
+    "passwordLabel": "Sartu Administratzailearen Pasahitza",
+    "passwordPlaceholder": "Administratzailearen pasahitza",
+    "unlockButton": "Ikusi Esleipen Guztiak",
+    "incorrectPassword": "Pasahitz okerra",
+    "allAssignmentsTitle": "Olentzero Sekretuaren Esleipen Guztiak",
+    "giverColumn": "Emailea",
+    "receiverColumn": "Hartzailea",
+    "backButton": "Itzuli Hasierara"
+  },
+  "error": {
+    "title": "⚠️ Errorea",
+    "backButton": "Itzuli Hasierara"
+  },
+  "validation": {
+    "minParticipants": "Gutxienez 3 partaide behar dituzu Olentzero Sekretua egiteko",
+    "maxParticipants": "Gehienez 50 partaide onartzen dira (URL luzeraren muga)",
+    "seedRequired": "Mesedez, sartu hazi ausazkoa",
+    "passwordRequired": "Mesedez, sartu administratzailearen pasahitza",
+    "passwordTooShort": "Administratzailearen pasahitzak gutxienez 4 karaktere izan behar ditu",
+    "noAssignmentFound": "Ez da {name}-(r)en esleipenik aurkitu",
+    "failedToLoad": "Huts egin du esleipena kargatzean: {error}",
+    "failedToCreate": "Errorea Olentzero Sekretua sortzean: {error}",
+    "invalidUrl": "URL baliogabea: erabiltzaile edo administratzaile parametroa falta da",
+    "invalidData": "Datu formatu baliogabea",
+    "failedToCopy": "Huts egin du arbelean kopiatzean"
+  },
+  "alerts": {
+    "viewInstructions": "Zure esleipena ikusteko, egin klik zurekin partekatu den esteka pertsonalizatuan."
+  }
+}
