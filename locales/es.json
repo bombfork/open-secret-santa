@@ -44,7 +44,9 @@
     "backButton": "Volver al Inicio"
   },
   "viewAdmin": {
-    "title": "Todas las Asignaciones (Vista de Administrador)",
+    "title": "Vista de Administrador",
+    "participantLinksTitle": "Enlaces de Participantes",
+    "participantLinksHelp": "Comparte estos enlaces con los participantes si los necesitan",
     "passwordLabel": "Ingresa la Contraseña de Administrador",
     "passwordPlaceholder": "Contraseña de administrador",
     "unlockButton": "Ver Todas las Asignaciones",

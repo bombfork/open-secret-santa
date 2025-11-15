@@ -2,8 +2,9 @@
  * View mode logic for Secret Santa (participant and admin views)
  */
 
-import { decodeData, verifyPassword } from './encoder.js';
+import { decodeData, verifyPassword, generateParticipantUrl } from './encoder.js';
 import { t } from './i18n.js';
+import { escapeHtml, setupCopyButtons } from './utils.js';
 
 /**
  * Get assignment for a specific participant
@@ -47,6 +48,39 @@ export function setupParticipantView(encodedData, participantName, onBack) {
 }
 
 /**
+ * Display participant links in admin view
+ * @param {string} encodedData - Encoded data from URL
+ * @param {Object[]} assignments - Array of assignments
+ */
+function displayAdminParticipantLinks(encodedData, assignments) {
+    const container = document.getElementById('admin-participant-links');
+    container.innerHTML = '';
+
+    // Get base URL
+    const baseUrl = window.location.origin + window.location.pathname;
+
+    // Get all participant names
+    const participants = assignments.map(a => a.giver);
+
+    participants.forEach(name => {
+        const url = generateParticipantUrl(baseUrl, encodedData, name);
+
+        const div = document.createElement('div');
+        div.className = 'participant-link-item';
+        div.innerHTML = `
+            <strong>${escapeHtml(name)}:</strong>
+            <input type="text" value="${escapeHtml(url)}" readonly>
+            <button class="copy-btn" data-url="${escapeHtml(url)}">${t('results.copyButton')}</button>
+        `;
+
+        container.appendChild(div);
+    });
+
+    // Setup copy buttons
+    setupCopyButtons();
+}
+
+/**
  * Setup admin view
  * @param {string} encodedData - Encoded data from URL
  * @param {string} passwordHash - Password hash from URL
@@ -65,6 +99,9 @@ export function setupAdminView(encodedData, passwordHash, onBack) {
     } catch (error) {
         throw new Error(t('validation.failedToLoad', { error: error.message }));
     }
+
+    // Display participant links (always visible, no password needed)
+    displayAdminParticipantLinks(encodedData, data.assignments);
 
     // Setup unlock button
     unlockBtn.addEventListener('click', () => {
@@ -113,17 +150,6 @@ function displayAllAssignments(assignments) {
         `;
         tbody.appendChild(row);
     });
-}
-
-/**
- * Escape HTML to prevent XSS
- * @param {string} text - Text to escape
- * @returns {string} - Escaped text
- */
-function escapeHtml(text) {
-    const div = document.createElement('div');
-    div.textContent = text;
-    return div.innerHTML;
 }
 
 /**

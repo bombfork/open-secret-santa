@@ -107,8 +107,16 @@
 
         <!-- View Mode (Admin) -->
         <div id="view-admin-page" class="page hidden">
-            <h1>All Assignments (Admin View)</h1>
+            <h1>Admin View</h1>
 
+            <!-- Participant Links Section (always visible) -->
+            <article>
+                <header><strong>Participant Links</strong></header>
+                <p><small>Share these links with participants if they need them again</small></p>
+                <div id="admin-participant-links"></div>
+            </article>
+
+            <!-- Password Section -->
             <article>
                 <label for="admin-password-input">
                     Enter Admin Password
@@ -117,6 +125,7 @@
                 <button id="unlock-admin">View All Assignments</button>
             </article>
 
+            <!-- Assignments Table (hidden until unlocked) -->
             <div id="all-assignments" class="hidden">
                 <article>
                     <header><strong>All Secret Santa Assignments</strong></header>

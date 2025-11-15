@@ -44,7 +44,9 @@
     "backButton": "Retour à l'Accueil"
   },
   "viewAdmin": {
-    "title": "Toutes les Attributions (Vue Administrateur)",
+    "title": "Vue Administrateur",
+    "participantLinksTitle": "Liens des Participants",
+    "participantLinksHelp": "Partagez ces liens avec les participants s'ils en ont besoin",
     "passwordLabel": "Entrez le Mot de Passe Administrateur",
     "passwordPlaceholder": "Mot de passe administrateur",
     "unlockButton": "Voir Toutes les Attributions",

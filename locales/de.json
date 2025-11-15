@@ -44,7 +44,9 @@
     "backButton": "Zurück zur Startseite"
   },
   "viewAdmin": {
-    "title": "Alle Zuweisungen (Administrator-Ansicht)",
+    "title": "Administrator-Ansicht",
+    "participantLinksTitle": "Teilnehmer-Links",
+    "participantLinksHelp": "Teilen Sie diese Links mit den Teilnehmern, wenn sie sie erneut benötigen",
     "passwordLabel": "Administrator-Passwort Eingeben",
     "passwordPlaceholder": "Administrator-Passwort",
     "unlockButton": "Alle Zuweisungen Anzeigen",

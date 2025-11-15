@@ -44,7 +44,9 @@
     "backButton": "Back to Home"
   },
   "viewAdmin": {
-    "title": "All Assignments (Admin View)",
+    "title": "Admin View",
+    "participantLinksTitle": "Participant Links",
+    "participantLinksHelp": "Share these links with participants if they need them again",
     "passwordLabel": "Enter Admin Password",
     "passwordPlaceholder": "Admin password",
     "unlockButton": "View All Assignments",

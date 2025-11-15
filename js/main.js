@@ -102,6 +102,8 @@ function updatePageText() {
 
     // View admin page
     document.querySelector('#view-admin-page h1').textContent = t('viewAdmin.title');
+    document.querySelector('#view-admin-page article:nth-of-type(1) header strong').textContent = t('viewAdmin.participantLinksTitle');
+    document.querySelector('#view-admin-page article:nth-of-type(1) p small').textContent = t('viewAdmin.participantLinksHelp');
     document.querySelector('label[for="admin-password-input"]').childNodes[0].textContent = t('viewAdmin.passwordLabel') + ' ';
     document.getElementById('admin-password-input').placeholder = t('viewAdmin.passwordPlaceholder');
     document.getElementById('unlock-admin').textContent = t('viewAdmin.unlockButton');
