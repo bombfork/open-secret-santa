@@ -8,7 +8,7 @@ A simple, client-side Secret Santa gift exchange organizer. No backend required 
 - **Shareable Links**: Each participant gets a unique link showing only their assignment
 - **Admin View**: Password-protected view to see all assignments
 - **Reproducible**: Same seed always generates the same assignments
-- **Multi-Language Support**: Available in English 🇬🇧, French 🇫🇷, Spanish 🇪🇸, and German 🇩🇪
+- **Multi-Language Support**: Available in 22 languages including 11 practical languages, 4 regional languages, and 7 geek/fantasy languages!
 - **Privacy-Focused**: All processing happens in the browser
 - **No Backend**: Hosted entirely on GitHub Pages
 
@@ -99,7 +99,8 @@ If deploying for the first time:
 │   ├── en.json        # English translations
 │   ├── fr.json        # French translations
 │   ├── es.json        # Spanish translations
-│   └── de.json        # German translations
+│   ├── de.json        # German translations
+│   ├── ...            # And 18 more languages (22 total)!
 ├── index.html          # Main HTML file
 ├── styles/
 │   └── main.css       # Custom styles
@@ -251,7 +252,7 @@ If you need Fort Knox security, this might not be your app! 😊 But for most ca
 
 ## Limitations
 
-- **URL Length**: Very large participant lists may exceed browser URL limits
+- **Participant Limit**: Maximum 50 participants (due to URL length constraints)
 - **No Exclusions**: Cannot specify people who shouldn't be paired (future enhancement)
 - **Browser History**: URLs with data are stored in browser history
 - **No Encryption**: Data is encoded, not encrypted
@@ -262,10 +263,10 @@ Potential features for future versions:
 
 - [ ] Exclusion rules (people who shouldn't be paired)
 - [ ] Email template generator
-- [ ] Multi-language support
 - [ ] Custom themes
 - [ ] Export assignments as PDF
 - [ ] URL shortening integration
+- [ ] More languages (we're already at 22!)
 
 ## License
 
