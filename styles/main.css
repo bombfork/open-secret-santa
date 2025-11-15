@@ -1,0 +1,108 @@
+/* Custom styles for Secret Santa app */
+
+:root {
+    --spacing-section: 3rem;
+}
+
+body {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
+
+/* Page visibility */
+.page {
+    display: block;
+}
+
+.page.hidden {
+    display: none;
+}
+
+/* Link containers */
+.link-container {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.link-container input {
+    flex: 1;
+    margin-bottom: 0;
+}
+
+.link-container .copy-btn {
+    flex-shrink: 0;
+    margin-bottom: 0;
+}
+
+/* Participant links */
+.participant-link-item {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.participant-link-item strong {
+    min-width: 150px;
+}
+
+.participant-link-item input {
+    flex: 1;
+    margin-bottom: 0;
+}
+
+.participant-link-item .copy-btn {
+    flex-shrink: 0;
+    margin-bottom: 0;
+}
+
+/* Assignment card */
+.assignment-card {
+    text-align: center;
+    margin: 2rem 0;
+}
+
+.assignment-card h2 {
+    color: var(--pico-primary);
+    margin: 2rem 0;
+    font-size: 2.5rem;
+}
+
+/* Tables */
+table {
+    margin-top: 1rem;
+}
+
+table th:nth-child(2),
+table td:nth-child(2) {
+    text-align: center;
+    width: 50px;
+}
+
+/* Buttons */
+button.copy-btn {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+}
+
+/* Success feedback */
+.copied {
+    background-color: var(--pico-ins-color) !important;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .participant-link-item {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .participant-link-item strong {
+        min-width: auto;
+    }
+
+    .link-container {
+        flex-direction: column;
+    }
+}

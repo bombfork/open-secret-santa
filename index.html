@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secret Santa</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+    <link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+    <main class="container">
+        <!-- Landing Page -->
+        <div id="landing-page" class="page">
+            <hgroup>
+                <h1>🎅 Secret Santa</h1>
+                <p>Organize your gift exchange with ease</p>
+            </hgroup>
+
+            <article>
+                <header><strong>How it works</strong></header>
+                <ol>
+                    <li>Create a new Secret Santa with participant names</li>
+                    <li>Set a random seed for reproducible assignments</li>
+                    <li>Share individual links with each participant</li>
+                    <li>Each person sees only who they're giving to</li>
+                    <li>Admin can view all assignments with password</li>
+                </ol>
+            </article>
+
+            <div class="grid">
+                <button id="create-btn" class="contrast">Create New Secret Santa</button>
+                <button id="view-btn" class="secondary">View Your Assignment</button>
+            </div>
+        </div>
+
+        <!-- Create Mode -->
+        <div id="create-page" class="page hidden">
+            <h1>Create Secret Santa</h1>
+
+            <form id="create-form">
+                <label for="participants">
+                    Participant Names
+                    <small>Enter one name per line (minimum 3 participants)</small>
+                    <textarea id="participants" rows="8" placeholder="Alice&#10;Bob&#10;Charlie&#10;Diana" required></textarea>
+                </label>
+
+                <label for="seed">
+                    Random Seed
+                    <small>Use the same seed to get the same assignments</small>
+                    <input type="text" id="seed" placeholder="e.g., christmas2024" required>
+                </label>
+
+                <label for="admin-password">
+                    Admin Password
+                    <small>Required to view all assignments</small>
+                    <input type="password" id="admin-password" placeholder="Enter admin password" required>
+                </label>
+
+                <div class="grid">
+                    <button type="button" id="back-to-landing" class="secondary">Back</button>
+                    <button type="submit">Generate Secret Santa</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Results Page -->
+        <div id="results-page" class="page hidden">
+            <h1>Secret Santa Created!</h1>
+
+            <article>
+                <header><strong>Admin Link</strong></header>
+                <p><small>Share this with the organizer to view all assignments</small></p>
+                <div class="link-container">
+                    <input type="text" id="admin-link" readonly>
+                    <button class="copy-btn" data-target="admin-link">Copy</button>
+                </div>
+            </article>
+
+            <article>
+                <header><strong>Participant Links</strong></header>
+                <p><small>Share each link with the corresponding participant</small></p>
+                <div id="participant-links"></div>
+            </article>
+
+            <button id="create-another" class="secondary">Create Another</button>
+        </div>
+
+        <!-- View Mode (Participant) -->
+        <div id="view-participant-page" class="page hidden">
+            <h1>Your Secret Santa Assignment</h1>
+
+            <article class="assignment-card">
+                <header>
+                    <strong id="participant-name"></strong>
+                </header>
+                <p>You are Secret Santa for:</p>
+                <h2 id="assigned-to"></h2>
+                <footer>
+                    <small>🤫 Keep it secret!</small>
+                </footer>
+            </article>
+
+            <button id="back-from-view">Back to Home</button>
+        </div>
+
+        <!-- View Mode (Admin) -->
+        <div id="view-admin-page" class="page hidden">
+            <h1>All Assignments (Admin View)</h1>
+
+            <article>
+                <label for="admin-password-input">
+                    Enter Admin Password
+                    <input type="password" id="admin-password-input" placeholder="Admin password">
+                </label>
+                <button id="unlock-admin">View All Assignments</button>
+            </article>
+
+            <div id="all-assignments" class="hidden">
+                <article>
+                    <header><strong>All Secret Santa Assignments</strong></header>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Giver</th>
+                                <th>→</th>
+                                <th>Receiver</th>
+                            </tr>
+                        </thead>
+                        <tbody id="assignments-table"></tbody>
+                    </table>
+                </article>
+            </div>
+
+            <button id="back-from-admin">Back to Home</button>
+        </div>
+
+        <!-- Error Page -->
+        <div id="error-page" class="page hidden">
+            <article>
+                <header><strong>⚠️ Error</strong></header>
+                <p id="error-message"></p>
+                <button id="back-from-error">Back to Home</button>
+            </article>
+        </div>
+    </main>
+
+    <script type="module" src="js/main.js"></script>
+</body>
+</html>
