@@ -93,6 +93,7 @@ function updatePageText() {
     document.querySelector('#results-page h1').textContent = t('results.title');
     document.querySelector('#results-page article:nth-of-type(1) header strong').textContent = t('results.adminLinkTitle');
     document.querySelector('#results-page article:nth-of-type(1) p small').textContent = t('results.adminLinkHelp');
+    document.querySelector('#results-page .link-container .copy-btn').textContent = t('results.copyButton');
     document.querySelector('#results-page article:nth-of-type(2) header strong').textContent = t('results.participantLinksTitle');
     document.querySelector('#results-page article:nth-of-type(2) p small').textContent = t('results.participantLinksHelp');
     document.getElementById('create-another').textContent = t('results.createAnotherButton');
