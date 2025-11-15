@@ -1,0 +1,76 @@
+{
+  "landing": {
+    "title": "Amigo Invisible",
+    "subtitle": "Organiza tu intercambio de regalos con facilidad",
+    "howItWorks": "Cómo funciona",
+    "instructions": [
+      "Crea un nuevo Amigo Invisible con los nombres de los participantes",
+      "Establece una semilla aleatoria para asignaciones reproducibles",
+      "Comparte enlaces individuales con cada participante",
+      "Cada persona solo ve a quién le toca dar",
+      "El administrador puede ver todas las asignaciones con contraseña"
+    ],
+    "createButton": "Crear Nuevo Amigo Invisible",
+    "viewButton": "Ver Tu Asignación"
+  },
+  "create": {
+    "title": "Crear Amigo Invisible",
+    "participantsLabel": "Nombres de los Participantes",
+    "participantsHelp": "Ingresa un nombre por línea (mínimo 3 participantes)",
+    "participantsPlaceholder": "Alicia\nBob\nCarlos\nDiana",
+    "seedLabel": "Semilla Aleatoria",
+    "seedHelp": "Usa la misma semilla para obtener las mismas asignaciones",
+    "seedPlaceholder": "ej: navidad2024",
+    "passwordLabel": "Contraseña de Administrador",
+    "passwordHelp": "Requerida para ver todas las asignaciones",
+    "passwordPlaceholder": "Ingresa la contraseña de administrador",
+    "backButton": "Atrás",
+    "submitButton": "Generar Amigo Invisible"
+  },
+  "results": {
+    "title": "¡Amigo Invisible Creado!",
+    "adminLinkTitle": "Enlace de Administrador",
+    "adminLinkHelp": "Comparte esto con el organizador para ver todas las asignaciones",
+    "participantLinksTitle": "Enlaces de Participantes",
+    "participantLinksHelp": "Comparte cada enlace con el participante correspondiente",
+    "copyButton": "Copiar",
+    "copiedButton": "✓ ¡Copiado!",
+    "createAnotherButton": "Crear Otro"
+  },
+  "viewParticipant": {
+    "title": "Tu Asignación de Amigo Invisible",
+    "youAre": "Eres el Amigo Invisible de:",
+    "keepSecret": "🤫 ¡Manténlo en secreto!",
+    "backButton": "Volver al Inicio"
+  },
+  "viewAdmin": {
+    "title": "Todas las Asignaciones (Vista de Administrador)",
+    "passwordLabel": "Ingresa la Contraseña de Administrador",
+    "passwordPlaceholder": "Contraseña de administrador",
+    "unlockButton": "Ver Todas las Asignaciones",
+    "incorrectPassword": "Contraseña incorrecta",
+    "allAssignmentsTitle": "Todas las Asignaciones del Amigo Invisible",
+    "giverColumn": "Donante",
+    "receiverColumn": "Receptor",
+    "backButton": "Volver al Inicio"
+  },
+  "error": {
+    "title": "⚠️ Error",
+    "backButton": "Volver al Inicio"
+  },
+  "validation": {
+    "minParticipants": "Necesitas al menos 3 participantes para el Amigo Invisible",
+    "seedRequired": "Por favor ingresa una semilla aleatoria",
+    "passwordRequired": "Por favor ingresa una contraseña de administrador",
+    "passwordTooShort": "La contraseña de administrador debe tener al menos 4 caracteres",
+    "noAssignmentFound": "No se encontró asignación para {name}",
+    "failedToLoad": "Error al cargar la asignación: {error}",
+    "failedToCreate": "Error al crear el Amigo Invisible: {error}",
+    "invalidUrl": "URL inválida: falta el parámetro de usuario o administrador",
+    "invalidData": "Formato de datos inválido",
+    "failedToCopy": "Error al copiar al portapapeles"
+  },
+  "alerts": {
+    "viewInstructions": "Para ver tu asignación, haz clic en el enlace personalizado que se compartió contigo."
+  }
+}

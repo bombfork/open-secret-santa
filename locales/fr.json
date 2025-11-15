@@ -1,0 +1,76 @@
+{
+  "landing": {
+    "title": "Père Noël Secret",
+    "subtitle": "Organisez votre échange de cadeaux en toute simplicité",
+    "howItWorks": "Comment ça marche",
+    "instructions": [
+      "Créez un nouveau Père Noël Secret avec les noms des participants",
+      "Définissez une graine aléatoire pour des attributions reproductibles",
+      "Partagez les liens individuels avec chaque participant",
+      "Chaque personne ne voit que son attribution",
+      "L'administrateur peut voir toutes les attributions avec le mot de passe"
+    ],
+    "createButton": "Créer un Père Noël Secret",
+    "viewButton": "Voir Votre Attribution"
+  },
+  "create": {
+    "title": "Créer un Père Noël Secret",
+    "participantsLabel": "Noms des Participants",
+    "participantsHelp": "Entrez un nom par ligne (minimum 3 participants)",
+    "participantsPlaceholder": "Alice\nBob\nCharlie\nDiana",
+    "seedLabel": "Graine Aléatoire",
+    "seedHelp": "Utilisez la même graine pour obtenir les mêmes attributions",
+    "seedPlaceholder": "ex: noel2024",
+    "passwordLabel": "Mot de Passe Administrateur",
+    "passwordHelp": "Requis pour voir toutes les attributions",
+    "passwordPlaceholder": "Entrez le mot de passe administrateur",
+    "backButton": "Retour",
+    "submitButton": "Générer le Père Noël Secret"
+  },
+  "results": {
+    "title": "Père Noël Secret Créé !",
+    "adminLinkTitle": "Lien Administrateur",
+    "adminLinkHelp": "Partagez ce lien avec l'organisateur pour voir toutes les attributions",
+    "participantLinksTitle": "Liens des Participants",
+    "participantLinksHelp": "Partagez chaque lien avec le participant correspondant",
+    "copyButton": "Copier",
+    "copiedButton": "✓ Copié !",
+    "createAnotherButton": "Créer un Autre"
+  },
+  "viewParticipant": {
+    "title": "Votre Attribution de Père Noël Secret",
+    "youAre": "Vous êtes le Père Noël Secret de :",
+    "keepSecret": "🤫 Gardez le secret !",
+    "backButton": "Retour à l'Accueil"
+  },
+  "viewAdmin": {
+    "title": "Toutes les Attributions (Vue Administrateur)",
+    "passwordLabel": "Entrez le Mot de Passe Administrateur",
+    "passwordPlaceholder": "Mot de passe administrateur",
+    "unlockButton": "Voir Toutes les Attributions",
+    "incorrectPassword": "Mot de passe incorrect",
+    "allAssignmentsTitle": "Toutes les Attributions du Père Noël Secret",
+    "giverColumn": "Donneur",
+    "receiverColumn": "Receveur",
+    "backButton": "Retour à l'Accueil"
+  },
+  "error": {
+    "title": "⚠️ Erreur",
+    "backButton": "Retour à l'Accueil"
+  },
+  "validation": {
+    "minParticipants": "Vous avez besoin d'au moins 3 participants pour le Père Noël Secret",
+    "seedRequired": "Veuillez entrer une graine aléatoire",
+    "passwordRequired": "Veuillez entrer un mot de passe administrateur",
+    "passwordTooShort": "Le mot de passe administrateur doit contenir au moins 4 caractères",
+    "noAssignmentFound": "Aucune attribution trouvée pour {name}",
+    "failedToLoad": "Échec du chargement de l'attribution : {error}",
+    "failedToCreate": "Erreur lors de la création du Père Noël Secret : {error}",
+    "invalidUrl": "URL invalide : paramètre utilisateur ou administrateur manquant",
+    "invalidData": "Format de données invalide",
+    "failedToCopy": "Échec de la copie dans le presse-papiers"
+  },
+  "alerts": {
+    "viewInstructions": "Pour voir votre attribution, cliquez sur le lien personnalisé qui vous a été partagé."
+  }
+}

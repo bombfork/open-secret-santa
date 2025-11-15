@@ -4,6 +4,7 @@
 
 import { generateAssignments } from './random.js';
 import { encodeData, generateAdminUrl, generateParticipantUrl } from './encoder.js';
+import { t } from './i18n.js';
 
 /**
  * Parse participant names from textarea
@@ -30,28 +31,28 @@ export function validateInputs(participants, seed, password) {
     if (participants.length < 3) {
         return {
             valid: false,
-            error: 'You need at least 3 participants for Secret Santa'
+            error: t('validation.minParticipants')
         };
     }
 
     if (seed.trim().length === 0) {
         return {
             valid: false,
-            error: 'Please enter a random seed'
+            error: t('validation.seedRequired')
         };
     }
 
     if (password.trim().length === 0) {
         return {
             valid: false,
-            error: 'Please enter an admin password'
+            error: t('validation.passwordRequired')
         };
     }
 
     if (password.length < 4) {
         return {
             valid: false,
-            error: 'Admin password must be at least 4 characters'
+            error: t('validation.passwordTooShort')
         };
     }
 
@@ -120,7 +121,7 @@ export function setupCreateForm(onSuccess, onBack) {
             const result = createSecretSanta(participants, seed, password);
             onSuccess(result);
         } catch (error) {
-            alert('Error creating Secret Santa: ' + error.message);
+            alert(t('validation.failedToCreate', { error: error.message }));
         }
     });
 
@@ -148,7 +149,7 @@ export function displayResults(result, onCreateAnother) {
         div.innerHTML = `
             <strong>${escapeHtml(name)}:</strong>
             <input type="text" value="${escapeHtml(url)}" readonly>
-            <button class="copy-btn" data-url="${escapeHtml(url)}">Copy</button>
+            <button class="copy-btn" data-url="${escapeHtml(url)}">${t('results.copyButton')}</button>
         `;
 
         participantLinksContainer.appendChild(div);
@@ -187,7 +188,7 @@ function setupCopyButtons() {
 
                 // Visual feedback
                 const originalText = button.textContent;
-                button.textContent = '✓ Copied!';
+                button.textContent = t('results.copiedButton');
                 button.classList.add('copied');
 
                 setTimeout(() => {
@@ -195,7 +196,7 @@ function setupCopyButtons() {
                     button.classList.remove('copied');
                 }, 2000);
             } catch (error) {
-                alert('Failed to copy to clipboard');
+                alert(t('validation.failedToCopy'));
             }
         });
     });

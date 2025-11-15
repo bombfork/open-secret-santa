@@ -3,6 +3,7 @@
  */
 
 import { decodeData, verifyPassword } from './encoder.js';
+import { t } from './i18n.js';
 
 /**
  * Get assignment for a specific participant
@@ -29,7 +30,7 @@ export function setupParticipantView(encodedData, participantName, onBack) {
         const assignment = getAssignment(data.assignments, participantName);
 
         if (!assignment) {
-            throw new Error(`No assignment found for ${participantName}`);
+            throw new Error(t('validation.noAssignmentFound', { name: participantName }));
         }
 
         // Display assignment
@@ -41,7 +42,7 @@ export function setupParticipantView(encodedData, participantName, onBack) {
         backBtn.addEventListener('click', onBack, { once: true });
 
     } catch (error) {
-        throw new Error('Failed to load assignment: ' + error.message);
+        throw new Error(t('validation.failedToLoad', { error: error.message }));
     }
 }
 
@@ -62,7 +63,7 @@ export function setupAdminView(encodedData, passwordHash, onBack) {
     try {
         data = decodeData(encodedData);
     } catch (error) {
-        throw new Error('Failed to load data: ' + error.message);
+        throw new Error(t('validation.failedToLoad', { error: error.message }));
     }
 
     // Setup unlock button
@@ -70,7 +71,7 @@ export function setupAdminView(encodedData, passwordHash, onBack) {
         const password = passwordInput.value;
 
         if (!verifyPassword(password, passwordHash)) {
-            alert('Incorrect password');
+            alert(t('viewAdmin.incorrectPassword'));
             passwordInput.value = '';
             passwordInput.focus();
             return;
@@ -148,7 +149,7 @@ export function setupViewMode(params, onBack) {
             return 'admin';
         } else {
             // Data but no user or admin parameter - show error
-            throw new Error('Invalid URL: missing user or admin parameter');
+            throw new Error(t('validation.invalidUrl'));
         }
     } catch (error) {
         throw error;

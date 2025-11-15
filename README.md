@@ -8,6 +8,7 @@ A simple, client-side Secret Santa gift exchange organizer. No backend required 
 - **Shareable Links**: Each participant gets a unique link showing only their assignment
 - **Admin View**: Password-protected view to see all assignments
 - **Reproducible**: Same seed always generates the same assignments
+- **Multi-Language Support**: Available in English 🇬🇧, French 🇫🇷, Spanish 🇪🇸, and German 🇩🇪
 - **Privacy-Focused**: All processing happens in the browser
 - **No Backend**: Hosted entirely on GitHub Pages
 
@@ -94,6 +95,11 @@ If deploying for the first time:
 ├── .github/
 │   └── workflows/
 │       └── deploy.yml # GitHub Actions deployment workflow
+├── locales/
+│   ├── en.json        # English translations
+│   ├── fr.json        # French translations
+│   ├── es.json        # Spanish translations
+│   └── de.json        # German translations
 ├── index.html          # Main HTML file
 ├── styles/
 │   └── main.css       # Custom styles
@@ -102,11 +108,72 @@ If deploying for the first time:
 │   ├── create.js      # Create Secret Santa logic
 │   ├── view.js        # View assignments logic
 │   ├── random.js      # Seeded random generator & assignment algorithm
-│   └── encoder.js     # URL encoding/decoding utilities
+│   ├── encoder.js     # URL encoding/decoding utilities
+│   └── i18n.js        # Internationalization system
 ├── .mise.toml         # mise configuration for development
 ├── .nojekyll          # GitHub Pages configuration
 ├── LICENSE            # MIT License
 └── README.md          # This file
+```
+
+## Internationalization (i18n)
+
+The application supports multiple languages with automatic detection and persistence.
+
+### Supported Languages
+
+- 🇬🇧 **English** (default)
+- 🇫🇷 **French** (Français)
+- 🇪🇸 **Spanish** (Español)
+- 🇩🇪 **German** (Deutsch)
+
+### Language Detection
+
+The application determines language in this priority order:
+
+1. User's explicit choice (saved in localStorage)
+2. URL parameter (`?lang=fr`)
+3. Browser language preference
+4. Falls back to English
+
+### Adding New Languages
+
+To add a new language:
+
+1. Create a new translation file in `locales/` (e.g., `it.json` for Italian)
+2. Copy the structure from `locales/en.json`
+3. Translate all text values
+4. Add the language to `LANGUAGES` object in `js/i18n.js`:
+
+```javascript
+export const LANGUAGES = {
+    en: { name: 'English', flag: '🇬🇧' },
+    fr: { name: 'Français', flag: '🇫🇷' },
+    es: { name: 'Español', flag: '🇪🇸' },
+    de: { name: 'Deutsch', flag: '🇩🇪' },
+    it: { name: 'Italiano', flag: '🇮🇹' }  // New language
+};
+```
+
+### Translation File Structure
+
+Each translation file contains nested objects with keys for different sections:
+
+```json
+{
+  "landing": {
+    "title": "Secret Santa",
+    "subtitle": "Organize your gift exchange with ease",
+    ...
+  },
+  "create": { ... },
+  "results": { ... },
+  "viewParticipant": { ... },
+  "viewAdmin": { ... },
+  "error": { ... },
+  "validation": { ... },
+  "alerts": { ... }
+}
 ```
 
 ## How the Algorithm Works
