@@ -36,6 +36,13 @@ export function validateInputs(participants, seed, password) {
         };
     }
 
+    if (participants.length > 50) {
+        return {
+            valid: false,
+            error: t('validation.maxParticipants')
+        };
+    }
+
     if (seed.trim().length === 0) {
         return {
             valid: false,

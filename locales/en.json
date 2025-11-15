@@ -18,7 +18,7 @@
   "create": {
     "title": "Create Secret Santa",
     "participantsLabel": "Participant Names",
-    "participantsHelp": "Enter one name per line (minimum 3 participants)",
+    "participantsHelp": "Enter one name per line (minimum 3, maximum 50 participants)",
     "participantsPlaceholder": "Alice\nBob\nCharlie\nDiana",
     "seedLabel": "Random Seed",
     "seedHelp": "Use the same seed to get the same assignments",
@@ -64,6 +64,7 @@
   },
   "validation": {
     "minParticipants": "You need at least 3 participants for Secret Santa",
+    "maxParticipants": "Maximum 50 participants allowed (URL length limitation)",
     "seedRequired": "Please enter a random seed",
     "passwordRequired": "Please enter an admin password",
     "passwordTooShort": "Admin password must be at least 4 characters",

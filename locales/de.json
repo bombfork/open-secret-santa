@@ -18,7 +18,7 @@
   "create": {
     "title": "Wichteln Erstellen",
     "participantsLabel": "Teilnehmernamen",
-    "participantsHelp": "Geben Sie einen Namen pro Zeile ein (mindestens 3 Teilnehmer)",
+    "participantsHelp": "Geben Sie einen Namen pro Zeile ein (mindestens 3, maximal 50 Teilnehmer)",
     "participantsPlaceholder": "Alice\nBob\nCharlie\nDiana",
     "seedLabel": "Zufallssamen",
     "seedHelp": "Verwenden Sie denselben Samen für dieselben Zuweisungen",
@@ -64,6 +64,7 @@
   },
   "validation": {
     "minParticipants": "Sie benötigen mindestens 3 Teilnehmer für das Wichteln",
+    "maxParticipants": "Maximal 50 Teilnehmer erlaubt (URL-Längenbeschränkung)",
     "seedRequired": "Bitte geben Sie einen Zufallssamen ein",
     "passwordRequired": "Bitte geben Sie ein Administrator-Passwort ein",
     "passwordTooShort": "Das Administrator-Passwort muss mindestens 4 Zeichen lang sein",

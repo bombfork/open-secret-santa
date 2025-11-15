@@ -18,7 +18,7 @@
   "create": {
     "title": "Créer un Père Noël Secret",
     "participantsLabel": "Noms des Participants",
-    "participantsHelp": "Entrez un nom par ligne (minimum 3 participants)",
+    "participantsHelp": "Entrez un nom par ligne (minimum 3, maximum 50 participants)",
     "participantsPlaceholder": "Alice\nBob\nCharlie\nDiana",
     "seedLabel": "Graine Aléatoire",
     "seedHelp": "Utilisez la même graine pour obtenir les mêmes attributions",
@@ -64,6 +64,7 @@
   },
   "validation": {
     "minParticipants": "Vous avez besoin d'au moins 3 participants pour le Père Noël Secret",
+    "maxParticipants": "Maximum 50 participants autorisés (limitation de longueur d'URL)",
     "seedRequired": "Veuillez entrer une graine aléatoire",
     "passwordRequired": "Veuillez entrer un mot de passe administrateur",
     "passwordTooShort": "Le mot de passe administrateur doit contenir au moins 4 caractères",

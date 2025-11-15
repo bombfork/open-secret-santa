@@ -18,7 +18,7 @@
   "create": {
     "title": "Crear Amigo Invisible",
     "participantsLabel": "Nombres de los Participantes",
-    "participantsHelp": "Ingresa un nombre por línea (mínimo 3 participantes)",
+    "participantsHelp": "Ingresa un nombre por línea (mínimo 3, máximo 50 participantes)",
     "participantsPlaceholder": "Alicia\nBob\nCarlos\nDiana",
     "seedLabel": "Semilla Aleatoria",
     "seedHelp": "Usa la misma semilla para obtener las mismas asignaciones",
@@ -64,6 +64,7 @@
   },
   "validation": {
     "minParticipants": "Necesitas al menos 3 participantes para el Amigo Invisible",
+    "maxParticipants": "Máximo 50 participantes permitidos (limitación de longitud de URL)",
     "seedRequired": "Por favor ingresa una semilla aleatoria",
     "passwordRequired": "Por favor ingresa una contraseña de administrador",
     "passwordTooShort": "La contraseña de administrador debe tener al menos 4 caracteres",
