@@ -1,0 +1,82 @@
+{
+  "landing": {
+    "title": "Thurin Mírdan",
+    "subtitle": "Orthach le megalad mellyn",
+    "howItWorks": "Man cared",
+    "instructions": [
+      "Ego Thurin Mírdan guren ah ennyn i mellyn",
+      "Togo had annui an haded anglennatha",
+      "Anno enni mellon ah i thailen annui",
+      "Sui mellon cên anno hen i anno dan",
+      "Condir cên gwenn hain haded le têw"
+    ],
+    "securityNoticeTitle": "🎄 An mellyn ceredir egor",
+    "securityNoticeTitle": "🎄 An Mellyn Faer Egor",
+    "securityNoticeText": "I sad hen gûr míriel! I thailen egorer, ú-galadhremmo - mae an mellyn ceredir, velethril, ah mellon-gwaith! Man anírach galadh Fort Knox? Ú-mae i sad hen! 😊",
+    "createButton": "Ego Thurin Mírdan Guren",
+    "viewButton": "Pedo Had Le"
+  },
+  "create": {
+    "title": "Ego Thurin Mírdan",
+    "participantsLabel": "Enni i Mellyn",
+    "participantsHelp": "Tecco eneth sui thâl (nelui mellyn ned, canad mellyn ned)",
+    "participantsPlaceholder": "Arwen\nLegolas\nGaladriel\nElrond",
+    "seedLabel": "Had Annui",
+    "seedHelp": "Togo i had him an i haded anglennatha him",
+    "seedPlaceholder": "e.g., yestarë2024",
+    "passwordLabel": "Têw i Condir",
+    "passwordHelp": "Orthach an hain haded gwenn",
+    "passwordPlaceholder": "Tecco têw i condir",
+    "backButton": "Ego Ned",
+    "submitButton": "Egor Thurin Mírdan"
+  },
+  "results": {
+    "title": "Thurin Mírdan Egor!",
+    "adminLinkTitle": "Thail i Condir",
+    "adminLinkHelp": "Anno hen an i tûr an hain haded gwenn",
+    "participantLinksTitle": "Thailen i Mellyn",
+    "participantLinksHelp": "Anno sui thail an mellon sui",
+    "copyButton": "Togo",
+    "copiedButton": "✓ Tegol!",
+    "createAnotherButton": "Egor Eneth"
+  },
+  "viewParticipant": {
+    "title": "Le Had Thurin Mírdan",
+    "youAre": "Thurin Mírdan le an:",
+    "keepSecret": "🤫 Daro i thurin!",
+    "backButton": "Ego Ned ah Mindon"
+  },
+  "viewAdmin": {
+    "title": "Cennen i Condir",
+    "participantLinksTitle": "Thailen i Mellyn",
+    "participantLinksHelp": "Anno i thailen hen an mellyn man anírach ned",
+    "passwordLabel": "Tecco Têw i Condir",
+    "passwordPlaceholder": "Têw i condir",
+    "unlockButton": "Gwenn Hain Haded",
+    "incorrectPassword": "Têw ú-certh",
+    "allAssignmentsTitle": "Hain Haded Thurin Mírdan",
+    "giverColumn": "Anno",
+    "receiverColumn": "Cabed",
+    "backButton": "Ego Ned ah Mindon"
+  },
+  "error": {
+    "title": "⚠️ Baw",
+    "backButton": "Ego Ned ah Mindon"
+  },
+  "validation": {
+    "minParticipants": "Orthach nelui mellyn an Thurin Mírdan",
+    "maxParticipants": "Canad mellyn anglenna (and thail anglenna)",
+    "seedRequired": "Tecco had annui",
+    "passwordRequired": "Tecco têw i condir",
+    "passwordTooShort": "Têw i condir orthach cân rîw",
+    "noAssignmentFound": "Had an {name} ú-hîr",
+    "failedToLoad": "Ú-cabed had hîr: {error}",
+    "failedToCreate": "Baw ego Thurin Mírdan: {error}",
+    "invalidUrl": "Thail ú-certh: mellon edh condir ú-hîr",
+    "invalidData": "Le anglenna ú-certh",
+    "failedToCopy": "Ú-cabed togo"
+  },
+  "alerts": {
+    "viewInstructions": "An cennen le had, togo i thail annui i annen an le."
+  }
+}

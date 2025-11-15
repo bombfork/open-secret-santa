@@ -126,6 +126,9 @@ The application supports multiple languages with automatic detection and persist
 - 🇫🇷 **French** (Français)
 - 🇪🇸 **Spanish** (Español)
 - 🇩🇪 **German** (Deutsch)
+- 🏴 **Catalan** (Català)
+- 🖖 **Klingon** (tlhIngan Hol) - For the glory of the Empire!
+- 🧝 **Sindarin** (Elvish) - Speak friend and enter!
 
 ### Language Detection
 

@@ -8,7 +8,10 @@ export const LANGUAGES = {
     en: { name: 'English', flag: '🇬🇧' },
     fr: { name: 'Français', flag: '🇫🇷' },
     es: { name: 'Español', flag: '🇪🇸' },
-    de: { name: 'Deutsch', flag: '🇩🇪' }
+    de: { name: 'Deutsch', flag: '🇩🇪' },
+    ca: { name: 'Català', flag: '🏴' },
+    tlh: { name: 'tlhIngan Hol', flag: '🖖' },
+    sjn: { name: 'Sindarin', flag: '🧝' }
 };
 
 const DEFAULT_LANGUAGE = 'en';
