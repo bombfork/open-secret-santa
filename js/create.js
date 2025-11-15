@@ -50,19 +50,7 @@ export function validateInputs(participants, seed, password) {
         };
     }
 
-    if (password.trim().length === 0) {
-        return {
-            valid: false,
-            error: t('validation.passwordRequired')
-        };
-    }
-
-    if (password.length < 4) {
-        return {
-            valid: false,
-            error: t('validation.passwordTooShort')
-        };
-    }
+    // Password is now optional (blank passwords are allowed)
 
     return { valid: true };
 }
@@ -78,14 +66,14 @@ export function createSecretSanta(participants, seed, adminPassword) {
     // Generate assignments
     const assignments = generateAssignments(participants, seed);
 
-    // Encode data
-    const { data, passwordHash } = encodeData(assignments, seed, adminPassword);
+    // Encode data (password hash now included in data)
+    const { data } = encodeData(assignments, seed, adminPassword);
 
     // Get base URL (current page without query params)
     const baseUrl = window.location.origin + window.location.pathname;
 
-    // Generate admin URL
-    const adminUrl = generateAdminUrl(baseUrl, data, passwordHash);
+    // Generate admin URL (no password hash in URL)
+    const adminUrl = generateAdminUrl(baseUrl, data);
 
     // Generate participant URLs
     const participantUrls = participants.map(name => ({

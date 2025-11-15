@@ -20,36 +20,87 @@ export function hashPassword(password) {
 }
 
 /**
+ * Simple XOR cipher for basic obfuscation
+ * Not cryptographically secure - for casual use only
+ * @param {string} text - Text to encrypt/decrypt
+ * @param {string} key - Encryption key (seed)
+ * @returns {string} - Encrypted/decrypted text
+ */
+function xorCipher(text, key) {
+    if (!key || key.length === 0) {
+        return text; // No encryption if key is empty
+    }
+
+    let result = '';
+    for (let i = 0; i < text.length; i++) {
+        const textCode = text.charCodeAt(i);
+        const keyCode = key.charCodeAt(i % key.length);
+        result += String.fromCharCode(textCode ^ keyCode);
+    }
+    return result;
+}
+
+/**
+ * Encrypt assignments using seed as key
+ * @param {Object[]} assignments - Array of {giver, receiver} pairs
+ * @param {string} seed - Encryption key
+ * @returns {string} - Encrypted assignments as string
+ */
+function encryptAssignments(assignments, seed) {
+    const jsonString = JSON.stringify(assignments);
+    return xorCipher(jsonString, seed);
+}
+
+/**
+ * Decrypt assignments using seed as key
+ * @param {string} encryptedData - Encrypted assignments string
+ * @param {string} seed - Decryption key
+ * @returns {Object[]} - Decrypted assignments array
+ */
+function decryptAssignments(encryptedData, seed) {
+    const jsonString = xorCipher(encryptedData, seed);
+    return JSON.parse(jsonString);
+}
+
+/**
  * Encode Secret Santa data for URL
  * @param {Object[]} assignments - Array of {giver, receiver} pairs
  * @param {string} seed - Random seed used
- * @param {string} adminPassword - Admin password (will be hashed)
- * @returns {Object} - Encoded data object with data and passwordHash
+ * @param {string} adminPassword - Admin password (will be hashed and stored in data)
+ * @returns {Object} - Encoded data object with data only (passwordHash now included in data)
  */
 export function encodeData(assignments, seed, adminPassword) {
+    // Encrypt assignments using seed as key (basic obfuscation)
+    const encryptedAssignments = encryptAssignments(assignments, seed);
+
     const data = {
         seed: seed,
-        assignments: assignments
+        assignments: encryptedAssignments,
+        passwordHash: hashPassword(adminPassword)
     };
 
     const jsonString = JSON.stringify(data);
     const base64 = btoa(unescape(encodeURIComponent(jsonString)));
 
     return {
-        data: base64,
-        passwordHash: hashPassword(adminPassword)
+        data: base64
     };
 }
 
 /**
  * Decode Secret Santa data from URL parameter
  * @param {string} encodedData - Base64 encoded data
- * @returns {Object} - Decoded data object with seed and assignments
+ * @returns {Object} - Decoded data object with seed and decrypted assignments
  */
 export function decodeData(encodedData) {
     try {
         const jsonString = decodeURIComponent(escape(atob(encodedData)));
-        return JSON.parse(jsonString);
+        const data = JSON.parse(jsonString);
+
+        // Decrypt assignments using seed as key
+        data.assignments = decryptAssignments(data.assignments, data.seed);
+
+        return data;
     } catch (error) {
         throw new Error('Invalid data format');
     }
@@ -58,14 +109,13 @@ export function decodeData(encodedData) {
 /**
  * Generate admin URL
  * @param {string} baseUrl - Base URL of the application
- * @param {string} encodedData - Encoded data string
- * @param {string} passwordHash - Hashed admin password
+ * @param {string} encodedData - Encoded data string (includes password hash)
  * @returns {string} - Complete admin URL
  */
-export function generateAdminUrl(baseUrl, encodedData, passwordHash) {
+export function generateAdminUrl(baseUrl, encodedData) {
     const url = new URL(baseUrl);
     url.searchParams.set('data', encodedData);
-    url.searchParams.set('admin', passwordHash);
+    url.searchParams.set('admin', 'true');
     return url.toString();
 }
 

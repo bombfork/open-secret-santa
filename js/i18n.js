@@ -9,7 +9,7 @@ export const LANGUAGES = {
     fr: { name: 'Français', flag: '🇫🇷' },
     es: { name: 'Español', flag: '🇪🇸' },
     de: { name: 'Deutsch', flag: '🇩🇪' },
-    ca: { name: 'Català', flag: '🏴 CA' },
+    ca: { name: 'Català', flag: '🏴' },
     it: { name: 'Italiano', flag: '🇮🇹' },
     pt: { name: 'Português', flag: '🇵🇹' },
     nl: { name: 'Nederlands', flag: '🇳🇱' },
@@ -17,9 +17,9 @@ export const LANGUAGES = {
     ru: { name: 'Русский', flag: '🇷🇺' },
     ja: { name: '日本語', flag: '🇯🇵' },
     zh: { name: '中文', flag: '🇨🇳' },
-    eu: { name: 'Euskara', flag: '🏴 EU' },
-    gl: { name: 'Galego', flag: '🏴 GL' },
-    oc: { name: 'Occitan', flag: '🏴 OC' },
+    eu: { name: 'Euskara', flag: '🏴' },
+    gl: { name: 'Galego', flag: '🏴' },
+    oc: { name: 'Occitan', flag: '🏴' },
     tlh: { name: 'tlhIngan Hol', flag: '🖖' },
     sjn: { name: 'Sindarin', flag: '🧝' },
     qya: { name: 'Quenya', flag: '✨' }
@@ -170,40 +170,37 @@ export async function initI18n() {
  * @param {Function} onChange - Callback when language changes
  */
 export function createLanguageSelector(container, onChange) {
-    const selector = document.createElement('div');
-    selector.className = 'language-selector';
-    selector.setAttribute('role', 'navigation');
-    selector.setAttribute('aria-label', 'Language selector');
+    const wrapper = document.createElement('div');
+    wrapper.className = 'language-selector';
+    wrapper.setAttribute('role', 'navigation');
+    wrapper.setAttribute('aria-label', 'Language selector');
+
+    const select = document.createElement('select');
+    select.className = 'language-dropdown';
+    select.setAttribute('aria-label', 'Select language');
 
     for (const [code, { name, flag }] of Object.entries(LANGUAGES)) {
-        const button = document.createElement('button');
-        button.className = 'language-btn';
-        button.setAttribute('data-lang', code);
-        button.setAttribute('aria-label', name);
-        button.setAttribute('title', name);
-        button.textContent = flag;
+        const option = document.createElement('option');
+        option.value = code;
+        option.textContent = `${flag} ${name}`;
 
         if (code === currentLanguage) {
-            button.classList.add('active');
+            option.selected = true;
         }
 
-        button.addEventListener('click', async () => {
-            await setLanguage(code);
-
-            // Update active state
-            selector.querySelectorAll('.language-btn').forEach(btn => {
-                btn.classList.remove('active');
-            });
-            button.classList.add('active');
-
-            // Call onChange callback
-            if (onChange) {
-                onChange(code);
-            }
-        });
-
-        selector.appendChild(button);
+        select.appendChild(option);
     }
 
-    container.appendChild(selector);
+    select.addEventListener('change', async (e) => {
+        const code = e.target.value;
+        await setLanguage(code);
+
+        // Call onChange callback
+        if (onChange) {
+            onChange(code);
+        }
+    });
+
+    wrapper.appendChild(select);
+    container.appendChild(wrapper);
 }

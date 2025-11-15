@@ -168,6 +168,12 @@ async function init() {
 
     // Setup landing page buttons
     document.getElementById('create-btn').addEventListener('click', () => {
+        // Pre-fill seed with random value
+        const seedInput = document.getElementById('seed');
+        if (!seedInput.value) {
+            const randomSeed = Math.random().toString(36).substring(2, 15);
+            seedInput.value = randomSeed;
+        }
         showPage('create');
     });
 

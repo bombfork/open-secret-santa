@@ -10,7 +10,6 @@
       "Sui mellon cên anno hen i anno dan",
       "Condir cên gwenn hain haded le têw"
     ],
-    "securityNoticeTitle": "🎄 An mellyn ceredir egor",
     "securityNoticeTitle": "🎄 An Mellyn Faer Egor",
     "securityNoticeText": "I sad hen gûr míriel! I thailen egorer, ú-galadhremmo - mae an mellyn ceredir, velethril, ah mellon-gwaith! Man anírach galadh Fort Knox? Ú-mae i sad hen! 😊",
     "createButton": "Ego Thurin Mírdan Guren",
@@ -22,11 +21,11 @@
     "participantsHelp": "Tecco eneth sui thâl (nelui mellyn ned, canad mellyn ned)",
     "participantsPlaceholder": "Arwen\nLegolas\nGaladriel\nElrond",
     "seedLabel": "Had Annui",
-    "seedHelp": "Togo i had him an i haded anglennatha him",
+    "seedHelp": "A random seed has been generated, or provide your own",
     "seedPlaceholder": "e.g., yestarë2024",
     "passwordLabel": "Têw i Condir",
-    "passwordHelp": "Orthach an hain haded gwenn",
-    "passwordPlaceholder": "Tecco têw i condir",
+    "passwordHelp": "Optional - leave blank for no password protection",
+    "passwordPlaceholder": "Enter admin password (optional)",
     "backButton": "Ego Ned",
     "submitButton": "Egor Thurin Mírdan"
   },

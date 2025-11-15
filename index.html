@@ -9,14 +9,16 @@
 </head>
 <body>
     <main class="container">
-        <!-- Language Selector -->
-        <div id="language-selector-container"></div>
         <!-- Landing Page -->
         <div id="landing-page" class="page">
-            <hgroup>
-                <h1>🎅 Secret Santa</h1>
-                <p>Organize your gift exchange with ease</p>
-            </hgroup>
+            <div class="header-with-language">
+                <hgroup>
+                    <h1>🎅 Secret Santa</h1>
+                    <p>Organize your gift exchange with ease</p>
+                </hgroup>
+                <!-- Language Selector -->
+                <div id="language-selector-container"></div>
+            </div>
 
             <article>
                 <header><strong>How it works</strong></header>
@@ -63,8 +65,8 @@
 
                 <label for="admin-password">
                     Admin Password
-                    <small>Required to view all assignments</small>
-                    <input type="password" id="admin-password" placeholder="Enter admin password" required>
+                    <small>Optional - leave blank for no password protection</small>
+                    <input type="password" id="admin-password" placeholder="Enter admin password (optional)">
                 </label>
 
                 <div class="grid">

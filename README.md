@@ -141,10 +141,10 @@ The application supports multiple languages with automatic detection and persist
 - 🇨🇳 **Chinese** (中文)
 
 **Regional Languages:**
-- 🏴 CA **Catalan** (Català)
-- 🏴 EU **Basque** (Euskara)
-- 🏴 GL **Galician** (Galego)
-- 🏴 OC **Occitan** (Occitan)
+- 🏴 **Catalan** (Català)
+- 🏴 **Basque** (Euskara)
+- 🏴 **Galician** (Galego)
+- 🏴 **Occitan** (Occitan)
 
 **Geek/Fantasy Languages:**
 - 🖖 **Klingon** (tlhIngan Hol) - Qapla'!

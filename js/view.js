@@ -82,11 +82,10 @@ function displayAdminParticipantLinks(encodedData, assignments) {
 
 /**
  * Setup admin view
- * @param {string} encodedData - Encoded data from URL
- * @param {string} passwordHash - Password hash from URL
+ * @param {string} encodedData - Encoded data from URL (includes password hash)
  * @param {Function} onBack - Callback for back button
  */
-export function setupAdminView(encodedData, passwordHash, onBack) {
+export function setupAdminView(encodedData, onBack) {
     const unlockBtn = document.getElementById('unlock-admin');
     const passwordInput = document.getElementById('admin-password-input');
     const assignmentsDiv = document.getElementById('all-assignments');
@@ -107,7 +106,8 @@ export function setupAdminView(encodedData, passwordHash, onBack) {
     unlockBtn.addEventListener('click', () => {
         const password = passwordInput.value;
 
-        if (!verifyPassword(password, passwordHash)) {
+        // If password hash exists in data, verify it
+        if (data.passwordHash && !verifyPassword(password, data.passwordHash)) {
             alert(t('viewAdmin.incorrectPassword'));
             passwordInput.value = '';
             passwordInput.focus();
@@ -170,8 +170,8 @@ export function setupViewMode(params, onBack) {
             setupParticipantView(params.data, params.user, onBack);
             return 'participant';
         } else if (params.admin) {
-            // Admin view
-            setupAdminView(params.data, params.admin, onBack);
+            // Admin view (password hash now in encoded data)
+            setupAdminView(params.data, onBack);
             return 'admin';
         } else {
             // Data but no user or admin parameter - show error
