@@ -2,6 +2,8 @@
 
 A simple, client-side Secret Santa gift exchange organizer. No backend required - all data is encoded in shareable URLs!
 
+**🎄 Try it live:** [https://bombfork.github.io/open-secret-santa](https://bombfork.github.io/open-secret-santa)
+
 ## Features
 
 - **Create Secret Santa**: Add participants, set a random seed, and generate assignments
@@ -100,7 +102,7 @@ If deploying for the first time:
 │   ├── fr.json        # French translations
 │   ├── es.json        # Spanish translations
 │   ├── de.json        # German translations
-│   ├── ...            # And 18 more languages (22 total)!
+│   ├── ...            # And 14 more languages (18 total)!
 ├── index.html          # Main HTML file
 ├── styles/
 │   └── main.css       # Custom styles
@@ -139,10 +141,10 @@ The application supports multiple languages with automatic detection and persist
 - 🇨🇳 **Chinese** (中文)
 
 **Regional Languages:**
-- 🏴 **Catalan** (Català)
-- 🟥 **Basque** (Euskara)
-- 🏴 **Galician** (Galego)
-- 🏴 **Occitan** (Occitan)
+- 🏴 CA **Catalan** (Català)
+- 🏴 EU **Basque** (Euskara)
+- 🏴 GL **Galician** (Galego)
+- 🏴 OC **Occitan** (Occitan)
 
 **Geek/Fantasy Languages:**
 - 🖖 **Klingon** (tlhIngan Hol) - Qapla'!
