@@ -12,6 +12,7 @@ body {
 /* Language Selector */
 .language-selector {
     display: flex;
+    flex-wrap: wrap;
     gap: 0.5rem;
     justify-content: flex-end;
     margin-bottom: 2rem;

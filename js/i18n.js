@@ -9,7 +9,7 @@ export const LANGUAGES = {
     fr: { name: 'Français', flag: '🇫🇷' },
     es: { name: 'Español', flag: '🇪🇸' },
     de: { name: 'Deutsch', flag: '🇩🇪' },
-    ca: { name: 'Català', flag: '🏴' },
+    ca: { name: 'Català', flag: '🏴 CA' },
     it: { name: 'Italiano', flag: '🇮🇹' },
     pt: { name: 'Português', flag: '🇵🇹' },
     nl: { name: 'Nederlands', flag: '🇳🇱' },
@@ -17,16 +17,12 @@ export const LANGUAGES = {
     ru: { name: 'Русский', flag: '🇷🇺' },
     ja: { name: '日本語', flag: '🇯🇵' },
     zh: { name: '中文', flag: '🇨🇳' },
-    eu: { name: 'Euskara', flag: '🟥' },
-    gl: { name: 'Galego', flag: '🏴' },
-    oc: { name: 'Occitan', flag: '🏴' },
+    eu: { name: 'Euskara', flag: '🏴 EU' },
+    gl: { name: 'Galego', flag: '🏴 GL' },
+    oc: { name: 'Occitan', flag: '🏴 OC' },
     tlh: { name: 'tlhIngan Hol', flag: '🖖' },
     sjn: { name: 'Sindarin', flag: '🧝' },
-    qya: { name: 'Quenya', flag: '✨' },
-    'mis-x-dot': { name: 'Dothraki', flag: '🐴' },
-    'mis-x-navi': { name: "Na'vi", flag: '💙' },
-    'mis-x-vulc': { name: 'Vulcan', flag: '🖖' },
-    'mis-x-mand': { name: "Mando'a", flag: '🪖' }
+    qya: { name: 'Quenya', flag: '✨' }
 };
 
 const DEFAULT_LANGUAGE = 'en';

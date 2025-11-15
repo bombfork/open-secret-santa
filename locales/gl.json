@@ -5,9 +5,7 @@
     "howItWorks": "Como funciona",
     "instructions": [
       "Crea un novo Amigo Invisible cos nomes dos participantes",
-      "Establece unha semente aleatoria para asignacións reproduc
-
-ibles",
+      "Establece unha semente aleatoria para asignacións reproducibles",
       "Comparte ligazóns individuais con cada participante",
       "Cada persoa só ve a quen lle toca agasallar",
       "O administrador pode ver todas as asignacións co contrasinal"
