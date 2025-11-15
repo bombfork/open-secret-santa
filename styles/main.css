@@ -54,6 +54,23 @@ body {
     display: none;
 }
 
+/* Security notice */
+.security-notice {
+    background-color: var(--pico-secondary-background);
+    border-left: 4px solid var(--pico-secondary);
+    margin: 1.5rem 0;
+}
+
+.security-notice header {
+    margin-bottom: 0.5rem;
+}
+
+.security-notice p {
+    margin-bottom: 0;
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
 /* Link containers */
 .link-container {
     display: flex;

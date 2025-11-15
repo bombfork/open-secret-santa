@@ -10,6 +10,8 @@
       "Jede Person sieht nur, wem sie beschenkt",
       "Admin kann alle Zuweisungen mit Passwort einsehen"
     ],
+    "securityNoticeTitle": "🎄 Für Fair-Player Gemacht",
+    "securityNoticeText": "Diese App basiert auf dem Vertrauensprinzip! Links sind kodiert (nicht verschlüsselt), daher ist sie ideal für vertrauenswürdige Gruppen wie Familie, Freunde oder Kollegen. Wenn Sie Fort-Knox-Sicherheit brauchen, ist das vielleicht nicht die richtige App! 😊",
     "createButton": "Neues Wichteln Erstellen",
     "viewButton": "Ihre Zuweisung Ansehen"
   },

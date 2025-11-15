@@ -10,6 +10,8 @@
       "Each person sees only who they're giving to",
       "Admin can view all assignments with password"
     ],
+    "securityNoticeTitle": "🎄 Made for Fair Players",
+    "securityNoticeText": "This app works on the honor system! Links are encoded (not encrypted), so it's best for trustworthy groups like family, friends, or coworkers. If you need Fort Knox security, this might not be your app! 😊",
     "createButton": "Create New Secret Santa",
     "viewButton": "View Your Assignment"
   },

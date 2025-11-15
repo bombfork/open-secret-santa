@@ -205,12 +205,18 @@ https://example.com/?data=<encoded_data>&admin=<password_hash>
 
 ## Security Considerations
 
-⚠️ **Important**: This application is designed for casual use, not high-security scenarios.
+🎄 **Made for Fair Players**: This app works on the honor system!
 
-- Passwords are hashed with a simple algorithm (not cryptographically secure)
-- Data in URLs can be decoded by anyone with technical knowledge
-- URLs appear in browser history and server logs
-- Best for friendly gift exchanges, not sensitive data
+This Secret Santa application is designed for **casual, friendly exchanges** with trustworthy groups (family, friends, coworkers). Here's what you should know:
+
+- **Encoded, not encrypted**: Links use Base64 encoding - anyone with technical knowledge can decode them
+- **Honor system**: We assume participants play fair and don't peek at others' assignments
+- **Simple password hashing**: Admin passwords use basic hashing (not cryptographically secure)
+- **URLs in history**: Assignment links appear in browser history and server logs
+- **Perfect for**: Friendly groups where everyone plays by the rules
+- **Not recommended for**: High-security scenarios or groups with untrusted participants
+
+If you need Fort Knox security, this might not be your app! 😊 But for most casual Secret Santa exchanges, it works great.
 
 ## Browser Compatibility
 

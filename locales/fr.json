@@ -10,6 +10,8 @@
       "Chaque personne ne voit que son attribution",
       "L'administrateur peut voir toutes les attributions avec le mot de passe"
     ],
+    "securityNoticeTitle": "🎄 Pour Joueurs Fair-Play",
+    "securityNoticeText": "Cette application fonctionne sur le principe de l'honneur ! Les liens sont encodés (pas chiffrés), donc c'est idéal pour des groupes de confiance comme la famille, les amis ou les collègues. Si vous avez besoin d'une sécurité maximale, ce n'est peut-être pas l'app qu'il vous faut ! 😊",
     "createButton": "Créer un Père Noël Secret",
     "viewButton": "Voir Votre Attribution"
   },

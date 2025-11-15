@@ -69,6 +69,9 @@ function updatePageText() {
         instructionsList.appendChild(li);
     });
 
+    document.querySelector('.security-notice header strong').textContent = t('landing.securityNoticeTitle');
+    document.querySelector('.security-notice p').textContent = t('landing.securityNoticeText');
+
     document.getElementById('create-btn').textContent = t('landing.createButton');
     document.getElementById('view-btn').textContent = t('landing.viewButton');
 

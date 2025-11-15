@@ -10,6 +10,8 @@
       "Cada persona solo ve a quién le toca dar",
       "El administrador puede ver todas las asignaciones con contraseña"
     ],
+    "securityNoticeTitle": "🎄 Para Jugadores Justos",
+    "securityNoticeText": "¡Esta app funciona con el sistema de honor! Los enlaces están codificados (no encriptados), así que es ideal para grupos de confianza como familia, amigos o compañeros. Si necesitas seguridad de Fort Knox, ¡puede que esta no sea tu app! 😊",
     "createButton": "Crear Nuevo Amigo Invisible",
     "viewButton": "Ver Tu Asignación"
   },
