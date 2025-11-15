@@ -30,6 +30,19 @@ A simple, client-side Secret Santa gift exchange organizer. No backend required 
 
 ## Local Development
 
+### Prerequisites
+
+- Node.js (latest stable version recommended)
+- npm (comes with Node.js)
+
+### Setup
+
+First, install dependencies:
+
+```bash
+npm install
+```
+
 ### Using mise (Recommended)
 
 If you have [mise](https://mise.jdx.dev/) installed:
@@ -40,18 +53,55 @@ mise run dev
 
 # Or start server and open in browser
 mise run test
+
+# Run linter
+mise run lint
+
+# Check code formatting
+mise run format
+
+# Fix code formatting
+mise run format-fix
+
+# Validate i18n JSON files
+mise run validate-i18n
+
+# Run all validations (lint, format, i18n)
+mise run validate-all
 ```
 
 The server will run on `http://localhost:8000`. Press Ctrl+C to stop.
 
 ### Manual Setup
 
-Simply open `index.html` in a web browser, or use a local server:
+Use npm scripts directly:
 
 ```bash
-# Python 3
-python -m http.server 8000
+# Start development server
+npm run dev
 
+# Run linter
+npm run lint
+
+# Fix linting issues
+npm run lint:fix
+
+# Check code formatting
+npm run format
+
+# Fix code formatting
+npm run format:fix
+
+# Validate i18n JSON files
+npm run validate:i18n
+
+# Run all validations
+npm run validate:all
+```
+
+Or use any local server:
+
+```bash
 # Node.js (with http-server)
 npx http-server -p 8000
 ```
@@ -64,13 +114,17 @@ Then visit `http://localhost:8000`
 /
 ├── .github/
 │   └── workflows/
-│       └── deploy.yml # GitHub Actions deployment workflow
+│       ├── deploy.yml           # GitHub Actions deployment workflow
+│       └── lint-and-format.yml  # PR validation workflow
 ├── locales/
+│   ├── schema.json    # JSON schema for i18n validation
 │   ├── en.json        # English translations
 │   ├── fr.json        # French translations
 │   ├── es.json        # Spanish translations
 │   ├── de.json        # German translations
-│   ├── ...            # And 14 more languages (18 total)!
+│   └── ...            # And 14 more languages (18 total)!
+├── scripts/
+│   └── validate-i18n.js # i18n validation script
 ├── index.html          # Main HTML file
 ├── styles/
 │   └── main.css       # Custom styles
@@ -80,8 +134,10 @@ Then visit `http://localhost:8000`
 │   ├── view.js        # View assignments logic
 │   ├── random.js      # Seeded random generator & assignment algorithm
 │   ├── encoder.js     # URL encoding/decoding utilities
-│   └── i18n.js        # Internationalization system
+│   ├── i18n.js        # Internationalization system
+│   └── utils.js       # Shared utilities
 ├── .mise.toml         # mise configuration for development
+├── package.json       # Node.js dependencies and scripts
 ├── .nojekyll          # GitHub Pages configuration
 ├── LICENSE            # MIT License
 └── README.md          # This file

@@ -1,0 +1,203 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://secretsanta.bombfork.com/locales/schema.json",
+  "title": "Secret Santa Locale File",
+  "description": "JSON schema for Open Secret Santa i18n locale files",
+  "type": "object",
+  "required": [
+    "landing",
+    "create",
+    "results",
+    "viewParticipant",
+    "viewAdmin",
+    "error",
+    "validation",
+    "alerts"
+  ],
+  "properties": {
+    "landing": {
+      "type": "object",
+      "required": [
+        "title",
+        "subtitle",
+        "howItWorks",
+        "instructions",
+        "securityNoticeTitle",
+        "securityNoticeText",
+        "createButton",
+        "viewButton"
+      ],
+      "properties": {
+        "title": { "type": "string" },
+        "subtitle": { "type": "string" },
+        "howItWorks": { "type": "string" },
+        "instructions": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 5,
+          "maxItems": 5
+        },
+        "securityNoticeTitle": { "type": "string" },
+        "securityNoticeText": { "type": "string" },
+        "createButton": { "type": "string" },
+        "viewButton": { "type": "string" }
+      },
+      "additionalProperties": false
+    },
+    "create": {
+      "type": "object",
+      "required": [
+        "title",
+        "participantsLabel",
+        "participantsHelp",
+        "participantsPlaceholder",
+        "seedLabel",
+        "seedHelp",
+        "seedPlaceholder",
+        "passwordLabel",
+        "passwordHelp",
+        "passwordPlaceholder",
+        "backButton",
+        "submitButton"
+      ],
+      "properties": {
+        "title": { "type": "string" },
+        "participantsLabel": { "type": "string" },
+        "participantsHelp": { "type": "string" },
+        "participantsPlaceholder": { "type": "string" },
+        "seedLabel": { "type": "string" },
+        "seedHelp": { "type": "string" },
+        "seedPlaceholder": { "type": "string" },
+        "passwordLabel": { "type": "string" },
+        "passwordHelp": { "type": "string" },
+        "passwordPlaceholder": { "type": "string" },
+        "backButton": { "type": "string" },
+        "submitButton": { "type": "string" }
+      },
+      "additionalProperties": false
+    },
+    "results": {
+      "type": "object",
+      "required": [
+        "title",
+        "adminLinkTitle",
+        "adminLinkHelp",
+        "participantLinksTitle",
+        "participantLinksHelp",
+        "copyButton",
+        "copiedButton",
+        "createAnotherButton"
+      ],
+      "properties": {
+        "title": { "type": "string" },
+        "adminLinkTitle": { "type": "string" },
+        "adminLinkHelp": { "type": "string" },
+        "participantLinksTitle": { "type": "string" },
+        "participantLinksHelp": { "type": "string" },
+        "copyButton": { "type": "string" },
+        "copiedButton": { "type": "string" },
+        "createAnotherButton": { "type": "string" }
+      },
+      "additionalProperties": false
+    },
+    "viewParticipant": {
+      "type": "object",
+      "required": [
+        "title",
+        "youAre",
+        "keepSecret",
+        "backButton"
+      ],
+      "properties": {
+        "title": { "type": "string" },
+        "youAre": { "type": "string" },
+        "keepSecret": { "type": "string" },
+        "backButton": { "type": "string" }
+      },
+      "additionalProperties": false
+    },
+    "viewAdmin": {
+      "type": "object",
+      "required": [
+        "title",
+        "participantLinksTitle",
+        "participantLinksHelp",
+        "passwordLabel",
+        "passwordPlaceholder",
+        "unlockButton",
+        "incorrectPassword",
+        "allAssignmentsTitle",
+        "giverColumn",
+        "receiverColumn",
+        "backButton"
+      ],
+      "properties": {
+        "title": { "type": "string" },
+        "participantLinksTitle": { "type": "string" },
+        "participantLinksHelp": { "type": "string" },
+        "passwordLabel": { "type": "string" },
+        "passwordPlaceholder": { "type": "string" },
+        "unlockButton": { "type": "string" },
+        "incorrectPassword": { "type": "string" },
+        "allAssignmentsTitle": { "type": "string" },
+        "giverColumn": { "type": "string" },
+        "receiverColumn": { "type": "string" },
+        "backButton": { "type": "string" }
+      },
+      "additionalProperties": false
+    },
+    "error": {
+      "type": "object",
+      "required": [
+        "title",
+        "backButton"
+      ],
+      "properties": {
+        "title": { "type": "string" },
+        "backButton": { "type": "string" }
+      },
+      "additionalProperties": false
+    },
+    "validation": {
+      "type": "object",
+      "required": [
+        "minParticipants",
+        "maxParticipants",
+        "seedRequired",
+        "passwordRequired",
+        "passwordTooShort",
+        "noAssignmentFound",
+        "failedToLoad",
+        "failedToCreate",
+        "invalidUrl",
+        "invalidData",
+        "failedToCopy"
+      ],
+      "properties": {
+        "minParticipants": { "type": "string" },
+        "maxParticipants": { "type": "string" },
+        "seedRequired": { "type": "string" },
+        "passwordRequired": { "type": "string" },
+        "passwordTooShort": { "type": "string" },
+        "noAssignmentFound": { "type": "string" },
+        "failedToLoad": { "type": "string" },
+        "failedToCreate": { "type": "string" },
+        "invalidUrl": { "type": "string" },
+        "invalidData": { "type": "string" },
+        "failedToCopy": { "type": "string" }
+      },
+      "additionalProperties": false
+    },
+    "alerts": {
+      "type": "object",
+      "required": [
+        "viewInstructions"
+      ],
+      "properties": {
+        "viewInstructions": { "type": "string" }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

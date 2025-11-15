@@ -10,13 +10,13 @@
  * @returns {string} - Hashed password
  */
 export function hashPassword(password) {
-    let hash = 0;
-    for (let i = 0; i < password.length; i++) {
-        const char = password.charCodeAt(i);
-        hash = ((hash << 5) - hash) + char;
-        hash = hash & hash; // Convert to 32-bit integer
-    }
-    return Math.abs(hash).toString(36);
+  let hash = 0;
+  for (let i = 0; i < password.length; i++) {
+    const char = password.charCodeAt(i);
+    hash = (hash << 5) - hash + char;
+    hash = hash & hash; // Convert to 32-bit integer
+  }
+  return Math.abs(hash).toString(36);
 }
 
 /**
@@ -27,17 +27,17 @@ export function hashPassword(password) {
  * @returns {string} - Encrypted/decrypted text
  */
 function xorCipher(text, key) {
-    if (!key || key.length === 0) {
-        return text; // No encryption if key is empty
-    }
+  if (!key || key.length === 0) {
+    return text; // No encryption if key is empty
+  }
 
-    let result = '';
-    for (let i = 0; i < text.length; i++) {
-        const textCode = text.charCodeAt(i);
-        const keyCode = key.charCodeAt(i % key.length);
-        result += String.fromCharCode(textCode ^ keyCode);
-    }
-    return result;
+  let result = "";
+  for (let i = 0; i < text.length; i++) {
+    const textCode = text.charCodeAt(i);
+    const keyCode = key.charCodeAt(i % key.length);
+    result += String.fromCharCode(textCode ^ keyCode);
+  }
+  return result;
 }
 
 /**
@@ -47,8 +47,8 @@ function xorCipher(text, key) {
  * @returns {string} - Encrypted assignments as string
  */
 function encryptAssignments(assignments, seed) {
-    const jsonString = JSON.stringify(assignments);
-    return xorCipher(jsonString, seed);
+  const jsonString = JSON.stringify(assignments);
+  return xorCipher(jsonString, seed);
 }
 
 /**
@@ -58,8 +58,8 @@ function encryptAssignments(assignments, seed) {
  * @returns {Object[]} - Decrypted assignments array
  */
 function decryptAssignments(encryptedData, seed) {
-    const jsonString = xorCipher(encryptedData, seed);
-    return JSON.parse(jsonString);
+  const jsonString = xorCipher(encryptedData, seed);
+  return JSON.parse(jsonString);
 }
 
 /**
@@ -70,21 +70,21 @@ function decryptAssignments(encryptedData, seed) {
  * @returns {Object} - Encoded data object with data only (passwordHash now included in data)
  */
 export function encodeData(assignments, seed, adminPassword) {
-    // Encrypt assignments using seed as key (basic obfuscation)
-    const encryptedAssignments = encryptAssignments(assignments, seed);
+  // Encrypt assignments using seed as key (basic obfuscation)
+  const encryptedAssignments = encryptAssignments(assignments, seed);
 
-    const data = {
-        seed: seed,
-        assignments: encryptedAssignments,
-        passwordHash: hashPassword(adminPassword)
-    };
+  const data = {
+    seed: seed,
+    assignments: encryptedAssignments,
+    passwordHash: hashPassword(adminPassword),
+  };
 
-    const jsonString = JSON.stringify(data);
-    const base64 = btoa(unescape(encodeURIComponent(jsonString)));
+  const jsonString = JSON.stringify(data);
+  const base64 = btoa(unescape(encodeURIComponent(jsonString)));
 
-    return {
-        data: base64
-    };
+  return {
+    data: base64,
+  };
 }
 
 /**
@@ -93,17 +93,17 @@ export function encodeData(assignments, seed, adminPassword) {
  * @returns {Object} - Decoded data object with seed and decrypted assignments
  */
 export function decodeData(encodedData) {
-    try {
-        const jsonString = decodeURIComponent(escape(atob(encodedData)));
-        const data = JSON.parse(jsonString);
+  try {
+    const jsonString = decodeURIComponent(escape(atob(encodedData)));
+    const data = JSON.parse(jsonString);
 
-        // Decrypt assignments using seed as key
-        data.assignments = decryptAssignments(data.assignments, data.seed);
+    // Decrypt assignments using seed as key
+    data.assignments = decryptAssignments(data.assignments, data.seed);
 
-        return data;
-    } catch (error) {
-        throw new Error('Invalid data format');
-    }
+    return data;
+  } catch {
+    throw new Error("Invalid data format");
+  }
 }
 
 /**
@@ -113,10 +113,10 @@ export function decodeData(encodedData) {
  * @returns {string} - Complete admin URL
  */
 export function generateAdminUrl(baseUrl, encodedData) {
-    const url = new URL(baseUrl);
-    url.searchParams.set('data', encodedData);
-    url.searchParams.set('admin', 'true');
-    return url.toString();
+  const url = new URL(baseUrl);
+  url.searchParams.set("data", encodedData);
+  url.searchParams.set("admin", "true");
+  return url.toString();
 }
 
 /**
@@ -127,10 +127,10 @@ export function generateAdminUrl(baseUrl, encodedData) {
  * @returns {string} - Complete participant URL
  */
 export function generateParticipantUrl(baseUrl, encodedData, participantName) {
-    const url = new URL(baseUrl);
-    url.searchParams.set('data', encodedData);
-    url.searchParams.set('user', encodeURIComponent(participantName));
-    return url.toString();
+  const url = new URL(baseUrl);
+  url.searchParams.set("data", encodedData);
+  url.searchParams.set("user", encodeURIComponent(participantName));
+  return url.toString();
 }
 
 /**
@@ -138,12 +138,12 @@ export function generateParticipantUrl(baseUrl, encodedData, participantName) {
  * @returns {Object} - Object with data, admin, and user parameters
  */
 export function parseUrlParams() {
-    const params = new URLSearchParams(window.location.search);
-    return {
-        data: params.get('data'),
-        admin: params.get('admin'),
-        user: params.get('user') ? decodeURIComponent(params.get('user')) : null
-    };
+  const params = new URLSearchParams(window.location.search);
+  return {
+    data: params.get("data"),
+    admin: params.get("admin"),
+    user: params.get("user") ? decodeURIComponent(params.get("user")) : null,
+  };
 }
 
 /**
@@ -153,5 +153,5 @@ export function parseUrlParams() {
  * @returns {boolean} - True if password matches
  */
 export function verifyPassword(password, storedHash) {
-    return hashPassword(password) === storedHash;
+  return hashPassword(password) === storedHash;
 }
