@@ -54,6 +54,11 @@ body {
     display: none;
 }
 
+/* Hidden utility class */
+.hidden {
+    display: none;
+}
+
 /* Security notice */
 .security-notice {
     background-color: var(--pico-secondary-background);
