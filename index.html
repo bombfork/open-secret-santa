@@ -4,7 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Secret Santa</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+    <!-- Runtime CSS loading: CDN for web, local for Capacitor -->
+    <script>
+        // Detect Capacitor environment and load appropriate CSS
+        if (window.Capacitor) {
+            // Running in Capacitor (mobile app) - load local CSS
+            document.write('<link rel="stylesheet" href="assets/pico.min.css">');
+        } else {
+            // Running in browser (GitHub Pages) - load CDN CSS
+            document.write('<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">');
+        }
+    </script>
     <link rel="stylesheet" href="styles/main.css">
 </head>
 <body>
