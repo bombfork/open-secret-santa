@@ -1,0 +1,81 @@
+{
+  "landing": {
+    "title": "Amic Invisible",
+    "subtitle": "Organitza el teu intercanvi de regals amb facilitat",
+    "howItWorks": "Com funciona",
+    "instructions": [
+      "Crea un nou Amic Invisible amb els noms dels participants",
+      "Estableix una llavor aleatòria per a assignacions reproduïbles",
+      "Comparteix els enllaços individuals amb cada participant",
+      "Cada persona només veu a qui ha de regalar",
+      "L'administrador pot veure totes les assignacions amb la contrasenya"
+    ],
+    "securityNoticeTitle": "🎄 Fet per Jugadors Honestos",
+    "securityNoticeText": "Aquesta aplicació funciona amb el sistema d'honor! Els enllaços estan codificats (no xifrats), així que és ideal per a grups de confiança com família, amics o companys de feina. Si necessites seguretat de Fort Knox, potser aquesta no és la teva app! 😊",
+    "createButton": "Crear Nou Amic Invisible",
+    "viewButton": "Veure la Teva Assignació"
+  },
+  "create": {
+    "title": "Crear Amic Invisible",
+    "participantsLabel": "Noms dels Participants",
+    "participantsHelp": "Introdueix un nom per línia (mínim 3, màxim 50 participants)",
+    "participantsPlaceholder": "Alícia\nBob\nCarles\nDiana",
+    "seedLabel": "Llavor Aleatòria",
+    "seedHelp": "S'ha generat una llavor aleatòria, o podeu proporcionar la vostra pròpia",
+    "seedPlaceholder": "p.ex: nadal2024",
+    "passwordLabel": "Contrasenya d'Administrador",
+    "passwordHelp": "Opcional - deixeu-ho en blanc per a cap protecció amb contrasenya",
+    "passwordPlaceholder": "Introduïu la contrasenya d'administrador (opcional)",
+    "backButton": "Enrere",
+    "submitButton": "Generar Amic Invisible"
+  },
+  "results": {
+    "title": "Amic Invisible Creat!",
+    "adminLinkTitle": "Enllaç d'Administrador",
+    "adminLinkHelp": "Comparteix això amb l'organitzador per veure totes les assignacions",
+    "participantLinksTitle": "Enllaços dels Participants",
+    "participantLinksHelp": "Comparteix cada enllaç amb el participant corresponent",
+    "copyButton": "Copiar",
+    "copiedButton": "✓ Copiat!",
+    "createAnotherButton": "Crear un Altre"
+  },
+  "viewParticipant": {
+    "title": "La Teva Assignació d'Amic Invisible",
+    "youAre": "Ets l'Amic Invisible de:",
+    "keepSecret": "🤫 Mantén-ho en secret!",
+    "backButton": "Tornar a l'Inici"
+  },
+  "viewAdmin": {
+    "title": "Vista d'Administrador",
+    "participantLinksTitle": "Enllaços dels Participants",
+    "participantLinksHelp": "Comparteix aquests enllaços amb els participants si els necessiten de nou",
+    "passwordLabel": "Introdueix la Contrasenya d'Administrador",
+    "passwordPlaceholder": "Contrasenya d'administrador",
+    "unlockButton": "Veure Totes les Assignacions",
+    "incorrectPassword": "Contrasenya incorrecta",
+    "allAssignmentsTitle": "Totes les Assignacions de l'Amic Invisible",
+    "giverColumn": "Donant",
+    "receiverColumn": "Receptor",
+    "backButton": "Tornar a l'Inici"
+  },
+  "error": {
+    "title": "⚠️ Error",
+    "backButton": "Tornar a l'Inici"
+  },
+  "validation": {
+    "minParticipants": "Necessites almenys 3 participants per a l'Amic Invisible",
+    "maxParticipants": "Màxim 50 participants permesos (limitació de longitud d'URL)",
+    "seedRequired": "Si us plau, introdueix una llavor aleatòria",
+    "passwordRequired": "Si us plau, introdueix una contrasenya d'administrador",
+    "passwordTooShort": "La contrasenya d'administrador ha de tenir almenys 4 caràcters",
+    "noAssignmentFound": "No s'ha trobat assignació per a {name}",
+    "failedToLoad": "Error en carregar l'assignació: {error}",
+    "failedToCreate": "Error en crear l'Amic Invisible: {error}",
+    "invalidUrl": "URL no vàlida: falta el paràmetre d'usuari o administrador",
+    "invalidData": "Format de dades no vàlid",
+    "failedToCopy": "Error en copiar al porta-retalls"
+  },
+  "alerts": {
+    "viewInstructions": "Per veure la teva assignació, fes clic a l'enllaç personalitzat que s'ha compartit amb tu."
+  }
+}

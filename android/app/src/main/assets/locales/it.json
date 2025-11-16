@@ -1,0 +1,81 @@
+{
+  "landing": {
+    "title": "Babbo Natale Segreto",
+    "subtitle": "Organizza il tuo scambio di regali con facilità",
+    "howItWorks": "Come funziona",
+    "instructions": [
+      "Crea un nuovo Babbo Natale Segreto con i nomi dei partecipanti",
+      "Imposta un seme casuale per assegnazioni riproducibili",
+      "Condividi i link individuali con ciascun partecipante",
+      "Ogni persona vede solo a chi deve fare il regalo",
+      "L'amministratore può vedere tutte le assegnazioni con la password"
+    ],
+    "securityNoticeTitle": "🎄 Fatto per Giocatori Leali",
+    "securityNoticeText": "Questa app funziona sul sistema dell'onore! I link sono codificati (non crittografati), quindi è ideale per gruppi fidati come famiglia, amici o colleghi. Se hai bisogno della sicurezza di Fort Knox, questa potrebbe non essere la tua app! 😊",
+    "createButton": "Crea Nuovo Babbo Natale Segreto",
+    "viewButton": "Vedi la Tua Assegnazione"
+  },
+  "create": {
+    "title": "Crea Babbo Natale Segreto",
+    "participantsLabel": "Nomi dei Partecipanti",
+    "participantsHelp": "Inserisci un nome per riga (minimo 3, massimo 50 partecipanti)",
+    "participantsPlaceholder": "Alice\nBob\nCarla\nDiana",
+    "seedLabel": "Seme Casuale",
+    "seedHelp": "È stato generato un seed casuale, oppure puoi fornire il tuo",
+    "seedPlaceholder": "es: natale2024",
+    "passwordLabel": "Password Amministratore",
+    "passwordHelp": "Facoltativo - lascia vuoto per nessuna protezione password",
+    "passwordPlaceholder": "Inserisci password amministratore (facoltativo)",
+    "backButton": "Indietro",
+    "submitButton": "Genera Babbo Natale Segreto"
+  },
+  "results": {
+    "title": "Babbo Natale Segreto Creato!",
+    "adminLinkTitle": "Link Amministratore",
+    "adminLinkHelp": "Condividi questo con l'organizzatore per vedere tutte le assegnazioni",
+    "participantLinksTitle": "Link dei Partecipanti",
+    "participantLinksHelp": "Condividi ogni link con il partecipante corrispondente",
+    "copyButton": "Copia",
+    "copiedButton": "✓ Copiato!",
+    "createAnotherButton": "Crea un Altro"
+  },
+  "viewParticipant": {
+    "title": "La Tua Assegnazione di Babbo Natale Segreto",
+    "youAre": "Sei il Babbo Natale Segreto di:",
+    "keepSecret": "🤫 Mantieni il segreto!",
+    "backButton": "Torna all'Inizio"
+  },
+  "viewAdmin": {
+    "title": "Vista Amministratore",
+    "participantLinksTitle": "Link dei Partecipanti",
+    "participantLinksHelp": "Condividi questi link con i partecipanti se ne hanno bisogno di nuovo",
+    "passwordLabel": "Inserisci la Password Amministratore",
+    "passwordPlaceholder": "Password amministratore",
+    "unlockButton": "Vedi Tutte le Assegnazioni",
+    "incorrectPassword": "Password errata",
+    "allAssignmentsTitle": "Tutte le Assegnazioni di Babbo Natale Segreto",
+    "giverColumn": "Donatore",
+    "receiverColumn": "Ricevente",
+    "backButton": "Torna all'Inizio"
+  },
+  "error": {
+    "title": "⚠️ Errore",
+    "backButton": "Torna all'Inizio"
+  },
+  "validation": {
+    "minParticipants": "Hai bisogno di almeno 3 partecipanti per il Babbo Natale Segreto",
+    "maxParticipants": "Massimo 50 partecipanti consentiti (limitazione lunghezza URL)",
+    "seedRequired": "Inserisci un seme casuale",
+    "passwordRequired": "Inserisci una password amministratore",
+    "passwordTooShort": "La password amministratore deve essere di almeno 4 caratteri",
+    "noAssignmentFound": "Nessuna assegnazione trovata per {name}",
+    "failedToLoad": "Impossibile caricare l'assegnazione: {error}",
+    "failedToCreate": "Errore nella creazione del Babbo Natale Segreto: {error}",
+    "invalidUrl": "URL non valido: parametro utente o amministratore mancante",
+    "invalidData": "Formato dati non valido",
+    "failedToCopy": "Impossibile copiare negli appunti"
+  },
+  "alerts": {
+    "viewInstructions": "Per vedere la tua assegnazione, clicca sul link personalizzato che è stato condiviso con te."
+  }
+}

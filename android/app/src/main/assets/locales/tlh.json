@@ -1,0 +1,81 @@
+{
+  "landing": {
+    "title": "pegh Santa",
+    "subtitle": "nob tam choH chu' yIDIl",
+    "howItWorks": "chay' vImoj",
+    "instructions": [
+      "pegh Santa chu' yIchenmoH 'ej 'uch pongmey yIghItlh",
+      "random seed yIwIv 'ej rap choH yIqaw",
+      "Hoch 'uch chu' DIjatlh 'ej ghItlhmey yIngeH",
+      "Hoch nuv choH neH legh",
+      "Admin Hoch choH legh 'e' chaw' mu'qaD"
+    ],
+    "securityNoticeTitle": "🎄 quv 'uchpu' vaD chenmoHta'",
+    "securityNoticeText": "Quj quv poQ! ghItlhmey encoded 'ach encrypted pagh - QaQ qorDu', jup, qet pong! Fort Knox Qapla' DaneH'a'? vaj qaSchugh app pagh! Qapla'! 😊",
+    "createButton": "pegh Santa chu' yIchenmoH",
+    "viewButton": "choH yIlegh"
+  },
+  "create": {
+    "title": "pegh Santa yIchenmoH",
+    "participantsLabel": "'uch pongmey",
+    "participantsHelp": "wa' pong per tlhegh yIghItlh (wej 'uch poQ, vaghmaH 'uch maximum)",
+    "participantsPlaceholder": "Alice\nBob\nCharlie\nDiana",
+    "seedLabel": "Random Seed",
+    "seedHelp": "random seed chenmoHta' (or provide your own)",
+    "seedPlaceholder": "DIS: QISmaS2024",
+    "passwordLabel": "Admin mu'qaD",
+    "passwordHelp": "Optional - chIm mej for no password protection",
+    "passwordPlaceholder": "admin password (optional)",
+    "backButton": "chegh",
+    "submitButton": "pegh Santa yIchenmoH"
+  },
+  "results": {
+    "title": "pegh Santa chenmoHta'!",
+    "adminLinkTitle": "Admin ghItlh",
+    "adminLinkHelp": "Hoch choH legh neH Admin chu' ngeH",
+    "participantLinksTitle": "'uch ghItlhmey",
+    "participantLinksHelp": "Hoch 'uch ghItlh ngeH",
+    "copyButton": "lao'",
+    "copiedButton": "✓ lao'ta'!",
+    "createAnotherButton": "latlh yIchenmoH"
+  },
+  "viewParticipant": {
+    "title": "pegh Santa choH",
+    "youAre": "pegh Santa SoH:",
+    "keepSecret": "🤫 pegh yIpol!",
+    "backButton": "nach chegh"
+  },
+  "viewAdmin": {
+    "title": "Admin legh",
+    "participantLinksTitle": "'uch ghItlhmey",
+    "participantLinksHelp": "'uch ghItlhmey ngeH chaq poQ",
+    "passwordLabel": "Admin mu'qaD yIghItlh",
+    "passwordPlaceholder": "Admin mu'qaD",
+    "unlockButton": "Hoch choH yIlegh",
+    "incorrectPassword": "mu'qaD Qagh",
+    "allAssignmentsTitle": "Hoch pegh Santa choH",
+    "giverColumn": "nob",
+    "receiverColumn": "Hev",
+    "backButton": "nach chegh"
+  },
+  "error": {
+    "title": "⚠️ Qagh",
+    "backButton": "nach chegh"
+  },
+  "validation": {
+    "minParticipants": "wej 'uch poQ pegh Santa",
+    "maxParticipants": "vaghmaH 'uch maximum (URL 'ab poQ)",
+    "seedRequired": "random seed yIghItlh",
+    "passwordRequired": "Admin mu'qaD yIghItlh",
+    "passwordTooShort": "Admin mu'qaD loS mI' poQ",
+    "noAssignmentFound": "{name} choH tu'be'lu'",
+    "failedToLoad": "choH Qotbe': {error}",
+    "failedToCreate": "pegh Santa chenmoH Qagh: {error}",
+    "invalidUrl": "URL Qagh: 'uch joq Admin parameter tu'be'lu'",
+    "invalidData": "De' format Qagh",
+    "failedToCopy": "lao' Qagh"
+  },
+  "alerts": {
+    "viewInstructions": "choH Dalegh DaneHchugh, ghItlh personal yIwIv."
+  }
+}

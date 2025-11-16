@@ -1,0 +1,81 @@
+{
+  "landing": {
+    "title": "Núra Yéni Aran",
+    "subtitle": "Tecë le mírieryassë formië",
+    "howItWorks": "Manen ná",
+    "instructions": [
+      "Cara Núra Yéni Aran essenen i yomenin",
+      "Tecë erdë vilya an hrestallë atarmi",
+      "Anna sí thailë ilya yómenello",
+      "Ilya indóme cenë ta yómen anna dan",
+      "Aran cenë ilya atarmi as têw"
+    ],
+    "securityNoticeTitle": "🎄 Faila Yomenin á Carë",
+    "securityNoticeText": "Sin apsenë apsená fairëo! I thailë apsénear, lá sangiénar - mára nostalë atariénen, meldin, ar yomenniénen! Man mérë Fort Knox limbë? Ú-mára sin apsenë! 😊",
+    "createButton": "Cara Núra Yéni Aran",
+    "viewButton": "Cen Le Atarmë"
+  },
+  "create": {
+    "title": "Cara Núra Yéni Aran",
+    "participantsLabel": "Essë i Yomenin",
+    "participantsHelp": "Tecë min essë símen línë (neldë yómenin né, lempë yómenin)",
+    "participantsPlaceholder": "Galadriel\nElrond\nArwen\nCeleborn",
+    "seedLabel": "Erdë Vilya",
+    "seedHelp": "A random seed has been generated, or provide your own",
+    "seedPlaceholder": "e.g., yestarë2024",
+    "passwordLabel": "Aran Têw",
+    "passwordHelp": "Optional - leave blank for no password protection",
+    "passwordPlaceholder": "Enter admin password (optional)",
+    "backButton": "Nat",
+    "submitButton": "Apsë Núra Yéni Aran"
+  },
+  "results": {
+    "title": "Núra Yéni Aran Carnë!",
+    "adminLinkTitle": "Aran Thailë",
+    "adminLinkHelp": "Anna ta i turë an cen ilya atarmi",
+    "participantLinksTitle": "Yómen Thailen",
+    "participantLinksHelp": "Anna ilya thailë i yómenin",
+    "copyButton": "Tecë",
+    "copiedButton": "✓ Tecnë!",
+    "createAnotherButton": "Cara Anwë"
+  },
+  "viewParticipant": {
+    "title": "Le Atarmë Núra Yéni Aran",
+    "youAre": "Ná Núra Yéni Aran an:",
+    "keepSecret": "🤫 Pol i núrë!",
+    "backButton": "Nat Arwa"
+  },
+  "viewAdmin": {
+    "title": "Aran Centië",
+    "participantLinksTitle": "Yómen Thailen",
+    "participantLinksHelp": "Anna sin thaile i yomenin man mériër nat",
+    "passwordLabel": "Tecë Aran Têw",
+    "passwordPlaceholder": "Aran têw",
+    "unlockButton": "Cen Ilya Atarmi",
+    "incorrectPassword": "Têw ú-faila",
+    "allAssignmentsTitle": "Ilya Atarmi Núra Yéni Aran",
+    "giverColumn": "Anna",
+    "receiverColumn": "Cápa",
+    "backButton": "Nat Arwa"
+  },
+  "error": {
+    "title": "⚠️ Ú-faila",
+    "backButton": "Nat Arwa"
+  },
+  "validation": {
+    "minParticipants": "Polduvë neldë yómenin Núra Yéni Aran",
+    "maxParticipants": "Lempë yómenin polduvar (thailë andavë)",
+    "seedRequired": "Tecë erdë vilya",
+    "passwordRequired": "Tecë aran têw",
+    "passwordTooShort": "Aran têw polda canta tengwi",
+    "noAssignmentFound": "Atarmë {name} ú-hirnë",
+    "failedToLoad": "Ú-hirnë atarmë: {error}",
+    "failedToCreate": "Ú-faila carë Núra Yéni Aran: {error}",
+    "invalidUrl": "Thailë ú-faila: yómen ephë aran ú-hirnë",
+    "invalidData": "Sanya ú-faila",
+    "failedToCopy": "Ú-tecë"
+  },
+  "alerts": {
+    "viewInstructions": "An cen le atarmë, mapë i thailë sinyanna i annë le."
+  }
+}

@@ -1,0 +1,81 @@
+{
+  "landing": {
+    "title": "Tajemniczy Mikołaj",
+    "subtitle": "Zorganizuj wymianę prezentów z łatwością",
+    "howItWorks": "Jak to działa",
+    "instructions": [
+      "Utwórz nowego Tajemniczego Mikołaja z nazwami uczestników",
+      "Ustaw losowe ziarno dla powtarzalnych przypisań",
+      "Udostępnij indywidualne linki każdemu uczestnikowi",
+      "Każda osoba widzi tylko kogo obdarowuje",
+      "Administrator może zobaczyć wszystkie przypisania z hasłem"
+    ],
+    "securityNoticeTitle": "🎄 Stworzone dla Uczciwych Graczy",
+    "securityNoticeText": "Ta aplikacja działa na zasadzie zaufania! Linki są zakodowane (nie zaszyfrowane), więc idealnie nadaje się dla zaufanych grup takich jak rodzina, przyjaciele czy współpracownicy. Jeśli potrzebujesz bezpieczeństwa Fort Knox, to może nie być Twoja aplikacja! 😊",
+    "createButton": "Utwórz Nowego Tajemniczego Mikołaja",
+    "viewButton": "Zobacz Swoje Przypisanie"
+  },
+  "create": {
+    "title": "Utwórz Tajemniczego Mikołaja",
+    "participantsLabel": "Nazwy Uczestników",
+    "participantsHelp": "Wprowadź jedno nazwisko w linii (minimum 3, maksimum 50 uczestników)",
+    "participantsPlaceholder": "Alicja\nBob\nKarol\nDiana",
+    "seedLabel": "Losowe Ziarno",
+    "seedHelp": "Losowy ziarno zostało wygenerowane lub możesz podać własne",
+    "seedPlaceholder": "np: bozenarodzenie2024",
+    "passwordLabel": "Hasło Administratora",
+    "passwordHelp": "Opcjonalne - pozostaw puste, aby nie używać ochrony hasłem",
+    "passwordPlaceholder": "Wprowadź hasło administratora (opcjonalne)",
+    "backButton": "Wstecz",
+    "submitButton": "Generuj Tajemniczego Mikołaja"
+  },
+  "results": {
+    "title": "Tajemniczy Mikołaj Utworzony!",
+    "adminLinkTitle": "Link Administratora",
+    "adminLinkHelp": "Udostępnij to organizatorowi, aby zobaczyć wszystkie przypisania",
+    "participantLinksTitle": "Linki Uczestników",
+    "participantLinksHelp": "Udostępnij każdy link odpowiedniemu uczestnikowi",
+    "copyButton": "Kopiuj",
+    "copiedButton": "✓ Skopiowano!",
+    "createAnotherButton": "Utwórz Kolejnego"
+  },
+  "viewParticipant": {
+    "title": "Twoje Przypisanie Tajemniczego Mikołaja",
+    "youAre": "Jesteś Tajemniczym Mikołajem dla:",
+    "keepSecret": "🤫 Zachowaj to w tajemnicy!",
+    "backButton": "Powrót do Strony Głównej"
+  },
+  "viewAdmin": {
+    "title": "Widok Administratora",
+    "participantLinksTitle": "Linki Uczestników",
+    "participantLinksHelp": "Udostępnij te linki uczestnikom, jeśli będą ich ponownie potrzebować",
+    "passwordLabel": "Wprowadź Hasło Administratora",
+    "passwordPlaceholder": "Hasło administratora",
+    "unlockButton": "Zobacz Wszystkie Przypisania",
+    "incorrectPassword": "Nieprawidłowe hasło",
+    "allAssignmentsTitle": "Wszystkie Przypisania Tajemniczego Mikołaja",
+    "giverColumn": "Obdarowujący",
+    "receiverColumn": "Obdarowany",
+    "backButton": "Powrót do Strony Głównej"
+  },
+  "error": {
+    "title": "⚠️ Błąd",
+    "backButton": "Powrót do Strony Głównej"
+  },
+  "validation": {
+    "minParticipants": "Potrzebujesz co najmniej 3 uczestników dla Tajemniczego Mikołaja",
+    "maxParticipants": "Maksymalnie 50 uczestników dozwolonych (ograniczenie długości URL)",
+    "seedRequired": "Proszę wprowadzić losowe ziarno",
+    "passwordRequired": "Proszę wprowadzić hasło administratora",
+    "passwordTooShort": "Hasło administratora musi mieć co najmniej 4 znaki",
+    "noAssignmentFound": "Nie znaleziono przypisania dla {name}",
+    "failedToLoad": "Nie udało się załadować przypisania: {error}",
+    "failedToCreate": "Błąd podczas tworzenia Tajemniczego Mikołaja: {error}",
+    "invalidUrl": "Nieprawidłowy URL: brak parametru użytkownika lub administratora",
+    "invalidData": "Nieprawidłowy format danych",
+    "failedToCopy": "Nie udało się skopiować do schowka"
+  },
+  "alerts": {
+    "viewInstructions": "Aby zobaczyć swoje przypisanie, kliknij na spersonalizowany link, który został Ci udostępniony."
+  }
+}

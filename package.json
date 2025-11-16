@@ -9,7 +9,11 @@
     "format:fix": "oxfmt js",
     "validate:i18n": "node scripts/validate-i18n.js",
     "validate:all": "npm run lint && npm run format && npm run validate:i18n",
-    "dev": "npx http-server -p 8000"
+    "dev": "npx http-server -p 8000",
+    "cap:sync": "npm run cap:copy-web && npx cap sync",
+    "cap:copy-web": "rm -rf www && mkdir -p www && cp index.html www/ && cp -r js styles locales www/",
+    "cap:open:android": "npx cap open android",
+    "cap:run:android": "npm run cap:sync && npx cap run android"
   },
   "keywords": [
     "secret-santa",
@@ -23,5 +27,10 @@
     "ajv": "^8.12.0",
     "oxfmt": "^0.13.0",
     "oxlint": "^1.28.0"
+  },
+  "dependencies": {
+    "@capacitor/android": "^7.4.4",
+    "@capacitor/cli": "^7.4.4",
+    "@capacitor/core": "^7.4.4"
   }
 }

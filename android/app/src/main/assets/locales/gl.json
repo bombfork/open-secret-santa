@@ -1,0 +1,81 @@
+{
+  "landing": {
+    "title": "Amigo Invisible",
+    "subtitle": "Organiza o teu intercambio de agasallos con facilidade",
+    "howItWorks": "Como funciona",
+    "instructions": [
+      "Crea un novo Amigo Invisible cos nomes dos participantes",
+      "Establece unha semente aleatoria para asignacións reproducibles",
+      "Comparte ligazóns individuais con cada participante",
+      "Cada persoa só ve a quen lle toca agasallar",
+      "O administrador pode ver todas as asignacións co contrasinal"
+    ],
+    "securityNoticeTitle": "🎄 Feito para Xogadores Honestos",
+    "securityNoticeText": "Esta app funciona co sistema da honra! As ligazóns están codificadas (non cifradas), polo que é ideal para grupos de confianza como familia, amigos ou compañeiros. Se necesitas seguridade de Fort Knox, esta pode non ser a túa app! 😊",
+    "createButton": "Crear Novo Amigo Invisible",
+    "viewButton": "Ver a Túa Asignación"
+  },
+  "create": {
+    "title": "Crear Amigo Invisible",
+    "participantsLabel": "Nomes dos Participantes",
+    "participantsHelp": "Introduce un nome por liña (mínimo 3, máximo 50 participantes)",
+    "participantsPlaceholder": "Alicia\nBob\nCarlos\nDiana",
+    "seedLabel": "Semente Aleatoria",
+    "seedHelp": "Xerouse unha semente aleatoria, ou pode proporcionar a súa propia",
+    "seedPlaceholder": "ex: nadal2024",
+    "passwordLabel": "Contrasinal de Administrador",
+    "passwordHelp": "Opcional - deixar en branco para ningunha protección con contrasinal",
+    "passwordPlaceholder": "Introduce o contrasinal de administrador (opcional)",
+    "backButton": "Atrás",
+    "submitButton": "Xerar Amigo Invisible"
+  },
+  "results": {
+    "title": "Amigo Invisible Creado!",
+    "adminLinkTitle": "Ligazón de Administrador",
+    "adminLinkHelp": "Comparte isto co organizador para ver todas as asignacións",
+    "participantLinksTitle": "Ligazóns dos Participantes",
+    "participantLinksHelp": "Comparte cada ligazón co participante correspondente",
+    "copyButton": "Copiar",
+    "copiedButton": "✓ Copiado!",
+    "createAnotherButton": "Crear Outro"
+  },
+  "viewParticipant": {
+    "title": "A Túa Asignación de Amigo Invisible",
+    "youAre": "Es o Amigo Invisible de:",
+    "keepSecret": "🤫 Mantén o segredo!",
+    "backButton": "Volver ao Inicio"
+  },
+  "viewAdmin": {
+    "title": "Vista de Administrador",
+    "participantLinksTitle": "Ligazóns dos Participantes",
+    "participantLinksHelp": "Comparte estas ligazóns cos participantes se as necesitan de novo",
+    "passwordLabel": "Introduce o Contrasinal de Administrador",
+    "passwordPlaceholder": "Contrasinal de administrador",
+    "unlockButton": "Ver Todas as Asignacións",
+    "incorrectPassword": "Contrasinal incorrecto",
+    "allAssignmentsTitle": "Todas as Asignacións do Amigo Invisible",
+    "giverColumn": "Dador",
+    "receiverColumn": "Receptor",
+    "backButton": "Volver ao Inicio"
+  },
+  "error": {
+    "title": "⚠️ Erro",
+    "backButton": "Volver ao Inicio"
+  },
+  "validation": {
+    "minParticipants": "Necesitas polo menos 3 participantes para o Amigo Invisible",
+    "maxParticipants": "Máximo 50 participantes permitidos (limitación de lonxitude de URL)",
+    "seedRequired": "Por favor, introduce unha semente aleatoria",
+    "passwordRequired": "Por favor, introduce un contrasinal de administrador",
+    "passwordTooShort": "O contrasinal de administrador debe ter polo menos 4 caracteres",
+    "noAssignmentFound": "Non se atopou asignación para {name}",
+    "failedToLoad": "Erro ao cargar a asignación: {error}",
+    "failedToCreate": "Erro ao crear o Amigo Invisible: {error}",
+    "invalidUrl": "URL non válido: falta o parámetro de usuario ou administrador",
+    "invalidData": "Formato de datos non válido",
+    "failedToCopy": "Erro ao copiar ao portapapeis"
+  },
+  "alerts": {
+    "viewInstructions": "Para ver a túa asignación, fai clic na ligazón personalizada que se compartiu contigo."
+  }
+}

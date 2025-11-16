@@ -1,0 +1,81 @@
+{
+  "landing": {
+    "title": "Wichteln",
+    "subtitle": "Organisieren Sie Ihren Geschenkaustausch mit Leichtigkeit",
+    "howItWorks": "So funktioniert's",
+    "instructions": [
+      "Erstellen Sie ein neues Wichteln mit Teilnehmernamen",
+      "Legen Sie einen Zufallssamen für reproduzierbare Zuweisungen fest",
+      "Teilen Sie individuelle Links mit jedem Teilnehmer",
+      "Jede Person sieht nur, wem sie beschenkt",
+      "Admin kann alle Zuweisungen mit Passwort einsehen"
+    ],
+    "securityNoticeTitle": "🎄 Für Fair-Player Gemacht",
+    "securityNoticeText": "Diese App basiert auf dem Vertrauensprinzip! Links sind kodiert (nicht verschlüsselt), daher ist sie ideal für vertrauenswürdige Gruppen wie Familie, Freunde oder Kollegen. Wenn Sie Fort-Knox-Sicherheit brauchen, ist das vielleicht nicht die richtige App! 😊",
+    "createButton": "Neues Wichteln Erstellen",
+    "viewButton": "Ihre Zuweisung Ansehen"
+  },
+  "create": {
+    "title": "Wichteln Erstellen",
+    "participantsLabel": "Teilnehmernamen",
+    "participantsHelp": "Geben Sie einen Namen pro Zeile ein (mindestens 3, maximal 50 Teilnehmer)",
+    "participantsPlaceholder": "Alice\nBob\nCharlie\nDiana",
+    "seedLabel": "Zufallssamen",
+    "seedHelp": "Ein zufälliger Seed wurde generiert, oder Sie können Ihren eigenen angeben",
+    "seedPlaceholder": "z.B. weihnachten2024",
+    "passwordLabel": "Administrator-Passwort",
+    "passwordHelp": "Optional - leer lassen für keinen Passwortschutz",
+    "passwordPlaceholder": "Administrator-Passwort eingeben (optional)",
+    "backButton": "Zurück",
+    "submitButton": "Wichteln Generieren"
+  },
+  "results": {
+    "title": "Wichteln Erstellt!",
+    "adminLinkTitle": "Administrator-Link",
+    "adminLinkHelp": "Teilen Sie dies mit dem Organisator, um alle Zuweisungen anzuzeigen",
+    "participantLinksTitle": "Teilnehmer-Links",
+    "participantLinksHelp": "Teilen Sie jeden Link mit dem entsprechenden Teilnehmer",
+    "copyButton": "Kopieren",
+    "copiedButton": "✓ Kopiert!",
+    "createAnotherButton": "Weiteres Erstellen"
+  },
+  "viewParticipant": {
+    "title": "Ihre Wichtel-Zuweisung",
+    "youAre": "Sie sind der Wichtel für:",
+    "keepSecret": "🤫 Geheim halten!",
+    "backButton": "Zurück zur Startseite"
+  },
+  "viewAdmin": {
+    "title": "Administrator-Ansicht",
+    "participantLinksTitle": "Teilnehmer-Links",
+    "participantLinksHelp": "Teilen Sie diese Links mit den Teilnehmern, wenn sie sie erneut benötigen",
+    "passwordLabel": "Administrator-Passwort Eingeben",
+    "passwordPlaceholder": "Administrator-Passwort",
+    "unlockButton": "Alle Zuweisungen Anzeigen",
+    "incorrectPassword": "Falsches Passwort",
+    "allAssignmentsTitle": "Alle Wichtel-Zuweisungen",
+    "giverColumn": "Schenker",
+    "receiverColumn": "Empfänger",
+    "backButton": "Zurück zur Startseite"
+  },
+  "error": {
+    "title": "⚠️ Fehler",
+    "backButton": "Zurück zur Startseite"
+  },
+  "validation": {
+    "minParticipants": "Sie benötigen mindestens 3 Teilnehmer für das Wichteln",
+    "maxParticipants": "Maximal 50 Teilnehmer erlaubt (URL-Längenbeschränkung)",
+    "seedRequired": "Bitte geben Sie einen Zufallssamen ein",
+    "passwordRequired": "Bitte geben Sie ein Administrator-Passwort ein",
+    "passwordTooShort": "Das Administrator-Passwort muss mindestens 4 Zeichen lang sein",
+    "noAssignmentFound": "Keine Zuweisung für {name} gefunden",
+    "failedToLoad": "Fehler beim Laden der Zuweisung: {error}",
+    "failedToCreate": "Fehler beim Erstellen des Wichtelns: {error}",
+    "invalidUrl": "Ungültige URL: Benutzer- oder Administrator-Parameter fehlt",
+    "invalidData": "Ungültiges Datenformat",
+    "failedToCopy": "Fehler beim Kopieren in die Zwischenablage"
+  },
+  "alerts": {
+    "viewInstructions": "Um Ihre Zuweisung anzusehen, klicken Sie auf den personalisierten Link, der mit Ihnen geteilt wurde."
+  }
+}
