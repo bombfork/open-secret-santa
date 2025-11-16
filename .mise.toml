@@ -1,4 +1,5 @@
 [tools]
+java = "zulu-17"
 jq = "latest"
 node = "latest"
 

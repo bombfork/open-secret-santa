@@ -108,6 +108,60 @@ npx http-server -p 8000
 
 Then visit `http://localhost:8000`
 
+## Android Development
+
+The project is configured with Capacitor to build native Android applications.
+
+### Prerequisites
+
+- Android Studio (latest stable version)
+- Android SDK (API 24 or higher)
+- Java 17 or newer (configured via mise in `.mise.toml`)
+
+### Setup
+
+The Android platform has been initialized with:
+- **App ID**: `com.bombfork.opensecretasanta`
+- **App Name**: `Open Secret Santa`
+- **Server Hostname**: `secret-santa.bombfork.net`
+
+### Building for Android
+
+1. **Sync web assets to Android**:
+   ```bash
+   npm run cap:sync
+   ```
+   This copies web files to the `www/` directory and syncs them to the Android project.
+
+2. **Open in Android Studio**:
+   ```bash
+   npm run cap:open:android
+   ```
+   Or manually:
+   ```bash
+   npx cap open android
+   ```
+
+3. **Run on device/emulator**:
+   ```bash
+   npm run cap:run:android
+   ```
+   Or build directly in Android Studio after opening the project.
+
+### Workflow
+
+When making changes to web files (HTML, JS, CSS):
+1. Make your changes to files in the root directory
+2. Run `npm run cap:sync` to copy changes to the Android project
+3. The Android app will reflect the updates
+
+### Important Notes
+
+- The `www/` directory is gitignored and generated from root files
+- Android build artifacts are gitignored (see `.gitignore`)
+- The web app runs in a WebView on Android
+- All web app functionality works the same on Android as in the browser
+
 ## File Structure
 
 ```
@@ -116,6 +170,17 @@ Then visit `http://localhost:8000`
 │   └── workflows/
 │       ├── deploy.yml           # GitHub Actions deployment workflow
 │       └── lint-and-format.yml  # PR validation workflow
+├── android/                     # Android native project (Capacitor)
+│   ├── app/                     # Android application module
+│   │   ├── src/main/
+│   │   │   ├── java/            # Java source code
+│   │   │   ├── assets/          # Web assets (auto-synced)
+│   │   │   ├── res/             # Android resources
+│   │   │   └── AndroidManifest.xml
+│   │   └── build.gradle         # App build configuration
+│   ├── gradle/                  # Gradle wrapper
+│   ├── build.gradle             # Project build configuration
+│   └── gradlew                  # Gradle wrapper script
 ├── locales/
 │   ├── schema.json    # JSON schema for i18n validation
 │   ├── en.json        # English translations
@@ -136,6 +201,8 @@ Then visit `http://localhost:8000`
 │   ├── encoder.js     # URL encoding/decoding utilities
 │   ├── i18n.js        # Internationalization system
 │   └── utils.js       # Shared utilities
+├── www/                # Web assets for Capacitor (auto-generated, gitignored)
+├── capacitor.config.json # Capacitor configuration
 ├── .mise.toml         # mise configuration for development
 ├── package.json       # Node.js dependencies and scripts
 ├── .nojekyll          # GitHub Pages configuration

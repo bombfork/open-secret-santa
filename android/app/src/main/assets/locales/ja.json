@@ -1,0 +1,81 @@
+{
+  "landing": {
+    "title": "シークレットサンタ",
+    "subtitle": "プレゼント交換を簡単に",
+    "howItWorks": "使い方",
+    "instructions": [
+      "参加者の名前でシークレットサンタを作成",
+      "ランダムシードを設定して再現可能な割り当て",
+      "各参加者に個別のリンクを共有",
+      "各参加者は自分が贈る相手のみ表示",
+      "管理者はパスワードですべての割り当てを表示"
+    ],
+    "securityNoticeTitle": "🎄 フェアプレイヤーのために",
+    "securityNoticeText": "このアプリは信頼システムで動作します！リンクはエンコードされていますが暗号化されていません。家族、友人、同僚などの信頼できるグループに最適です。フォートノックス級のセキュリティが必要な場合は、このアプリは適していないかもしれません！😊",
+    "createButton": "新しいシークレットサンタを作成",
+    "viewButton": "あなたの割り当てを見る"
+  },
+  "create": {
+    "title": "シークレットサンタを作成",
+    "participantsLabel": "参加者名",
+    "participantsHelp": "1行に1つの名前を入力（最小3人、最大50人）",
+    "participantsPlaceholder": "アリス\nボブ\nチャーリー\nダイアナ",
+    "seedLabel": "ランダムシード",
+    "seedHelp": "ランダムなシードが生成されましたが、独自のシードを指定することもできます",
+    "seedPlaceholder": "例：クリスマス2024",
+    "passwordLabel": "管理者パスワード",
+    "passwordHelp": "オプション - パスワード保護なしの場合は空白のままにします",
+    "passwordPlaceholder": "管理者パスワードを入力（オプション）",
+    "backButton": "戻る",
+    "submitButton": "シークレットサンタを生成"
+  },
+  "results": {
+    "title": "シークレットサンタが作成されました！",
+    "adminLinkTitle": "管理者リンク",
+    "adminLinkHelp": "すべての割り当てを表示するには主催者と共有",
+    "participantLinksTitle": "参加者リンク",
+    "participantLinksHelp": "各リンクを該当する参加者と共有",
+    "copyButton": "コピー",
+    "copiedButton": "✓ コピーしました！",
+    "createAnotherButton": "もう一つ作成"
+  },
+  "viewParticipant": {
+    "title": "あなたのシークレットサンタ割り当て",
+    "youAre": "あなたは次の人のシークレットサンタです：",
+    "keepSecret": "🤫 秘密にしてください！",
+    "backButton": "ホームに戻る"
+  },
+  "viewAdmin": {
+    "title": "管理者ビュー",
+    "participantLinksTitle": "参加者リンク",
+    "participantLinksHelp": "必要に応じて参加者とこれらのリンクを共有",
+    "passwordLabel": "管理者パスワードを入力",
+    "passwordPlaceholder": "管理者パスワード",
+    "unlockButton": "すべての割り当てを表示",
+    "incorrectPassword": "パスワードが正しくありません",
+    "allAssignmentsTitle": "すべてのシークレットサンタ割り当て",
+    "giverColumn": "贈り主",
+    "receiverColumn": "受取人",
+    "backButton": "ホームに戻る"
+  },
+  "error": {
+    "title": "⚠️ エラー",
+    "backButton": "ホームに戻る"
+  },
+  "validation": {
+    "minParticipants": "シークレットサンタには最低3人の参加者が必要です",
+    "maxParticipants": "最大50人まで（URL長の制限）",
+    "seedRequired": "ランダムシードを入力してください",
+    "passwordRequired": "管理者パスワードを入力してください",
+    "passwordTooShort": "管理者パスワードは4文字以上である必要があります",
+    "noAssignmentFound": "{name}の割り当てが見つかりません",
+    "failedToLoad": "割り当ての読み込みに失敗しました：{error}",
+    "failedToCreate": "シークレットサンタの作成エラー：{error}",
+    "invalidUrl": "無効なURL：ユーザーまたは管理者パラメータがありません",
+    "invalidData": "無効なデータ形式",
+    "failedToCopy": "クリップボードへのコピーに失敗しました"
+  },
+  "alerts": {
+    "viewInstructions": "割り当てを表示するには、共有された個別リンクをクリックしてください。"
+  }
+}

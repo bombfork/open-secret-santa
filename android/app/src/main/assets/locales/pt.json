@@ -1,0 +1,81 @@
+{
+  "landing": {
+    "title": "Amigo Secreto",
+    "subtitle": "Organize sua troca de presentes com facilidade",
+    "howItWorks": "Como funciona",
+    "instructions": [
+      "Crie um novo Amigo Secreto com os nomes dos participantes",
+      "Defina uma semente aleatória para atribuições reproduzíveis",
+      "Compartilhe links individuais com cada participante",
+      "Cada pessoa vê apenas quem ela vai presentear",
+      "O administrador pode ver todas as atribuições com a senha"
+    ],
+    "securityNoticeTitle": "🎄 Feito para Jogadores Honestos",
+    "securityNoticeText": "Este app funciona no sistema de honra! Os links são codificados (não criptografados), então é ideal para grupos confiáveis como família, amigos ou colegas. Se você precisa de segurança Fort Knox, este pode não ser o seu app! 😊",
+    "createButton": "Criar Novo Amigo Secreto",
+    "viewButton": "Ver Sua Atribuição"
+  },
+  "create": {
+    "title": "Criar Amigo Secreto",
+    "participantsLabel": "Nomes dos Participantes",
+    "participantsHelp": "Digite um nome por linha (mínimo 3, máximo 50 participantes)",
+    "participantsPlaceholder": "Alice\nBob\nCarlos\nDiana",
+    "seedLabel": "Semente Aleatória",
+    "seedHelp": "Uma semente aleatória foi gerada, ou você pode fornecer a sua própria",
+    "seedPlaceholder": "ex: natal2024",
+    "passwordLabel": "Senha do Administrador",
+    "passwordHelp": "Opcional - deixe em branco para nenhuma proteção por senha",
+    "passwordPlaceholder": "Digite a senha do administrador (opcional)",
+    "backButton": "Voltar",
+    "submitButton": "Gerar Amigo Secreto"
+  },
+  "results": {
+    "title": "Amigo Secreto Criado!",
+    "adminLinkTitle": "Link do Administrador",
+    "adminLinkHelp": "Compartilhe isso com o organizador para ver todas as atribuições",
+    "participantLinksTitle": "Links dos Participantes",
+    "participantLinksHelp": "Compartilhe cada link com o participante correspondente",
+    "copyButton": "Copiar",
+    "copiedButton": "✓ Copiado!",
+    "createAnotherButton": "Criar Outro"
+  },
+  "viewParticipant": {
+    "title": "Sua Atribuição de Amigo Secreto",
+    "youAre": "Você é o Amigo Secreto de:",
+    "keepSecret": "🤫 Mantenha em segredo!",
+    "backButton": "Voltar ao Início"
+  },
+  "viewAdmin": {
+    "title": "Visão do Administrador",
+    "participantLinksTitle": "Links dos Participantes",
+    "participantLinksHelp": "Compartilhe estes links com os participantes se eles precisarem novamente",
+    "passwordLabel": "Digite a Senha do Administrador",
+    "passwordPlaceholder": "Senha do administrador",
+    "unlockButton": "Ver Todas as Atribuições",
+    "incorrectPassword": "Senha incorreta",
+    "allAssignmentsTitle": "Todas as Atribuições do Amigo Secreto",
+    "giverColumn": "Doador",
+    "receiverColumn": "Receptor",
+    "backButton": "Voltar ao Início"
+  },
+  "error": {
+    "title": "⚠️ Erro",
+    "backButton": "Voltar ao Início"
+  },
+  "validation": {
+    "minParticipants": "Você precisa de pelo menos 3 participantes para o Amigo Secreto",
+    "maxParticipants": "Máximo 50 participantes permitidos (limitação de comprimento de URL)",
+    "seedRequired": "Por favor, digite uma semente aleatória",
+    "passwordRequired": "Por favor, digite uma senha de administrador",
+    "passwordTooShort": "A senha do administrador deve ter pelo menos 4 caracteres",
+    "noAssignmentFound": "Nenhuma atribuição encontrada para {name}",
+    "failedToLoad": "Falha ao carregar atribuição: {error}",
+    "failedToCreate": "Erro ao criar Amigo Secreto: {error}",
+    "invalidUrl": "URL inválido: parâmetro de usuário ou administrador ausente",
+    "invalidData": "Formato de dados inválido",
+    "failedToCopy": "Falha ao copiar para a área de transferência"
+  },
+  "alerts": {
+    "viewInstructions": "Para ver sua atribuição, clique no link personalizado que foi compartilhado com você."
+  }
+}

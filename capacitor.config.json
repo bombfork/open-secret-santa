@@ -1,0 +1,8 @@
+{
+  "appId": "com.bombfork.opensecretasanta",
+  "appName": "Open Secret Santa",
+  "webDir": "www",
+  "server": {
+    "hostname": "secret-santa.bombfork.net"
+  }
+}

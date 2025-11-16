@@ -1,1 +1,14 @@
 node_modules
+
+# Capacitor
+android/app/build
+android/build
+android/.gradle
+android/app/release
+android/app/debug
+android/local.properties
+android/.idea
+android/*.iml
+android/app/*.iml
+android/captures
+www

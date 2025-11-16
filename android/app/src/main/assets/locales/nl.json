@@ -1,0 +1,81 @@
+{
+  "landing": {
+    "title": "Geheime Kerstman",
+    "subtitle": "Organiseer je cadeauruil met gemak",
+    "howItWorks": "Hoe het werkt",
+    "instructions": [
+      "Maak een nieuwe Geheime Kerstman met deelnemersnamen",
+      "Stel een willekeurige seed in voor reproduceerbare toewijzingen",
+      "Deel individuele links met elke deelnemer",
+      "Elke persoon ziet alleen aan wie ze moeten geven",
+      "Beheerder kan alle toewijzingen zien met wachtwoord"
+    ],
+    "securityNoticeTitle": "🎄 Gemaakt voor Eerlijke Spelers",
+    "securityNoticeText": "Deze app werkt op het eersysteem! Links zijn gecodeerd (niet versleuteld), dus het is ideaal voor betrouwbare groepen zoals familie, vrienden of collega's. Als je Fort Knox-beveiliging nodig hebt, is dit misschien niet je app! 😊",
+    "createButton": "Nieuwe Geheime Kerstman Maken",
+    "viewButton": "Bekijk Je Toewijzing"
+  },
+  "create": {
+    "title": "Geheime Kerstman Maken",
+    "participantsLabel": "Deelnemersnamen",
+    "participantsHelp": "Voer één naam per regel in (minimaal 3, maximaal 50 deelnemers)",
+    "participantsPlaceholder": "Alice\nBob\nCarla\nDiana",
+    "seedLabel": "Willekeurige Seed",
+    "seedHelp": "Een willekeurige seed is gegenereerd, of u kunt uw eigen seed opgeven",
+    "seedPlaceholder": "bijv: kerst2024",
+    "passwordLabel": "Beheerderswachtwoord",
+    "passwordHelp": "Optioneel - laat leeg voor geen wachtwoordbeveiliging",
+    "passwordPlaceholder": "Voer beheerderswachtwoord in (optioneel)",
+    "backButton": "Terug",
+    "submitButton": "Geheime Kerstman Genereren"
+  },
+  "results": {
+    "title": "Geheime Kerstman Aangemaakt!",
+    "adminLinkTitle": "Beheerder Link",
+    "adminLinkHelp": "Deel dit met de organisator om alle toewijzingen te bekijken",
+    "participantLinksTitle": "Deelnemer Links",
+    "participantLinksHelp": "Deel elke link met de bijbehorende deelnemer",
+    "copyButton": "Kopiëren",
+    "copiedButton": "✓ Gekopieerd!",
+    "createAnotherButton": "Nog Een Maken"
+  },
+  "viewParticipant": {
+    "title": "Je Geheime Kerstman Toewijzing",
+    "youAre": "Je bent de Geheime Kerstman voor:",
+    "keepSecret": "🤫 Houd het geheim!",
+    "backButton": "Terug naar Home"
+  },
+  "viewAdmin": {
+    "title": "Beheerder Weergave",
+    "participantLinksTitle": "Deelnemer Links",
+    "participantLinksHelp": "Deel deze links met deelnemers als ze ze opnieuw nodig hebben",
+    "passwordLabel": "Voer Beheerderswachtwoord In",
+    "passwordPlaceholder": "Beheerderswachtwoord",
+    "unlockButton": "Bekijk Alle Toewijzingen",
+    "incorrectPassword": "Onjuist wachtwoord",
+    "allAssignmentsTitle": "Alle Geheime Kerstman Toewijzingen",
+    "giverColumn": "Gever",
+    "receiverColumn": "Ontvanger",
+    "backButton": "Terug naar Home"
+  },
+  "error": {
+    "title": "⚠️ Fout",
+    "backButton": "Terug naar Home"
+  },
+  "validation": {
+    "minParticipants": "Je hebt minimaal 3 deelnemers nodig voor Geheime Kerstman",
+    "maxParticipants": "Maximaal 50 deelnemers toegestaan (URL-lengtebeperking)",
+    "seedRequired": "Voer een willekeurige seed in",
+    "passwordRequired": "Voer een beheerderswachtwoord in",
+    "passwordTooShort": "Beheerderswachtwoord moet minimaal 4 tekens zijn",
+    "noAssignmentFound": "Geen toewijzing gevonden voor {name}",
+    "failedToLoad": "Kan toewijzing niet laden: {error}",
+    "failedToCreate": "Fout bij maken Geheime Kerstman: {error}",
+    "invalidUrl": "Ongeldige URL: gebruiker of beheerder parameter ontbreekt",
+    "invalidData": "Ongeldig gegevensformaat",
+    "failedToCopy": "Kan niet kopiëren naar klembord"
+  },
+  "alerts": {
+    "viewInstructions": "Om je toewijzing te bekijken, klik op de gepersonaliseerde link die met je is gedeeld."
+  }
+}
