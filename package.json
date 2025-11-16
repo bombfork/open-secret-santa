@@ -11,7 +11,7 @@
     "validate:all": "npm run lint && npm run format && npm run validate:i18n",
     "dev": "npx http-server -p 8000",
     "cap:sync": "npm run cap:copy-web && npx cap sync",
-    "cap:copy-web": "rm -rf www && mkdir -p www && cp index.html www/ && cp -r js styles locales www/",
+    "cap:copy-web": "rm -rf www && mkdir -p www && cp index.html www/ && cp -r js styles locales assets www/",
     "cap:open:android": "npx cap open android",
     "cap:run:android": "npm run cap:sync && npx cap run android"
   },

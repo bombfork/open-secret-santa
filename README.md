@@ -162,6 +162,31 @@ When making changes to web files (HTML, JS, CSS):
 - The web app runs in a WebView on Android
 - All web app functionality works the same on Android as in the browser
 
+## Offline Operation
+
+The application supports both online (web) and offline (mobile app) operation:
+
+### Web Version (GitHub Pages)
+- Loads Pico CSS from CDN for optimal performance
+- Requires internet connection for initial load
+- Caches static assets after first visit
+
+### Mobile App (Capacitor/Android)
+- Includes local copy of Pico CSS (v2.0.6) in `assets/` directory
+- Automatically detects Capacitor environment and loads local assets
+- Works completely offline after installation
+- No external network requests needed
+
+### How It Works
+The application uses runtime detection to determine which CSS to load:
+- **In browser**: Loads Pico CSS from CDN (`https://cdn.jsdelivr.net/npm/@picocss/pico@2/`)
+- **In Capacitor**: Loads local Pico CSS from `assets/pico.min.css`
+
+This ensures:
+- Web version benefits from CDN caching and updates
+- Mobile app works offline without network dependencies
+- Backward compatibility with existing deployments
+
 ## File Structure
 
 ```
@@ -181,6 +206,9 @@ When making changes to web files (HTML, JS, CSS):
 │   ├── gradle/                  # Gradle wrapper
 │   ├── build.gradle             # Project build configuration
 │   └── gradlew                  # Gradle wrapper script
+├── assets/
+│   ├── pico.min.css             # Local copy of Pico CSS (v2.0.6) for offline use
+│   └── PICO_LICENSE             # Pico CSS MIT license
 ├── locales/
 │   ├── schema.json    # JSON schema for i18n validation
 │   ├── en.json        # English translations
