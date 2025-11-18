@@ -7,6 +7,7 @@ import { setupCreateForm, displayResults } from "./create.js";
 import { setupViewMode } from "./view.js";
 import { parseUrlParams } from "./encoder.js";
 import { initI18n, t, createLanguageSelector } from "./i18n.js";
+import { initDeepLinking, handleDeepLinkNavigation } from "./deeplink.js";
 
 // Page elements
 const pages = {
@@ -213,6 +214,19 @@ async function init() {
   // Listen for language changes
   window.addEventListener("languagechange", () => {
     updatePageText();
+  });
+
+  // Initialize deep linking for Android App Links
+  initDeepLinking((params) => {
+    // Handle deep link navigation when app is opened via URL
+    handleDeepLinkNavigation(
+      params,
+      setupViewMode,
+      showPage,
+      showError,
+      goToLanding,
+      () => t("validation.invalidUrl"),
+    );
   });
 
   // Parse URL parameters

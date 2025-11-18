@@ -3,6 +3,7 @@
   "appName": "Open Secret Santa",
   "webDir": "www",
   "server": {
-    "hostname": "secret-santa.bombfork.net"
+    "hostname": "secret-santa.bombfork.net",
+    "androidScheme": "https"
   }
 }
