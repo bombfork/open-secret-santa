@@ -155,12 +155,29 @@ When making changes to web files (HTML, JS, CSS):
 2. Run `npm run cap:sync` to copy changes to the Android project
 3. The Android app will reflect the updates
 
+### Deep Linking (App Links)
+
+The Android app supports deep linking via Android App Links. When users click on Secret Santa URLs (`https://secret-santa.bombfork.net/?data=...`), the links automatically open in the app if installed.
+
+**Setup Required:**
+1. Update `.well-known/assetlinks.json` with your app signing certificate fingerprints
+2. Deploy the file to GitHub Pages (automatic via GitHub Actions)
+3. Build and install the app on device
+
+**See detailed documentation:** [DEEP_LINKING.md](DEEP_LINKING.md)
+
+**Test deep links:**
+```bash
+./scripts/test-deep-link.sh
+```
+
 ### Important Notes
 
 - The `www/` directory is gitignored and generated from root files
 - Android build artifacts are gitignored (see `.gitignore`)
 - The web app runs in a WebView on Android
 - All web app functionality works the same on Android as in the browser
+- Deep linking allows Secret Santa URLs to open directly in the app
 
 ## Offline Operation
 
@@ -195,13 +212,16 @@ This ensures:
 │   └── workflows/
 │       ├── deploy.yml           # GitHub Actions deployment workflow
 │       └── lint-and-format.yml  # PR validation workflow
+├── .well-known/
+│   ├── assetlinks.json # Android App Links verification file
+│   └── README.md       # Setup instructions for App Links
 ├── android/                     # Android native project (Capacitor)
 │   ├── app/                     # Android application module
 │   │   ├── src/main/
 │   │   │   ├── java/            # Java source code
 │   │   │   ├── assets/          # Web assets (auto-synced)
 │   │   │   ├── res/             # Android resources
-│   │   │   └── AndroidManifest.xml
+│   │   │   └── AndroidManifest.xml # Includes App Links intent filter
 │   │   └── build.gradle         # App build configuration
 │   ├── gradle/                  # Gradle wrapper
 │   ├── build.gradle             # Project build configuration
@@ -217,7 +237,8 @@ This ensures:
 │   ├── de.json        # German translations
 │   └── ...            # And 14 more languages (18 total)!
 ├── scripts/
-│   └── validate-i18n.js # i18n validation script
+│   ├── validate-i18n.js # i18n validation script
+│   └── test-deep-link.sh # Test Android App Links
 ├── index.html          # Main HTML file
 ├── styles/
 │   └── main.css       # Custom styles
@@ -228,13 +249,15 @@ This ensures:
 │   ├── random.js      # Seeded random generator & assignment algorithm
 │   ├── encoder.js     # URL encoding/decoding utilities
 │   ├── i18n.js        # Internationalization system
+│   ├── deeplink.js    # Android App Links deep linking handler
 │   └── utils.js       # Shared utilities
 ├── www/                # Web assets for Capacitor (auto-generated, gitignored)
-├── capacitor.config.json # Capacitor configuration
+├── capacitor.config.json # Capacitor configuration (includes androidScheme)
 ├── .mise.toml         # mise configuration for development
 ├── package.json       # Node.js dependencies and scripts
 ├── .nojekyll          # GitHub Pages configuration
 ├── LICENSE            # MIT License
+├── DEEP_LINKING.md    # Android App Links documentation
 └── README.md          # This file
 ```
 

@@ -22,6 +22,19 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
 
+            <!-- App Links intent filter for deep linking
+                 This enables the app to open https://secret-santa.bombfork.net URLs directly.
+                 Requires .well-known/assetlinks.json to be deployed with SHA-256 fingerprints.
+                 See DEEP_LINKING.md for setup instructions. -->
+            <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data
+                    android:scheme="https"
+                    android:host="secret-santa.bombfork.net" />
+            </intent-filter>
+
         </activity>
 
         <provider
