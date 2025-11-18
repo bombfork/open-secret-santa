@@ -7,10 +7,7 @@ import { setupCreateForm, displayResults } from "./create.js";
 import { setupViewMode } from "./view.js";
 import { parseUrlParams } from "./encoder.js";
 import { initI18n, t, createLanguageSelector } from "./i18n.js";
-import {
-  initDeepLinking,
-  handleDeepLinkNavigation,
-} from "./deeplink.js";
+import { initDeepLinking, handleDeepLinkNavigation } from "./deeplink.js";
 
 // Page elements
 const pages = {
