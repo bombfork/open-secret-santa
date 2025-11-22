@@ -88,16 +88,21 @@ jobs:
             const stats = fs.statSync(apkPath);
             const fileSizeInMB = (stats.size / (1024 * 1024)).toFixed(2);
 
+            // Construct artifact URL
+            const runId = context.runId;
+            const artifactUrl = `https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${runId}`;
+
             const comment = `### 📱 Android Debug APK Built Successfully
 
             **Size:** ${fileSizeInMB} MB
             **Commit:** ${context.sha.substring(0, 7)}
-            **Download:** Available in workflow artifacts
+            **Download:** [📦 Download APK from workflow artifacts](${artifactUrl})
 
             To test this build:
-            1. Download the APK from the workflow artifacts
-            2. Enable "Install unknown apps" on your Android device
-            3. Install and test the app`;
+            1. Click the download link above and download the APK artifact
+            2. Extract the APK from the downloaded ZIP file
+            3. Enable "Install unknown apps" on your Android device
+            4. Install and test the app`;
 
             github.rest.issues.createComment({
               issue_number: context.issue.number,
