@@ -142,6 +142,7 @@ export function displayResults(result, onCreateAnother) {
   // Setup admin share button
   const adminShareBtn = document.getElementById("share-admin-btn");
   adminShareBtn.setAttribute("data-url", result.adminUrl);
+  adminShareBtn.textContent = t("results.shareAdminButton");
 
   // Display participant links
   const participantLinksContainer =
