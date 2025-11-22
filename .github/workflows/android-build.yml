@@ -1,0 +1,273 @@
+name: Android Build
+
+on:
+  # Build debug APK on pull requests
+  pull_request:
+    branches:
+      - main
+
+  # Build debug APK on pushes to main, or release APK on tagged releases
+  push:
+    branches:
+      - main
+    tags:
+      - 'v*'
+
+  # Allow manual trigger
+  workflow_dispatch:
+
+jobs:
+  build-debug:
+    name: Build Debug APK
+    runs-on: ubuntu-latest
+    # Only run on PRs and main branch pushes, not on tags
+    if: startsWith(github.ref, 'refs/heads/') || startsWith(github.ref, 'refs/pull/')
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Setup Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+          cache: 'gradle'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build web assets
+        run: |
+          # Create www directory if it doesn't exist
+          mkdir -p www
+          # Copy web assets to www directory for Capacitor
+          cp index.html www/
+          cp -r js www/
+          cp -r styles www/
+          cp -r locales www/
+          cp -r assets www/
+          cp -r .well-known www/
+
+      - name: Sync Capacitor
+        run: npx cap sync android
+
+      - name: Make gradlew executable
+        run: chmod +x android/gradlew
+
+      - name: Build debug APK
+        run: |
+          cd android
+          ./gradlew assembleDebug --no-daemon
+
+      - name: Upload debug APK artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: app-debug-${{ github.sha }}
+          path: android/app/build/outputs/apk/debug/app-debug.apk
+          retention-days: 30
+
+      - name: Comment APK info on PR
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const path = require('path');
+            const apkPath = 'android/app/build/outputs/apk/debug/app-debug.apk';
+            const stats = fs.statSync(apkPath);
+            const fileSizeInMB = (stats.size / (1024 * 1024)).toFixed(2);
+
+            const comment = `### 📱 Android Debug APK Built Successfully
+
+            **Size:** ${fileSizeInMB} MB
+            **Commit:** ${context.sha.substring(0, 7)}
+            **Download:** Available in workflow artifacts
+
+            To test this build:
+            1. Download the APK from the workflow artifacts
+            2. Enable "Install unknown apps" on your Android device
+            3. Install and test the app`;
+
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: comment
+            });
+
+  build-release:
+    name: Build Release APK
+    runs-on: ubuntu-latest
+    # Only run on version tags
+    if: startsWith(github.ref, 'refs/tags/v')
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Setup Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+          cache: 'gradle'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build web assets
+        run: |
+          # Create www directory if it doesn't exist
+          mkdir -p www
+          # Copy web assets to www directory for Capacitor
+          cp index.html www/
+          cp -r js www/
+          cp -r styles www/
+          cp -r locales www/
+          cp -r assets www/
+          cp -r .well-known www/
+
+      - name: Sync Capacitor
+        run: npx cap sync android
+
+      - name: Decode keystore
+        env:
+          ANDROID_KEYSTORE_BASE64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+        run: |
+          if [ -z "$ANDROID_KEYSTORE_BASE64" ]; then
+            echo "❌ Error: ANDROID_KEYSTORE_BASE64 secret is not set"
+            echo "Please configure signing secrets in repository settings"
+            echo "See ANDROID_BUILD.md for instructions"
+            exit 1
+          fi
+          echo "$ANDROID_KEYSTORE_BASE64" | base64 -d > android/app/release.keystore
+
+      - name: Create signing properties
+        env:
+          ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+          ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+        run: |
+          # Verify all secrets are set
+          if [ -z "$ANDROID_KEYSTORE_PASSWORD" ] || [ -z "$ANDROID_KEY_ALIAS" ] || [ -z "$ANDROID_KEY_PASSWORD" ]; then
+            echo "❌ Error: One or more signing secrets are missing"
+            echo "Required secrets: ANDROID_KEYSTORE_PASSWORD, ANDROID_KEY_ALIAS, ANDROID_KEY_PASSWORD"
+            echo "See ANDROID_BUILD.md for instructions"
+            exit 1
+          fi
+
+          # Create signing config
+          cat > android/keystore.properties << EOF
+          storeFile=release.keystore
+          storePassword=$ANDROID_KEYSTORE_PASSWORD
+          keyAlias=$ANDROID_KEY_ALIAS
+          keyPassword=$ANDROID_KEY_PASSWORD
+          EOF
+
+      - name: Configure signing in build.gradle
+        run: |
+          # Add signing configuration to app/build.gradle
+          sed -i '/android {/a\
+              signingConfigs {\
+                  release {\
+                      def keystorePropertiesFile = rootProject.file("keystore.properties")\
+                      def keystoreProperties = new Properties()\
+                      keystoreProperties.load(new FileInputStream(keystorePropertiesFile))\
+                      storeFile file(keystoreProperties["storeFile"])\
+                      storePassword keystoreProperties["storePassword"]\
+                      keyAlias keystoreProperties["keyAlias"]\
+                      keyPassword keystoreProperties["keyPassword"]\
+                  }\
+              }' android/app/build.gradle
+
+          # Update release buildType to use signing config
+          sed -i '/buildTypes {/,/release {/a\
+              signingConfig signingConfigs.release' android/app/build.gradle
+
+      - name: Make gradlew executable
+        run: chmod +x android/gradlew
+
+      - name: Build release APK
+        run: |
+          cd android
+          ./gradlew assembleRelease --no-daemon
+
+      - name: Rename APK with version
+        run: |
+          VERSION=${GITHUB_REF#refs/tags/v}
+          cp android/app/build/outputs/apk/release/app-release.apk \
+             android/app/build/outputs/apk/release/open-secret-santa-${VERSION}.apk
+
+      - name: Upload release APK artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: app-release-${{ github.ref_name }}
+          path: android/app/build/outputs/apk/release/open-secret-santa-*.apk
+          retention-days: 90
+
+      - name: Get APK info
+        id: apk-info
+        run: |
+          VERSION=${GITHUB_REF#refs/tags/v}
+          APK_PATH="android/app/build/outputs/apk/release/open-secret-santa-${VERSION}.apk"
+          APK_SIZE=$(du -h "$APK_PATH" | cut -f1)
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "apk_path=$APK_PATH" >> $GITHUB_OUTPUT
+          echo "apk_size=$APK_SIZE" >> $GITHUB_OUTPUT
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: ${{ steps.apk-info.outputs.apk_path }}
+          body: |
+            ## 📱 Android Release APK
+
+            **Version:** ${{ steps.apk-info.outputs.version }}
+            **Size:** ${{ steps.apk-info.outputs.apk_size }}
+            **Package:** com.bombfork.opensecretasanta
+
+            ### Installation
+
+            1. Download the APK file below
+            2. Enable "Install unknown apps" on your Android device (Settings > Security)
+            3. Open the APK file to install
+            4. Launch "Open Secret Santa" from your app drawer
+
+            ### Features
+
+            - Full offline support (no internet required after installation)
+            - Android App Links support (Secret Santa URLs open directly in app)
+            - Native clipboard and sharing integration
+            - All web app features available on mobile
+
+            ### Requirements
+
+            - Android 7.0 (API 24) or higher
+            - ~${{ steps.apk-info.outputs.apk_size }} storage space
+
+            ---
+
+            For more information, see [ANDROID_BUILD.md](https://github.com/${{ github.repository }}/blob/main/ANDROID_BUILD.md)
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Cleanup keystore
+        if: always()
+        run: |
+          rm -f android/app/release.keystore
+          rm -f android/keystore.properties
