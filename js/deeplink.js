@@ -29,7 +29,6 @@ export function initDeepLinking(onDeepLink) {
 
   // Create a promise that resolves when a deep link is received or times out
   deepLinkPromise = new Promise((resolve) => {
-
     // Listen for app URL open events
     App.addListener("appUrlOpen", (event) => {
       console.log("Deep link received:", event.url);
