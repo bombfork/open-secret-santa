@@ -37,7 +37,12 @@
     "participantLinksHelp": "Condividi ogni link con il partecipante corrispondente",
     "copyButton": "Copia",
     "copiedButton": "✓ Copiato!",
-    "createAnotherButton": "Crea un Altro"
+    "createAnotherButton": "Crea un Altro",
+    "shareButton": "Condividi",
+    "shareTitle": "Babbo Natale Segreto per {name}",
+    "shareText": "Ecco il tuo link di assegnazione del Babbo Natale Segreto per {name}",
+    "shareAdminTitle": "Link Amministratore del Babbo Natale Segreto",
+    "shareAdminText": "Ecco il link amministratore per visualizzare tutte le assegnazioni del Babbo Natale Segreto"
   },
   "viewParticipant": {
     "title": "La Tua Assegnazione di Babbo Natale Segreto",
@@ -73,7 +78,8 @@
     "failedToCreate": "Errore nella creazione del Babbo Natale Segreto: {error}",
     "invalidUrl": "URL non valido: parametro utente o amministratore mancante",
     "invalidData": "Formato dati non valido",
-    "failedToCopy": "Impossibile copiare negli appunti"
+    "failedToCopy": "Impossibile copiare negli appunti",
+    "shareNotSupported": "La condivisione non è supportata su questo dispositivo"
   },
   "alerts": {
     "viewInstructions": "Per vedere la tua assegnazione, clicca sul link personalizzato che è stato condiviso con te."

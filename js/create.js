@@ -9,7 +9,7 @@ import {
   generateParticipantUrl,
 } from "./encoder.js";
 import { t } from "./i18n.js";
-import { escapeHtml, setupCopyButtons } from "./utils.js";
+import { escapeHtml, setupCopyButtons, setupShareButtons } from "./utils.js";
 
 /**
  * Parse participant names from textarea
@@ -139,6 +139,10 @@ export function displayResults(result, onCreateAnother) {
   const adminLinkInput = document.getElementById("admin-link");
   adminLinkInput.value = result.adminUrl;
 
+  // Setup admin share button
+  const adminShareBtn = document.getElementById("share-admin-btn");
+  adminShareBtn.setAttribute("data-url", result.adminUrl);
+
   // Display participant links
   const participantLinksContainer =
     document.getElementById("participant-links");
@@ -151,14 +155,18 @@ export function displayResults(result, onCreateAnother) {
     div.innerHTML = `
             <strong>${escapeHtml(name)}:</strong>
             <input type="text" value="${escapeHtml(url)}" readonly>
-            <button class="copy-btn" data-url="${escapeHtml(url)}">${t("results.copyButton")}</button>
+            <div class="button-group">
+                <button class="copy-btn" data-url="${escapeHtml(url)}">${t("results.copyButton")}</button>
+                <button class="share-btn secondary" data-url="${escapeHtml(url)}" data-name="${escapeHtml(name)}">${t("results.shareButton")}</button>
+            </div>
         `;
 
     participantLinksContainer.appendChild(div);
   });
 
-  // Setup copy buttons
+  // Setup copy and share buttons
   setupCopyButtons();
+  setupShareButtons();
 
   // Setup create another button
   const createAnotherBtn = document.getElementById("create-another");

@@ -37,6 +37,11 @@
     "participantLinksHelp": "Share each link with the corresponding participant",
     "copyButton": "Copy",
     "copiedButton": "✓ Copied!",
+    "shareButton": "Share",
+    "shareTitle": "Secret Santa for {name}",
+    "shareText": "Here's your Secret Santa assignment link for {name}",
+    "shareAdminTitle": "Secret Santa Admin Link",
+    "shareAdminText": "Here's the admin link to view all Secret Santa assignments",
     "createAnotherButton": "Create Another"
   },
   "viewParticipant": {
@@ -73,7 +78,8 @@
     "failedToCreate": "Error creating Secret Santa: {error}",
     "invalidUrl": "Invalid URL: missing user or admin parameter",
     "invalidData": "Invalid data format",
-    "failedToCopy": "Failed to copy to clipboard"
+    "failedToCopy": "Failed to copy to clipboard",
+    "shareNotSupported": "Sharing is not supported on this device"
   },
   "alerts": {
     "viewInstructions": "To view your assignment, click on the personalized link that was shared with you."

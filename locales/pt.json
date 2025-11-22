@@ -37,7 +37,12 @@
     "participantLinksHelp": "Compartilhe cada link com o participante correspondente",
     "copyButton": "Copiar",
     "copiedButton": "✓ Copiado!",
-    "createAnotherButton": "Criar Outro"
+    "createAnotherButton": "Criar Outro",
+    "shareButton": "Compartilhar",
+    "shareTitle": "Amigo Secreto para {name}",
+    "shareText": "Aqui está o seu link de atribuição do Amigo Secreto para {name}",
+    "shareAdminTitle": "Link de Administrador do Amigo Secreto",
+    "shareAdminText": "Aqui está o link de administrador para ver todas as atribuições do Amigo Secreto"
   },
   "viewParticipant": {
     "title": "Sua Atribuição de Amigo Secreto",
@@ -73,7 +78,8 @@
     "failedToCreate": "Erro ao criar Amigo Secreto: {error}",
     "invalidUrl": "URL inválido: parâmetro de usuário ou administrador ausente",
     "invalidData": "Formato de dados inválido",
-    "failedToCopy": "Falha ao copiar para a área de transferência"
+    "failedToCopy": "Falha ao copiar para a área de transferência",
+    "shareNotSupported": "Compartilhar não é suportado neste dispositivo"
   },
   "alerts": {
     "viewInstructions": "Para ver sua atribuição, clique no link personalizado que foi compartilhado com você."

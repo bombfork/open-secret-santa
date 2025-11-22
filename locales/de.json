@@ -37,7 +37,12 @@
     "participantLinksHelp": "Teilen Sie jeden Link mit dem entsprechenden Teilnehmer",
     "copyButton": "Kopieren",
     "copiedButton": "✓ Kopiert!",
-    "createAnotherButton": "Weiteres Erstellen"
+    "createAnotherButton": "Weiteres Erstellen",
+    "shareButton": "Teilen",
+    "shareTitle": "Wichteln für {name}",
+    "shareText": "Hier ist dein Wichtel-Zuordnungslink für {name}",
+    "shareAdminTitle": "Wichtel-Admin-Link",
+    "shareAdminText": "Hier ist der Admin-Link, um alle Wichtel-Zuordnungen anzuzeigen"
   },
   "viewParticipant": {
     "title": "Ihre Wichtel-Zuweisung",
@@ -73,7 +78,8 @@
     "failedToCreate": "Fehler beim Erstellen des Wichtelns: {error}",
     "invalidUrl": "Ungültige URL: Benutzer- oder Administrator-Parameter fehlt",
     "invalidData": "Ungültiges Datenformat",
-    "failedToCopy": "Fehler beim Kopieren in die Zwischenablage"
+    "failedToCopy": "Fehler beim Kopieren in die Zwischenablage",
+    "shareNotSupported": "Teilen wird auf diesem Gerät nicht unterstützt"
   },
   "alerts": {
     "viewInstructions": "Um Ihre Zuweisung anzusehen, klicken Sie auf den personalisierten Link, der mit Ihnen geteilt wurde."

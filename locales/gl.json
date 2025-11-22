@@ -37,7 +37,12 @@
     "participantLinksHelp": "Comparte cada ligazón co participante correspondente",
     "copyButton": "Copiar",
     "copiedButton": "✓ Copiado!",
-    "createAnotherButton": "Crear Outro"
+    "createAnotherButton": "Crear Outro",
+    "shareButton": "Compartir",
+    "shareTitle": "Papá Noel Secreto para {name}",
+    "shareText": "Aquí tes a túa ligazón de asignación do Papá Noel Secreto para {name}",
+    "shareAdminTitle": "Ligazón de Administrador do Papá Noel Secreto",
+    "shareAdminText": "Aquí tes a ligazón de administrador para ver todas as asignacións do Papá Noel Secreto"
   },
   "viewParticipant": {
     "title": "A Túa Asignación de Amigo Invisible",
@@ -73,7 +78,8 @@
     "failedToCreate": "Erro ao crear o Amigo Invisible: {error}",
     "invalidUrl": "URL non válido: falta o parámetro de usuario ou administrador",
     "invalidData": "Formato de datos non válido",
-    "failedToCopy": "Erro ao copiar ao portapapeis"
+    "failedToCopy": "Erro ao copiar ao portapapeis",
+    "shareNotSupported": "Compartir non está soportado neste dispositivo"
   },
   "alerts": {
     "viewInstructions": "Para ver a túa asignación, fai clic na ligazón personalizada que se compartiu contigo."

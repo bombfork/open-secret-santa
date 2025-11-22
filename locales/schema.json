@@ -86,6 +86,11 @@
         "participantLinksHelp",
         "copyButton",
         "copiedButton",
+        "shareButton",
+        "shareTitle",
+        "shareText",
+        "shareAdminTitle",
+        "shareAdminText",
         "createAnotherButton"
       ],
       "properties": {
@@ -96,6 +101,11 @@
         "participantLinksHelp": { "type": "string" },
         "copyButton": { "type": "string" },
         "copiedButton": { "type": "string" },
+        "shareButton": { "type": "string" },
+        "shareTitle": { "type": "string" },
+        "shareText": { "type": "string" },
+        "shareAdminTitle": { "type": "string" },
+        "shareAdminText": { "type": "string" },
         "createAnotherButton": { "type": "string" }
       },
       "additionalProperties": false
@@ -171,7 +181,8 @@
         "failedToCreate",
         "invalidUrl",
         "invalidData",
-        "failedToCopy"
+        "failedToCopy",
+        "shareNotSupported"
       ],
       "properties": {
         "minParticipants": { "type": "string" },
@@ -184,7 +195,8 @@
         "failedToCreate": { "type": "string" },
         "invalidUrl": { "type": "string" },
         "invalidData": { "type": "string" },
-        "failedToCopy": { "type": "string" }
+        "failedToCopy": { "type": "string" },
+        "shareNotSupported": { "type": "string" }
       },
       "additionalProperties": false
     },

@@ -37,7 +37,12 @@
     "participantLinksHelp": "与相应参与者分享每个链接",
     "copyButton": "复制",
     "copiedButton": "✓ 已复制！",
-    "createAnotherButton": "创建另一个"
+    "createAnotherButton": "创建另一个",
+    "shareButton": "分享",
+    "shareTitle": "{name}的神秘圣诞老人",
+    "shareText": "这是{name}的神秘圣诞老人分配链接",
+    "shareAdminTitle": "神秘圣诞老人管理员链接",
+    "shareAdminText": "这是查看所有神秘圣诞老人分配的管理员链接"
   },
   "viewParticipant": {
     "title": "您的神秘圣诞老人分配",
@@ -73,7 +78,8 @@
     "failedToCreate": "创建神秘圣诞老人时出错：{error}",
     "invalidUrl": "无效URL：缺少用户或管理员参数",
     "invalidData": "无效数据格式",
-    "failedToCopy": "复制到剪贴板失败"
+    "failedToCopy": "复制到剪贴板失败",
+    "shareNotSupported": "此设备不支持分享"
   },
   "alerts": {
     "viewInstructions": "要查看您的分配，请点击与您分享的个人链接。"
