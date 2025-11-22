@@ -24,9 +24,11 @@ export async function copyToClipboard(text) {
   // Check if running in Capacitor (mobile app)
   if (window.Capacitor) {
     try {
-      const { Clipboard } = await import("@capacitor/clipboard");
-      await Clipboard.write({ string: text });
-      return;
+      const { Clipboard } = window.Capacitor.Plugins;
+      if (Clipboard) {
+        await Clipboard.write({ string: text });
+        return;
+      }
     } catch (error) {
       // If Capacitor clipboard fails, fall back to web API
       console.warn("Native clipboard failed, falling back to web API:", error);
@@ -48,14 +50,16 @@ export async function shareContent(title, text, url) {
   // Check if running in Capacitor (mobile app)
   if (window.Capacitor) {
     try {
-      const { Share } = await import("@capacitor/share");
-      await Share.share({
-        title: title,
-        text: text,
-        url: url,
-        dialogTitle: title,
-      });
-      return;
+      const { Share } = window.Capacitor.Plugins;
+      if (Share) {
+        await Share.share({
+          title: title,
+          text: text,
+          url: url,
+          dialogTitle: title,
+        });
+        return;
+      }
     } catch (error) {
       // If native share fails or is cancelled, fail silently
       console.warn("Native share failed or was cancelled:", error);
