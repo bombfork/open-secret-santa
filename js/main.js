@@ -200,18 +200,14 @@ function updatePageText() {
  * Initialize the application
  */
 async function init() {
+  // Store deep link params if received before i18n is ready
+  let pendingDeepLinkParams = null;
+
   // Initialize deep linking FIRST for Android App Links
   // This must happen before i18n to prevent language detection from interfering
   const deepLinkPromise = initDeepLinking((params) => {
-    // Handle deep link navigation when app is opened via URL
-    handleDeepLinkNavigation(
-      params,
-      setupViewMode,
-      showPage,
-      showError,
-      goToLanding,
-      () => t("validation.invalidUrl"),
-    );
+    console.log("Deep link callback triggered with params:", params);
+    pendingDeepLinkParams = params;
   });
 
   // Initialize i18n system
@@ -238,8 +234,20 @@ async function init() {
   if (deepLinkPromise) {
     const deepLinkResult = await deepLinkPromise;
 
-    // If deep link was handled, stop here and let the deep link handler do the routing
-    if (deepLinkResult.handled) {
+    // If deep link was handled, process it now that i18n is ready
+    if (deepLinkResult.handled && pendingDeepLinkParams) {
+      console.log("Processing deep link with params:", pendingDeepLinkParams);
+
+      // Handle deep link navigation now that all dependencies are ready
+      handleDeepLinkNavigation(
+        pendingDeepLinkParams,
+        setupViewMode,
+        showPage,
+        showError,
+        goToLanding,
+        () => t("validation.invalidUrl"),
+      );
+
       console.log("Deep link handled, skipping normal routing");
       return;
     }
