@@ -91,6 +91,7 @@
         "shareText",
         "shareAdminTitle",
         "shareAdminText",
+        "shareAdminButton",
         "createAnotherButton"
       ],
       "properties": {
@@ -106,6 +107,7 @@
         "shareText": { "type": "string" },
         "shareAdminTitle": { "type": "string" },
         "shareAdminText": { "type": "string" },
+        "shareAdminButton": { "type": "string" },
         "createAnotherButton": { "type": "string" }
       },
       "additionalProperties": false
