@@ -8,22 +8,46 @@ Open Secret Santa is a client-side Secret Santa gift exchange organizer with no 
 
 ## Development Commands
 
+**IMPORTANT**: Always use `mise` tasks for development operations. Do not use direct `npm` or `node` commands unless absolutely necessary.
+
+### Available Mise Tasks
+
+- **`mise run dev`** - Start local development server
+- **`mise run test`** - Start server and open application in browser
+- **`mise run lint`** - Run ESLint on JavaScript files
+- **`mise run format`** - Check code formatting with Prettier
+- **`mise run format-fix`** - Fix code formatting with Prettier
+- **`mise run validate-i18n`** - Validate i18n JSON files against schema
+- **`mise run validate-all`** - Run all validation checks (lint + format + i18n)
+
 ### Starting the Development Server
 
-Using mise (recommended):
 ```bash
 mise run dev
-```
-
-Or manually:
-```bash
-python -m http.server 8000
-# Then visit http://localhost:8000
 ```
 
 ### Testing
 ```bash
 mise run test  # Starts server and opens browser
+```
+
+### Code Quality
+
+**Before committing**, ALWAYS run validation tasks:
+
+```bash
+# Run all validations (required before commit)
+mise run validate-all
+
+# Or run individually:
+mise run lint          # Check for code issues
+mise run format        # Check formatting
+mise run validate-i18n # Validate translations
+```
+
+**To auto-fix formatting issues:**
+```bash
+mise run format-fix
 ```
 
 ## Code Architecture

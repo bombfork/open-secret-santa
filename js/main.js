@@ -200,6 +200,16 @@ function updatePageText() {
  * Initialize the application
  */
 async function init() {
+  // Store deep link params if received before i18n is ready
+  let pendingDeepLinkParams = null;
+
+  // Initialize deep linking FIRST for Android App Links
+  // This must happen before i18n to prevent language detection from interfering
+  const deepLinkPromise = initDeepLinking((params) => {
+    console.log("Deep link callback triggered with params:", params);
+    pendingDeepLinkParams = params;
+  });
+
   // Initialize i18n system
   await initI18n();
 
@@ -219,20 +229,38 @@ async function init() {
     updatePageText();
   });
 
-  // Initialize deep linking for Android App Links
-  initDeepLinking((params) => {
-    // Handle deep link navigation when app is opened via URL
-    handleDeepLinkNavigation(
-      params,
-      setupViewMode,
-      showPage,
-      showError,
-      goToLanding,
-      () => t("validation.invalidUrl"),
-    );
-  });
+  // Wait for potential deep link before proceeding with normal routing
+  // This prevents race condition where window.location is checked before deep link fires
+  if (deepLinkPromise) {
+    const deepLinkResult = await deepLinkPromise;
 
-  // Parse URL parameters
+    // If deep link was handled, process it now that i18n is ready
+    if (deepLinkResult.handled && pendingDeepLinkParams) {
+      console.log("Processing deep link with params:", pendingDeepLinkParams);
+
+      // Handle deep link navigation now that all dependencies are ready
+      handleDeepLinkNavigation(
+        pendingDeepLinkParams,
+        setupViewMode,
+        showPage,
+        showError,
+        goToLanding,
+        () => t("validation.invalidUrl"),
+      );
+
+      console.log("Deep link handled, skipping normal routing");
+      return;
+    }
+
+    // Otherwise, continue with normal routing
+    console.log(
+      deepLinkResult.timeout
+        ? "No deep link received, proceeding with normal routing"
+        : "Deep link not handled, proceeding with normal routing",
+    );
+  }
+
+  // Parse URL parameters from window.location
   const params = parseUrlParams();
 
   // Check if we're in view mode (URL has parameters)
