@@ -32,17 +32,18 @@
   "results": {
     "title": "Thurin Mírdan Egor!",
     "adminLinkTitle": "Thail i Condir",
-    "adminLinkHelp": "Anno hen an i tûr an hain haded gwenn",
+    "adminLinkHelp": "Daro hen thail an le imman an anno ned thailen i mellyn ar gwenn hain haded",
     "participantLinksTitle": "Thailen i Mellyn",
     "participantLinksHelp": "Anno sui thail an mellon sui",
     "copyButton": "Togo",
     "copiedButton": "✓ Tegol!",
     "createAnotherButton": "Egor Eneth",
     "shareButton": "Juohkit",
+    "shareAdminButton": "Juohkit Condir Thail",
     "shareTitle": "Čuvges Juovllastállu {name}",
     "shareText": "Dás lea du Čuvges Juovllastállu juohkima-liŋka {name}",
     "shareAdminTitle": "Čuvges Juovllastállu Administráhtorliŋka",
-    "shareAdminText": "Dás lea administráhtorliŋka oainnit buot Čuvges Juovllastállu juohkimiid"
+    "shareAdminText": "Dás lea administráhtorliŋka anno ned thailen i mellyn ar oainnit buot Čuvges Juovllastállu juohkimiid"
   },
   "viewParticipant": {
     "title": "Le Had Thurin Mírdan",

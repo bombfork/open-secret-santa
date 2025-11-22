@@ -128,6 +128,9 @@ function updatePageText() {
   document.querySelector(
     "#results-page .link-container .copy-btn",
   ).textContent = t("results.copyButton");
+  document.getElementById("share-admin-btn").textContent = t(
+    "results.shareAdminButton",
+  );
   document.querySelector(
     "#results-page article:nth-of-type(2) header strong",
   ).textContent = t("results.participantLinksTitle");

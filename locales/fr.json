@@ -32,17 +32,18 @@
   "results": {
     "title": "Père Noël Secret Créé !",
     "adminLinkTitle": "Lien Administrateur",
-    "adminLinkHelp": "Partagez ce lien avec l'organisateur pour voir toutes les attributions",
+    "adminLinkHelp": "Enregistrez ce lien pour vous-même pour repartager les liens des participants et voir toutes les attributions",
     "participantLinksTitle": "Liens des Participants",
     "participantLinksHelp": "Partagez chaque lien avec le participant correspondant",
     "copyButton": "Copier",
     "copiedButton": "✓ Copié !",
     "createAnotherButton": "Créer un Autre",
     "shareButton": "Partager",
+    "shareAdminButton": "Partager le Lien Admin",
     "shareTitle": "Père Noël Secret pour {name}",
     "shareText": "Voici votre lien d'attribution de Père Noël Secret pour {name}",
     "shareAdminTitle": "Lien Administrateur du Père Noël Secret",
-    "shareAdminText": "Voici le lien administrateur pour voir toutes les attributions du Père Noël Secret"
+    "shareAdminText": "Voici le lien administrateur pour repartager les liens des participants et voir toutes les attributions du Père Noël Secret"
   },
   "viewParticipant": {
     "title": "Votre Attribution de Père Noël Secret",

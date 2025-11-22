@@ -32,17 +32,18 @@
   "results": {
     "title": "シークレットサンタが作成されました！",
     "adminLinkTitle": "管理者リンク",
-    "adminLinkHelp": "すべての割り当てを表示するには主催者と共有",
+    "adminLinkHelp": "参加者リンクを再共有し、すべての割り当てを表示するために、このリンクを自分用に保存してください",
     "participantLinksTitle": "参加者リンク",
     "participantLinksHelp": "各リンクを該当する参加者と共有",
     "copyButton": "コピー",
     "copiedButton": "✓ コピーしました！",
     "createAnotherButton": "もう一つ作成",
     "shareButton": "共有",
+    "shareAdminButton": "管理者リンクを共有",
     "shareTitle": "{name}のシークレットサンタ",
     "shareText": "{name}のシークレットサンタ割り当てリンクです",
     "shareAdminTitle": "シークレットサンタ管理者リンク",
-    "shareAdminText": "すべてのシークレットサンタ割り当てを表示する管理者リンクです"
+    "shareAdminText": "参加者リンクを再共有し、すべてのシークレットサンタ割り当てを表示する管理者リンクです"
   },
   "viewParticipant": {
     "title": "あなたのシークレットサンタ割り当て",

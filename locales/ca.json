@@ -32,17 +32,18 @@
   "results": {
     "title": "Amic Invisible Creat!",
     "adminLinkTitle": "Enllaç d'Administrador",
-    "adminLinkHelp": "Comparteix això amb l'organitzador per veure totes les assignacions",
+    "adminLinkHelp": "Desa aquest enllaç per a tu mateix per tornar a compartir enllaços dels participants i veure totes les assignacions",
     "participantLinksTitle": "Enllaços dels Participants",
     "participantLinksHelp": "Comparteix cada enllaç amb el participant corresponent",
     "copyButton": "Copiar",
     "copiedButton": "✓ Copiat!",
     "createAnotherButton": "Crear un Altre",
     "shareButton": "Compartir",
+    "shareAdminButton": "Compartir Enllaç Admin",
     "shareTitle": "Pare Noel Secret per a {name}",
     "shareText": "Aquí tens el teu enllaç d'assignació del Pare Noel Secret per a {name}",
     "shareAdminTitle": "Enllaç d'Administrador del Pare Noel Secret",
-    "shareAdminText": "Aquí tens l'enllaç d'administrador per veure totes les assignacions del Pare Noel Secret"
+    "shareAdminText": "Aquí tens l'enllaç d'administrador per tornar a compartir enllaços dels participants i veure totes les assignacions del Pare Noel Secret"
   },
   "viewParticipant": {
     "title": "La Teva Assignació d'Amic Invisible",

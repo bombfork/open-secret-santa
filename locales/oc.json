@@ -32,17 +32,18 @@
   "results": {
     "title": "Papèl Noèl Secret Creat!",
     "adminLinkTitle": "Ligam d'Administrator",
-    "adminLinkHelp": "Partejatz aquò amb l'organizator per veire totas las assignacions",
+    "adminLinkHelp": "Gardatz aqueste ligam per vos meteis per tornar partejar los ligams dels participants e veire totas las assignacions",
     "participantLinksTitle": "Ligams dels Participants",
     "participantLinksHelp": "Partejatz cada ligam amb lo participant correspondent",
     "copyButton": "Copiar",
     "copiedButton": "✓ Copiat!",
     "createAnotherButton": "Crear un Autre",
     "shareButton": "Partejar",
+    "shareAdminButton": "Partejar Ligam Admin",
     "shareTitle": "Pair Nadal Secret per {name}",
     "shareText": "Vaquí vòstre ligam d'assignacion del Pair Nadal Secret per {name}",
     "shareAdminTitle": "Ligam Administrator del Pair Nadal Secret",
-    "shareAdminText": "Vaquí lo ligam administrator per veire totas las assignacions del Pair Nadal Secret"
+    "shareAdminText": "Vaquí lo ligam administrator per tornar partejar los ligams dels participants e veire totas las assignacions del Pair Nadal Secret"
   },
   "viewParticipant": {
     "title": "Vòstra Assignacion de Papèl Noèl Secret",

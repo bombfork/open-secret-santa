@@ -32,17 +32,18 @@
   "results": {
     "title": "¡Amigo Invisible Creado!",
     "adminLinkTitle": "Enlace de Administrador",
-    "adminLinkHelp": "Comparte esto con el organizador para ver todas las asignaciones",
+    "adminLinkHelp": "Guarda este enlace para ti mismo para volver a compartir enlaces de participantes y ver todas las asignaciones",
     "participantLinksTitle": "Enlaces de Participantes",
     "participantLinksHelp": "Comparte cada enlace con el participante correspondiente",
     "copyButton": "Copiar",
     "copiedButton": "✓ ¡Copiado!",
     "createAnotherButton": "Crear Otro",
     "shareButton": "Compartir",
+    "shareAdminButton": "Compartir Enlace Admin",
     "shareTitle": "Amigo Invisible para {name}",
     "shareText": "Aquí está tu enlace de asignación de Amigo Invisible para {name}",
     "shareAdminTitle": "Enlace de Administrador del Amigo Invisible",
-    "shareAdminText": "Aquí está el enlace de administrador para ver todas las asignaciones del Amigo Invisible"
+    "shareAdminText": "Aquí está el enlace de administrador para volver a compartir enlaces de participantes y ver todas las asignaciones del Amigo Invisible"
   },
   "viewParticipant": {
     "title": "Tu Asignación de Amigo Invisible",
