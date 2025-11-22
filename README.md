@@ -1,5 +1,8 @@
 # 🎅 Secret Santa Web Application
 
+[![Android Build](https://github.com/bombfork/open-secret-santa/actions/workflows/android-build.yml/badge.svg)](https://github.com/bombfork/open-secret-santa/actions/workflows/android-build.yml)
+[![Lint & Format](https://github.com/bombfork/open-secret-santa/actions/workflows/lint-and-format.yml/badge.svg)](https://github.com/bombfork/open-secret-santa/actions/workflows/lint-and-format.yml)
+
 A simple, client-side Secret Santa gift exchange organizer. No backend required - all data is encoded in shareable URLs!
 
 **🎄 Try it live:** [https://secret-santa.bombfork.net](https://secret-santa.bombfork.net)
@@ -171,6 +174,31 @@ The Android app supports deep linking via Android App Links. When users click on
 ./scripts/test-deep-link.sh
 ```
 
+### Automated Builds (CI/CD)
+
+The project uses GitHub Actions to automatically build Android APKs:
+
+- **Debug APKs**: Automatically built on pull requests and pushes to main branch
+  - Available as workflow artifacts for testing
+  - No signing required
+
+- **Release APKs**: Automatically built on tagged releases (e.g., `v1.0.0`)
+  - Signed with release keystore
+  - Automatically attached to GitHub Releases
+  - Ready for distribution
+
+**To create a release:**
+```bash
+git tag v1.0.0
+git push origin v1.0.0
+```
+
+**Setup signing keys:** See [ANDROID_BUILD.md](ANDROID_BUILD.md) for complete instructions on:
+- Generating release signing keys
+- Configuring GitHub Secrets for automated builds
+- Extracting SHA-256 fingerprints for App Links
+- Troubleshooting build issues
+
 ### Important Notes
 
 - The `www/` directory is gitignored and generated from root files
@@ -210,6 +238,7 @@ This ensures:
 /
 ├── .github/
 │   └── workflows/
+│       ├── android-build.yml    # Android APK build workflow
 │       ├── deploy.yml           # GitHub Actions deployment workflow
 │       └── lint-and-format.yml  # PR validation workflow
 ├── .well-known/
@@ -257,6 +286,7 @@ This ensures:
 ├── package.json       # Node.js dependencies and scripts
 ├── .nojekyll          # GitHub Pages configuration
 ├── LICENSE            # MIT License
+├── ANDROID_BUILD.md   # Android signing and CI/CD setup documentation
 ├── DEEP_LINKING.md    # Android App Links documentation
 └── README.md          # This file
 ```
