@@ -220,7 +220,7 @@ async function init() {
   });
 
   // Initialize deep linking for Android App Links
-  initDeepLinking((params) => {
+  const deepLinkPromise = initDeepLinking((params) => {
     // Handle deep link navigation when app is opened via URL
     handleDeepLinkNavigation(
       params,
@@ -232,7 +232,26 @@ async function init() {
     );
   });
 
-  // Parse URL parameters
+  // Wait for potential deep link before proceeding with normal routing
+  // This prevents race condition where window.location is checked before deep link fires
+  if (deepLinkPromise) {
+    const deepLinkResult = await deepLinkPromise;
+
+    // If deep link was handled, stop here and let the deep link handler do the routing
+    if (deepLinkResult.handled) {
+      console.log("Deep link handled, skipping normal routing");
+      return;
+    }
+
+    // Otherwise, continue with normal routing
+    console.log(
+      deepLinkResult.timeout
+        ? "No deep link received, proceeding with normal routing"
+        : "Deep link not handled, proceeding with normal routing",
+    );
+  }
+
+  // Parse URL parameters from window.location
   const params = parseUrlParams();
 
   // Check if we're in view mode (URL has parameters)

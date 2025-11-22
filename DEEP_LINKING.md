@@ -67,8 +67,8 @@ https://secret-santa.bombfork.net/?data=BASE64_DATA&admin=true
 ### Code Flow
 
 ```javascript
-// 1. App starts or receives deep link
-initDeepLinking((params) => {
+// 1. App starts and initializes deep linking
+const deepLinkPromise = initDeepLinking((params) => {
   // 2. Deep link event handler in main.js
   handleDeepLinkNavigation(
     params,           // {data, admin, user}
@@ -80,7 +80,20 @@ initDeepLinking((params) => {
   );
 });
 
-// 3. deeplink.js extracts parameters from URL
+// 3. Wait for deep link to be processed (or timeout after 100ms)
+if (deepLinkPromise) {
+  const result = await deepLinkPromise;
+  if (result.handled) {
+    // Deep link was handled, skip normal routing
+    return;
+  }
+}
+
+// 4. If no deep link, use normal window.location routing
+const params = parseUrlParams();
+// ... normal routing continues
+
+// 5. deeplink.js extracts parameters from URL when event fires
 const url = new URL(event.url);
 const params = {
   data: url.searchParams.get("data"),
@@ -88,16 +101,19 @@ const params = {
   user: url.searchParams.get("user")
 };
 
-// 4. Reuses existing view.js routing logic
+// 6. Reuses existing view.js routing logic
 const viewType = setupViewMode(params, goToLanding);
 
-// 5. Shows appropriate page
+// 7. Shows appropriate page
 if (viewType === "participant") {
   showPage("viewParticipant");
 } else if (viewType === "admin") {
   showPage("viewAdmin");
 }
 ```
+
+**Race Condition Prevention:**
+The initialization flow includes a brief wait (100ms timeout) for potential deep link events before proceeding with normal `window.location` routing. This prevents a race condition where `window.location.search` is checked before the Capacitor `appUrlOpen` event fires. On the web (where Capacitor is not available), the timeout resolves immediately and normal routing proceeds without delay.
 
 ## Setup Instructions
 

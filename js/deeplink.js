@@ -3,16 +3,21 @@
  * Handles incoming URLs when the app is opened via deep links
  */
 
+// Track deep link state
+let deepLinkPromise = null;
+let deepLinkResolver = null;
+
 /**
  * Initialize deep link listener
  * Sets up event listener for Capacitor appUrlOpen events
  * @param {Function} onDeepLink - Callback function to handle deep link with params object
+ * @returns {Promise|null} Promise that resolves when deep link is processed, or null if not available
  */
 export function initDeepLinking(onDeepLink) {
   // Check if Capacitor App plugin is available (mobile environment)
   if (typeof window.Capacitor === "undefined") {
     console.log("Capacitor not available - deep linking disabled");
-    return;
+    return null;
   }
 
   // Get the App plugin from Capacitor
@@ -20,38 +25,55 @@ export function initDeepLinking(onDeepLink) {
 
   if (!App) {
     console.log("Capacitor App plugin not available");
-    return;
+    return null;
   }
 
-  // Listen for app URL open events
-  App.addListener("appUrlOpen", (event) => {
-    console.log("Deep link received:", event.url);
+  // Create a promise that resolves when a deep link is received or times out
+  deepLinkPromise = new Promise((resolve) => {
+    deepLinkResolver = resolve;
 
-    try {
-      // Parse the URL to extract query parameters
-      const url = new URL(event.url);
-      const params = {
-        data: url.searchParams.get("data"),
-        admin: url.searchParams.get("admin"),
-        user: url.searchParams.get("user")
-          ? decodeURIComponent(url.searchParams.get("user"))
-          : null,
-      };
+    // Listen for app URL open events
+    App.addListener("appUrlOpen", (event) => {
+      console.log("Deep link received:", event.url);
 
-      // Validate that we have the required data parameter
-      if (!params.data) {
-        console.warn("Deep link missing data parameter:", event.url);
-        return;
+      try {
+        // Parse the URL to extract query parameters
+        const url = new URL(event.url);
+        const params = {
+          data: url.searchParams.get("data"),
+          admin: url.searchParams.get("admin"),
+          user: url.searchParams.get("user")
+            ? decodeURIComponent(url.searchParams.get("user"))
+            : null,
+        };
+
+        // Validate that we have the required data parameter
+        if (!params.data) {
+          console.warn("Deep link missing data parameter:", event.url);
+          resolve({ handled: false });
+          return;
+        }
+
+        // Call the callback with the parsed parameters
+        onDeepLink(params);
+
+        // Signal that deep link was handled
+        resolve({ handled: true });
+      } catch (error) {
+        console.error("Error processing deep link:", error);
+        resolve({ handled: false });
       }
+    });
 
-      // Call the callback with the parsed parameters
-      onDeepLink(params);
-    } catch (error) {
-      console.error("Error processing deep link:", error);
-    }
+    // Timeout after 100ms if no deep link is received
+    // This allows the app to proceed with normal routing
+    setTimeout(() => {
+      resolve({ handled: false, timeout: true });
+    }, 100);
   });
 
   console.log("Deep linking initialized");
+  return deepLinkPromise;
 }
 
 /**
