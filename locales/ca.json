@@ -37,7 +37,12 @@
     "participantLinksHelp": "Comparteix cada enllaç amb el participant corresponent",
     "copyButton": "Copiar",
     "copiedButton": "✓ Copiat!",
-    "createAnotherButton": "Crear un Altre"
+    "createAnotherButton": "Crear un Altre",
+    "shareButton": "Compartir",
+    "shareTitle": "Pare Noel Secret per a {name}",
+    "shareText": "Aquí tens el teu enllaç d'assignació del Pare Noel Secret per a {name}",
+    "shareAdminTitle": "Enllaç d'Administrador del Pare Noel Secret",
+    "shareAdminText": "Aquí tens l'enllaç d'administrador per veure totes les assignacions del Pare Noel Secret"
   },
   "viewParticipant": {
     "title": "La Teva Assignació d'Amic Invisible",
@@ -73,7 +78,8 @@
     "failedToCreate": "Error en crear l'Amic Invisible: {error}",
     "invalidUrl": "URL no vàlida: falta el paràmetre d'usuari o administrador",
     "invalidData": "Format de dades no vàlid",
-    "failedToCopy": "Error en copiar al porta-retalls"
+    "failedToCopy": "Error en copiar al porta-retalls",
+    "shareNotSupported": "Compartir no està suportat en aquest dispositiu"
   },
   "alerts": {
     "viewInstructions": "Per veure la teva assignació, fes clic a l'enllaç personalitzat que s'ha compartit amb tu."

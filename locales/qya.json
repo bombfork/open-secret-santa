@@ -37,7 +37,12 @@
     "participantLinksHelp": "Anna ilya thailë i yómenin",
     "copyButton": "Tecë",
     "copiedButton": "✓ Tecnë!",
-    "createAnotherButton": "Cara Anwë"
+    "createAnotherButton": "Cara Anwë",
+    "shareButton": "Camila",
+    "shareTitle": "Núra Atar {name}n",
+    "shareText": "Sina ná cen Núra Atar apsenë sambë {name}n",
+    "shareAdminTitle": "Núra Atar Cáno Sambë",
+    "shareAdminText": "Sina ná i cáno sambë tire ilya Núra Atar apsenë"
   },
   "viewParticipant": {
     "title": "Le Atarmë Núra Yéni Aran",
@@ -73,7 +78,8 @@
     "failedToCreate": "Ú-faila carë Núra Yéni Aran: {error}",
     "invalidUrl": "Thailë ú-faila: yómen ephë aran ú-hirnë",
     "invalidData": "Sanya ú-faila",
-    "failedToCopy": "Ú-tecë"
+    "failedToCopy": "Ú-tecë",
+    "shareNotSupported": "Camila lá avalda sina sambassë"
   },
   "alerts": {
     "viewInstructions": "An cen le atarmë, mapë i thailë sinyanna i annë le."

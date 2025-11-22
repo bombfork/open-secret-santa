@@ -37,7 +37,12 @@
     "participantLinksHelp": "Comparte cada enlace con el participante correspondiente",
     "copyButton": "Copiar",
     "copiedButton": "✓ ¡Copiado!",
-    "createAnotherButton": "Crear Otro"
+    "createAnotherButton": "Crear Otro",
+    "shareButton": "Compartir",
+    "shareTitle": "Amigo Invisible para {name}",
+    "shareText": "Aquí está tu enlace de asignación de Amigo Invisible para {name}",
+    "shareAdminTitle": "Enlace de Administrador del Amigo Invisible",
+    "shareAdminText": "Aquí está el enlace de administrador para ver todas las asignaciones del Amigo Invisible"
   },
   "viewParticipant": {
     "title": "Tu Asignación de Amigo Invisible",
@@ -73,7 +78,8 @@
     "failedToCreate": "Error al crear el Amigo Invisible: {error}",
     "invalidUrl": "URL inválida: falta el parámetro de usuario o administrador",
     "invalidData": "Formato de datos inválido",
-    "failedToCopy": "Error al copiar al portapapeles"
+    "failedToCopy": "Error al copiar al portapapeles",
+    "shareNotSupported": "Compartir no está soportado en este dispositivo"
   },
   "alerts": {
     "viewInstructions": "Para ver tu asignación, haz clic en el enlace personalizado que se compartió contigo."

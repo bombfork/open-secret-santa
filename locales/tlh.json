@@ -37,7 +37,12 @@
     "participantLinksHelp": "Hoch 'uch ghItlh ngeH",
     "copyButton": "lao'",
     "copiedButton": "✓ lao'ta'!",
-    "createAnotherButton": "latlh yIchenmoH"
+    "createAnotherButton": "latlh yIchenmoH",
+    "shareButton": "ngeH",
+    "shareTitle": "QaStaHvIS Secret {name}",
+    "shareText": "naDev QaStaHvIS Secret assignment link {name}",
+    "shareAdminTitle": "QaStaHvIS Secret Admin Link",
+    "shareAdminText": "naDev admin link Hoch QaStaHvIS Secret assignments legh"
   },
   "viewParticipant": {
     "title": "pegh Santa choH",
@@ -73,7 +78,8 @@
     "failedToCreate": "pegh Santa chenmoH Qagh: {error}",
     "invalidUrl": "URL Qagh: 'uch joq Admin parameter tu'be'lu'",
     "invalidData": "De' format Qagh",
-    "failedToCopy": "lao' Qagh"
+    "failedToCopy": "lao' Qagh",
+    "shareNotSupported": "ngeH ghobe' jan De'vam"
   },
   "alerts": {
     "viewInstructions": "choH Dalegh DaneHchugh, ghItlh personal yIwIv."

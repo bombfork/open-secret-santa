@@ -8,7 +8,7 @@ import {
   generateParticipantUrl,
 } from "./encoder.js";
 import { t } from "./i18n.js";
-import { escapeHtml, setupCopyButtons } from "./utils.js";
+import { escapeHtml, setupCopyButtons, setupShareButtons } from "./utils.js";
 
 /**
  * Get assignment for a specific participant
@@ -75,14 +75,18 @@ function displayAdminParticipantLinks(encodedData, assignments) {
     div.innerHTML = `
             <strong>${escapeHtml(name)}:</strong>
             <input type="text" value="${escapeHtml(url)}" readonly>
-            <button class="copy-btn" data-url="${escapeHtml(url)}">${t("results.copyButton")}</button>
+            <div class="button-group">
+                <button class="copy-btn" data-url="${escapeHtml(url)}">${t("results.copyButton")}</button>
+                <button class="share-btn secondary" data-url="${escapeHtml(url)}" data-name="${escapeHtml(name)}">${t("results.shareButton")}</button>
+            </div>
         `;
 
     container.appendChild(div);
   });
 
-  // Setup copy buttons
+  // Setup copy and share buttons
   setupCopyButtons();
+  setupShareButtons();
 }
 
 /**

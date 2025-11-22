@@ -37,7 +37,12 @@
     "participantLinksHelp": "各リンクを該当する参加者と共有",
     "copyButton": "コピー",
     "copiedButton": "✓ コピーしました！",
-    "createAnotherButton": "もう一つ作成"
+    "createAnotherButton": "もう一つ作成",
+    "shareButton": "共有",
+    "shareTitle": "{name}のシークレットサンタ",
+    "shareText": "{name}のシークレットサンタ割り当てリンクです",
+    "shareAdminTitle": "シークレットサンタ管理者リンク",
+    "shareAdminText": "すべてのシークレットサンタ割り当てを表示する管理者リンクです"
   },
   "viewParticipant": {
     "title": "あなたのシークレットサンタ割り当て",
@@ -73,7 +78,8 @@
     "failedToCreate": "シークレットサンタの作成エラー：{error}",
     "invalidUrl": "無効なURL：ユーザーまたは管理者パラメータがありません",
     "invalidData": "無効なデータ形式",
-    "failedToCopy": "クリップボードへのコピーに失敗しました"
+    "failedToCopy": "クリップボードへのコピーに失敗しました",
+    "shareNotSupported": "このデバイスでは共有がサポートされていません"
   },
   "alerts": {
     "viewInstructions": "割り当てを表示するには、共有された個別リンクをクリックしてください。"

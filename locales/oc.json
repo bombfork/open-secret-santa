@@ -37,7 +37,12 @@
     "participantLinksHelp": "Partejatz cada ligam amb lo participant correspondent",
     "copyButton": "Copiar",
     "copiedButton": "✓ Copiat!",
-    "createAnotherButton": "Crear un Autre"
+    "createAnotherButton": "Crear un Autre",
+    "shareButton": "Partejar",
+    "shareTitle": "Pair Nadal Secret per {name}",
+    "shareText": "Vaquí vòstre ligam d'assignacion del Pair Nadal Secret per {name}",
+    "shareAdminTitle": "Ligam Administrator del Pair Nadal Secret",
+    "shareAdminText": "Vaquí lo ligam administrator per veire totas las assignacions del Pair Nadal Secret"
   },
   "viewParticipant": {
     "title": "Vòstra Assignacion de Papèl Noèl Secret",
@@ -73,7 +78,8 @@
     "failedToCreate": "Error en crear lo Papèl Noèl Secret: {error}",
     "invalidUrl": "URL invalid: paramètre d'utilizaire o d'administrator mancant",
     "invalidData": "Format de donadas invalid",
-    "failedToCopy": "Fracàs de la còpia dins lo quichapapièrs"
+    "failedToCopy": "Fracàs de la còpia dins lo quichapapièrs",
+    "shareNotSupported": "Partejar es pas suportat sus aqueste aparelh"
   },
   "alerts": {
     "viewInstructions": "Per veire vòstra assignacion, clicatz sul ligam personalizat qu'es estat partejat amb vos."

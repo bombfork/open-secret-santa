@@ -37,7 +37,12 @@
     "participantLinksHelp": "Anno sui thail an mellon sui",
     "copyButton": "Togo",
     "copiedButton": "✓ Tegol!",
-    "createAnotherButton": "Egor Eneth"
+    "createAnotherButton": "Egor Eneth",
+    "shareButton": "Juohkit",
+    "shareTitle": "Čuvges Juovllastállu {name}",
+    "shareText": "Dás lea du Čuvges Juovllastállu juohkima-liŋka {name}",
+    "shareAdminTitle": "Čuvges Juovllastállu Administráhtorliŋka",
+    "shareAdminText": "Dás lea administráhtorliŋka oainnit buot Čuvges Juovllastállu juohkimiid"
   },
   "viewParticipant": {
     "title": "Le Had Thurin Mírdan",
@@ -73,7 +78,8 @@
     "failedToCreate": "Baw ego Thurin Mírdan: {error}",
     "invalidUrl": "Thail ú-certh: mellon edh condir ú-hîr",
     "invalidData": "Le anglenna ú-certh",
-    "failedToCopy": "Ú-cabed togo"
+    "failedToCopy": "Ú-cabed togo",
+    "shareNotSupported": "Juohkin ii doarjjahuvvo dán ovttadagas"
   },
   "alerts": {
     "viewInstructions": "An cennen le had, togo i thail annui i annen an le."

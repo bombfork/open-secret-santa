@@ -79,6 +79,12 @@ body {
     margin-bottom: 0;
 }
 
+.link-container .button-group {
+    display: flex;
+    gap: 0.5rem;
+    flex-shrink: 0;
+}
+
 .link-container .copy-btn {
     flex-shrink: 0;
     margin-bottom: 0;
@@ -101,7 +107,14 @@ body {
     margin-bottom: 0;
 }
 
-.participant-link-item .copy-btn {
+.participant-link-item .button-group {
+    display: flex;
+    gap: 0.5rem;
+    flex-shrink: 0;
+}
+
+.participant-link-item .copy-btn,
+.participant-link-item .share-btn {
     flex-shrink: 0;
     margin-bottom: 0;
 }
@@ -130,7 +143,8 @@ table td:nth-child(2) {
 }
 
 /* Buttons */
-button.copy-btn {
+button.copy-btn,
+button.share-btn {
     padding: 0.5rem 1rem;
     font-size: 0.9rem;
 }
@@ -167,5 +181,14 @@ button.copy-btn {
 
     .link-container {
         flex-direction: column;
+    }
+
+    .button-group {
+        flex-direction: row;
+        width: 100%;
+    }
+
+    .button-group button {
+        flex: 1;
     }
 }

@@ -37,7 +37,12 @@
     "participantLinksHelp": "Partagez chaque lien avec le participant correspondant",
     "copyButton": "Copier",
     "copiedButton": "✓ Copié !",
-    "createAnotherButton": "Créer un Autre"
+    "createAnotherButton": "Créer un Autre",
+    "shareButton": "Partager",
+    "shareTitle": "Père Noël Secret pour {name}",
+    "shareText": "Voici votre lien d'attribution de Père Noël Secret pour {name}",
+    "shareAdminTitle": "Lien Administrateur du Père Noël Secret",
+    "shareAdminText": "Voici le lien administrateur pour voir toutes les attributions du Père Noël Secret"
   },
   "viewParticipant": {
     "title": "Votre Attribution de Père Noël Secret",
@@ -73,7 +78,8 @@
     "failedToCreate": "Erreur lors de la création du Père Noël Secret : {error}",
     "invalidUrl": "URL invalide : paramètre utilisateur ou administrateur manquant",
     "invalidData": "Format de données invalide",
-    "failedToCopy": "Échec de la copie dans le presse-papiers"
+    "failedToCopy": "Échec de la copie dans le presse-papiers",
+    "shareNotSupported": "Le partage n'est pas pris en charge sur cet appareil"
   },
   "alerts": {
     "viewInstructions": "Pour voir votre attribution, cliquez sur le lien personnalisé qui vous a été partagé."

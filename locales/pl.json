@@ -37,7 +37,12 @@
     "participantLinksHelp": "Udostępnij każdy link odpowiedniemu uczestnikowi",
     "copyButton": "Kopiuj",
     "copiedButton": "✓ Skopiowano!",
-    "createAnotherButton": "Utwórz Kolejnego"
+    "createAnotherButton": "Utwórz Kolejnego",
+    "shareButton": "Udostępnij",
+    "shareTitle": "Tajemniczy Mikołaj dla {name}",
+    "shareText": "Oto Twój link przypisania Tajemniczego Mikołaja dla {name}",
+    "shareAdminTitle": "Link Administratora Tajemniczego Mikołaja",
+    "shareAdminText": "Oto link administratora do przeglądania wszystkich przypisań Tajemniczego Mikołaja"
   },
   "viewParticipant": {
     "title": "Twoje Przypisanie Tajemniczego Mikołaja",
@@ -73,7 +78,8 @@
     "failedToCreate": "Błąd podczas tworzenia Tajemniczego Mikołaja: {error}",
     "invalidUrl": "Nieprawidłowy URL: brak parametru użytkownika lub administratora",
     "invalidData": "Nieprawidłowy format danych",
-    "failedToCopy": "Nie udało się skopiować do schowka"
+    "failedToCopy": "Nie udało się skopiować do schowka",
+    "shareNotSupported": "Udostępnianie nie jest obsługiwane na tym urządzeniu"
   },
   "alerts": {
     "viewInstructions": "Aby zobaczyć swoje przypisanie, kliknij na spersonalizowany link, który został Ci udostępniony."

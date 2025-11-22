@@ -37,7 +37,12 @@
     "participantLinksHelp": "Deel elke link met de bijbehorende deelnemer",
     "copyButton": "Kopiëren",
     "copiedButton": "✓ Gekopieerd!",
-    "createAnotherButton": "Nog Een Maken"
+    "createAnotherButton": "Nog Een Maken",
+    "shareButton": "Delen",
+    "shareTitle": "Geheime Kerstman voor {name}",
+    "shareText": "Hier is je Geheime Kerstman toewijzingslink voor {name}",
+    "shareAdminTitle": "Geheime Kerstman Beheerder Link",
+    "shareAdminText": "Hier is de beheerder link om alle Geheime Kerstman toewijzingen te bekijken"
   },
   "viewParticipant": {
     "title": "Je Geheime Kerstman Toewijzing",
@@ -73,7 +78,8 @@
     "failedToCreate": "Fout bij maken Geheime Kerstman: {error}",
     "invalidUrl": "Ongeldige URL: gebruiker of beheerder parameter ontbreekt",
     "invalidData": "Ongeldig gegevensformaat",
-    "failedToCopy": "Kan niet kopiëren naar klembord"
+    "failedToCopy": "Kan niet kopiëren naar klembord",
+    "shareNotSupported": "Delen wordt niet ondersteund op dit apparaat"
   },
   "alerts": {
     "viewInstructions": "Om je toewijzing te bekijken, klik op de gepersonaliseerde link die met je is gedeeld."

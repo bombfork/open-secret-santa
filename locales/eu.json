@@ -37,7 +37,12 @@
     "participantLinksHelp": "Partekatu esteka bakoitza dagokion partaidearekin",
     "copyButton": "Kopiatu",
     "copiedButton": "✓ Kopiatuta!",
-    "createAnotherButton": "Sortu Beste Bat"
+    "createAnotherButton": "Sortu Beste Bat",
+    "shareButton": "Partekatu",
+    "shareTitle": "Olentzero Sekretua {name}-(r)entzat",
+    "shareText": "Hona hemen zure Olentzero Sekretuaren esleipen-esteka {name}-(r)entzat",
+    "shareAdminTitle": "Olentzero Sekretuaren Administratzaile Esteka",
+    "shareAdminText": "Hona hemen administratzaile esteka Olentzero Sekretuaren esleipen guztiak ikusteko"
   },
   "viewParticipant": {
     "title": "Zure Olentzero Sekretuaren Esleipena",
@@ -73,7 +78,8 @@
     "failedToCreate": "Errorea Olentzero Sekretua sortzean: {error}",
     "invalidUrl": "URL baliogabea: erabiltzaile edo administratzaile parametroa falta da",
     "invalidData": "Datu formatu baliogabea",
-    "failedToCopy": "Huts egin du arbelean kopiatzean"
+    "failedToCopy": "Huts egin du arbelean kopiatzean",
+    "shareNotSupported": "Partekatzea ez da onartzen gailu honetan"
   },
   "alerts": {
     "viewInstructions": "Zure esleipena ikusteko, egin klik zurekin partekatu den esteka pertsonalizatuan."
