@@ -5,7 +5,6 @@
 
 // Track deep link state
 let deepLinkPromise = null;
-let deepLinkResolver = null;
 
 /**
  * Initialize deep link listener
@@ -30,7 +29,6 @@ export function initDeepLinking(onDeepLink) {
 
   // Create a promise that resolves when a deep link is received or times out
   deepLinkPromise = new Promise((resolve) => {
-    deepLinkResolver = resolve;
 
     // Listen for app URL open events
     App.addListener("appUrlOpen", (event) => {
