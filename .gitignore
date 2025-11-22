@@ -12,3 +12,4 @@ android/*.iml
 android/app/*.iml
 android/captures
 www
+release.keystore

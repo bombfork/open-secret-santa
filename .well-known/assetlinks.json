@@ -5,8 +5,7 @@
       "namespace": "android_app",
       "package_name": "com.bombfork.opensecretasanta",
       "sha256_cert_fingerprints": [
-        "REPLACE_WITH_DEBUG_KEYSTORE_SHA256_FINGERPRINT",
-        "REPLACE_WITH_RELEASE_KEYSTORE_SHA256_FINGERPRINT"
+        "BF:23:38:04:9F:8F:0B:A8:08:5A:C8:2B:A9:B8:AD:F7:2D:C8:7C:EC:DB:F1:0E:0E:EB:93:8B:1A:27:1F:7B:8C"
       ]
     }
   }
