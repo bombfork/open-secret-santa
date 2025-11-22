@@ -29,7 +29,45 @@ export function initDeepLinking(onDeepLink) {
 
   // Create a promise that resolves when a deep link is received or times out
   deepLinkPromise = new Promise((resolve) => {
-    // Listen for app URL open events
+    // Check if there's a launch URL (for when app was opened with a link)
+    // This handles the case where the URL was used to launch the app
+    App.getLaunchUrl()
+      .then((launchUrl) => {
+        if (launchUrl && launchUrl.url) {
+          console.log("Launch URL detected:", launchUrl.url);
+
+          // Parse the URL to extract query parameters
+          const url = new URL(launchUrl.url);
+          const params = {
+            data: url.searchParams.get("data"),
+            admin: url.searchParams.get("admin"),
+            user: url.searchParams.get("user")
+              ? decodeURIComponent(url.searchParams.get("user"))
+              : null,
+          };
+
+          // If we have data parameter, handle it immediately
+          if (params.data) {
+            console.log("Handling launch URL with data parameter");
+            onDeepLink(params);
+            resolve({ handled: true });
+            return;
+          }
+        }
+
+        // If no launch URL with data, set up listener for future deep links
+        setupDeepLinkListener(resolve);
+      })
+      .catch((error) => {
+        console.log("No launch URL or error checking:", error);
+        // Set up listener even if launch URL check fails
+        setupDeepLinkListener(resolve);
+      });
+  });
+
+  // Helper function to set up the deep link listener
+  function setupDeepLinkListener(resolve) {
+    // Listen for app URL open events (for when app is already running)
     App.addListener("appUrlOpen", (event) => {
       console.log("Deep link received:", event.url);
 
@@ -62,12 +100,13 @@ export function initDeepLinking(onDeepLink) {
       }
     });
 
-    // Timeout after 100ms if no deep link is received
+    // Timeout after 500ms if no deep link is received
     // This allows the app to proceed with normal routing
+    // Increased from 100ms to 500ms to handle slower app initialization
     setTimeout(() => {
       resolve({ handled: false, timeout: true });
-    }, 100);
-  });
+    }, 500);
+  }
 
   console.log("Deep linking initialized");
   return deepLinkPromise;

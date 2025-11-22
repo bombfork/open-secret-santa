@@ -200,6 +200,20 @@ function updatePageText() {
  * Initialize the application
  */
 async function init() {
+  // Initialize deep linking FIRST for Android App Links
+  // This must happen before i18n to prevent language detection from interfering
+  const deepLinkPromise = initDeepLinking((params) => {
+    // Handle deep link navigation when app is opened via URL
+    handleDeepLinkNavigation(
+      params,
+      setupViewMode,
+      showPage,
+      showError,
+      goToLanding,
+      () => t("validation.invalidUrl"),
+    );
+  });
+
   // Initialize i18n system
   await initI18n();
 
@@ -217,19 +231,6 @@ async function init() {
   // Listen for language changes
   window.addEventListener("languagechange", () => {
     updatePageText();
-  });
-
-  // Initialize deep linking for Android App Links
-  const deepLinkPromise = initDeepLinking((params) => {
-    // Handle deep link navigation when app is opened via URL
-    handleDeepLinkNavigation(
-      params,
-      setupViewMode,
-      showPage,
-      showError,
-      goToLanding,
-      () => t("validation.invalidUrl"),
-    );
   });
 
   // Wait for potential deep link before proceeding with normal routing
