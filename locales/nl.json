@@ -32,17 +32,18 @@
   "results": {
     "title": "Geheime Kerstman Aangemaakt!",
     "adminLinkTitle": "Beheerder Link",
-    "adminLinkHelp": "Deel dit met de organisator om alle toewijzingen te bekijken",
+    "adminLinkHelp": "Bewaar deze link voor jezelf om deelnemer links opnieuw te delen en alle toewijzingen te bekijken",
     "participantLinksTitle": "Deelnemer Links",
     "participantLinksHelp": "Deel elke link met de bijbehorende deelnemer",
     "copyButton": "Kopiëren",
     "copiedButton": "✓ Gekopieerd!",
     "createAnotherButton": "Nog Een Maken",
     "shareButton": "Delen",
+    "shareAdminButton": "Admin Link Delen",
     "shareTitle": "Geheime Kerstman voor {name}",
     "shareText": "Hier is je Geheime Kerstman toewijzingslink voor {name}",
     "shareAdminTitle": "Geheime Kerstman Beheerder Link",
-    "shareAdminText": "Hier is de beheerder link om alle Geheime Kerstman toewijzingen te bekijken"
+    "shareAdminText": "Hier is de beheerder link om deelnemer links opnieuw te delen en alle Geheime Kerstman toewijzingen te bekijken"
   },
   "viewParticipant": {
     "title": "Je Geheime Kerstman Toewijzing",

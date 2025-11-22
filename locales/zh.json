@@ -32,17 +32,18 @@
   "results": {
     "title": "神秘圣诞老人已创建！",
     "adminLinkTitle": "管理员链接",
-    "adminLinkHelp": "与组织者分享此链接以查看所有分配",
+    "adminLinkHelp": "保存此链接供自己使用，以便重新分享参与者链接并查看所有分配",
     "participantLinksTitle": "参与者链接",
     "participantLinksHelp": "与相应参与者分享每个链接",
     "copyButton": "复制",
     "copiedButton": "✓ 已复制！",
     "createAnotherButton": "创建另一个",
     "shareButton": "分享",
+    "shareAdminButton": "分享管理员链接",
     "shareTitle": "{name}的神秘圣诞老人",
     "shareText": "这是{name}的神秘圣诞老人分配链接",
     "shareAdminTitle": "神秘圣诞老人管理员链接",
-    "shareAdminText": "这是查看所有神秘圣诞老人分配的管理员链接"
+    "shareAdminText": "这是用于重新分享参与者链接并查看所有神秘圣诞老人分配的管理员链接"
   },
   "viewParticipant": {
     "title": "您的神秘圣诞老人分配",

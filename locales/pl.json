@@ -32,17 +32,18 @@
   "results": {
     "title": "Tajemniczy Mikołaj Utworzony!",
     "adminLinkTitle": "Link Administratora",
-    "adminLinkHelp": "Udostępnij to organizatorowi, aby zobaczyć wszystkie przypisania",
+    "adminLinkHelp": "Zapisz ten link dla siebie, aby ponownie udostępniać linki uczestników i zobaczyć wszystkie przypisania",
     "participantLinksTitle": "Linki Uczestników",
     "participantLinksHelp": "Udostępnij każdy link odpowiedniemu uczestnikowi",
     "copyButton": "Kopiuj",
     "copiedButton": "✓ Skopiowano!",
     "createAnotherButton": "Utwórz Kolejnego",
     "shareButton": "Udostępnij",
+    "shareAdminButton": "Udostępnij Link Admina",
     "shareTitle": "Tajemniczy Mikołaj dla {name}",
     "shareText": "Oto Twój link przypisania Tajemniczego Mikołaja dla {name}",
     "shareAdminTitle": "Link Administratora Tajemniczego Mikołaja",
-    "shareAdminText": "Oto link administratora do przeglądania wszystkich przypisań Tajemniczego Mikołaja"
+    "shareAdminText": "Oto link administratora do ponownego udostępniania linków uczestników i przeglądania wszystkich przypisań Tajemniczego Mikołaja"
   },
   "viewParticipant": {
     "title": "Twoje Przypisanie Tajemniczego Mikołaja",

@@ -32,17 +32,18 @@
   "results": {
     "title": "Amigo Invisible Creado!",
     "adminLinkTitle": "Ligazón de Administrador",
-    "adminLinkHelp": "Comparte isto co organizador para ver todas as asignacións",
+    "adminLinkHelp": "Garda esta ligazón para ti mesmo para volver compartir ligazóns dos participantes e ver todas as asignacións",
     "participantLinksTitle": "Ligazóns dos Participantes",
     "participantLinksHelp": "Comparte cada ligazón co participante correspondente",
     "copyButton": "Copiar",
     "copiedButton": "✓ Copiado!",
     "createAnotherButton": "Crear Outro",
     "shareButton": "Compartir",
+    "shareAdminButton": "Compartir Ligazón Admin",
     "shareTitle": "Papá Noel Secreto para {name}",
     "shareText": "Aquí tes a túa ligazón de asignación do Papá Noel Secreto para {name}",
     "shareAdminTitle": "Ligazón de Administrador do Papá Noel Secreto",
-    "shareAdminText": "Aquí tes a ligazón de administrador para ver todas as asignacións do Papá Noel Secreto"
+    "shareAdminText": "Aquí tes a ligazón de administrador para volver compartir ligazóns dos participantes e ver todas as asignacións do Papá Noel Secreto"
   },
   "viewParticipant": {
     "title": "A Túa Asignación de Amigo Invisible",

@@ -32,17 +32,18 @@
   "results": {
     "title": "Wichteln Erstellt!",
     "adminLinkTitle": "Administrator-Link",
-    "adminLinkHelp": "Teilen Sie dies mit dem Organisator, um alle Zuweisungen anzuzeigen",
+    "adminLinkHelp": "Speichern Sie diesen Link für sich selbst, um Teilnehmer-Links erneut zu teilen und alle Zuweisungen anzuzeigen",
     "participantLinksTitle": "Teilnehmer-Links",
     "participantLinksHelp": "Teilen Sie jeden Link mit dem entsprechenden Teilnehmer",
     "copyButton": "Kopieren",
     "copiedButton": "✓ Kopiert!",
     "createAnotherButton": "Weiteres Erstellen",
     "shareButton": "Teilen",
+    "shareAdminButton": "Admin-Link Teilen",
     "shareTitle": "Wichteln für {name}",
     "shareText": "Hier ist dein Wichtel-Zuordnungslink für {name}",
     "shareAdminTitle": "Wichtel-Admin-Link",
-    "shareAdminText": "Hier ist der Admin-Link, um alle Wichtel-Zuordnungen anzuzeigen"
+    "shareAdminText": "Hier ist der Admin-Link, um Teilnehmer-Links erneut zu teilen und alle Wichtel-Zuordnungen anzuzeigen"
   },
   "viewParticipant": {
     "title": "Ihre Wichtel-Zuweisung",

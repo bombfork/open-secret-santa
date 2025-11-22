@@ -32,17 +32,18 @@
   "results": {
     "title": "Núra Yéni Aran Carnë!",
     "adminLinkTitle": "Aran Thailë",
-    "adminLinkHelp": "Anna ta i turë an cen ilya atarmi",
+    "adminLinkHelp": "Pol ta thailë le imman an anna nat yómen thailen ar cen ilya atarmi",
     "participantLinksTitle": "Yómen Thailen",
     "participantLinksHelp": "Anna ilya thailë i yómenin",
     "copyButton": "Tecë",
     "copiedButton": "✓ Tecnë!",
     "createAnotherButton": "Cara Anwë",
     "shareButton": "Camila",
+    "shareAdminButton": "Camila Aran Thailë",
     "shareTitle": "Núra Atar {name}n",
     "shareText": "Sina ná cen Núra Atar apsenë sambë {name}n",
     "shareAdminTitle": "Núra Atar Cáno Sambë",
-    "shareAdminText": "Sina ná i cáno sambë tire ilya Núra Atar apsenë"
+    "shareAdminText": "Sina ná i cáno sambë an anna nat yómen thailen ar tire ilya Núra Atar apsenë"
   },
   "viewParticipant": {
     "title": "Le Atarmë Núra Yéni Aran",

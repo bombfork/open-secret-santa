@@ -32,16 +32,17 @@
   "results": {
     "title": "Secret Santa Created!",
     "adminLinkTitle": "Admin Link",
-    "adminLinkHelp": "Share this with the organizer to view all assignments",
+    "adminLinkHelp": "Save this link for yourself to reshare participant links and view all assignments",
     "participantLinksTitle": "Participant Links",
     "participantLinksHelp": "Share each link with the corresponding participant",
     "copyButton": "Copy",
     "copiedButton": "✓ Copied!",
     "shareButton": "Share",
+    "shareAdminButton": "Share Admin Link",
     "shareTitle": "Secret Santa for {name}",
     "shareText": "Here's your Secret Santa assignment link for {name}",
     "shareAdminTitle": "Secret Santa Admin Link",
-    "shareAdminText": "Here's the admin link to view all Secret Santa assignments",
+    "shareAdminText": "Here's the admin link to reshare participant links and view all Secret Santa assignments",
     "createAnotherButton": "Create Another"
   },
   "viewParticipant": {

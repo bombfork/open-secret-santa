@@ -32,17 +32,18 @@
   "results": {
     "title": "Babbo Natale Segreto Creato!",
     "adminLinkTitle": "Link Amministratore",
-    "adminLinkHelp": "Condividi questo con l'organizzatore per vedere tutte le assegnazioni",
+    "adminLinkHelp": "Salva questo link per te stesso per ricondividere i link dei partecipanti e visualizzare tutte le assegnazioni",
     "participantLinksTitle": "Link dei Partecipanti",
     "participantLinksHelp": "Condividi ogni link con il partecipante corrispondente",
     "copyButton": "Copia",
     "copiedButton": "✓ Copiato!",
     "createAnotherButton": "Crea un Altro",
     "shareButton": "Condividi",
+    "shareAdminButton": "Condividi Link Admin",
     "shareTitle": "Babbo Natale Segreto per {name}",
     "shareText": "Ecco il tuo link di assegnazione del Babbo Natale Segreto per {name}",
     "shareAdminTitle": "Link Amministratore del Babbo Natale Segreto",
-    "shareAdminText": "Ecco il link amministratore per visualizzare tutte le assegnazioni del Babbo Natale Segreto"
+    "shareAdminText": "Ecco il link amministratore per ricondividere i link dei partecipanti e visualizzare tutte le assegnazioni del Babbo Natale Segreto"
   },
   "viewParticipant": {
     "title": "La Tua Assegnazione di Babbo Natale Segreto",

@@ -32,17 +32,18 @@
   "results": {
     "title": "Olentzero Sekretua Sortuta!",
     "adminLinkTitle": "Administratzailearen Esteka",
-    "adminLinkHelp": "Partekatu hau antolatzailearekin esleipen guztiak ikusteko",
+    "adminLinkHelp": "Gorde esteka hau zure buruarentzat partaideen estekak berriro partekatzeko eta esleipen guztiak ikusteko",
     "participantLinksTitle": "Partaideen Estekak",
     "participantLinksHelp": "Partekatu esteka bakoitza dagokion partaidearekin",
     "copyButton": "Kopiatu",
     "copiedButton": "✓ Kopiatuta!",
     "createAnotherButton": "Sortu Beste Bat",
     "shareButton": "Partekatu",
+    "shareAdminButton": "Partekatu Admin Esteka",
     "shareTitle": "Olentzero Sekretua {name}-(r)entzat",
     "shareText": "Hona hemen zure Olentzero Sekretuaren esleipen-esteka {name}-(r)entzat",
     "shareAdminTitle": "Olentzero Sekretuaren Administratzaile Esteka",
-    "shareAdminText": "Hona hemen administratzaile esteka Olentzero Sekretuaren esleipen guztiak ikusteko"
+    "shareAdminText": "Hona hemen administratzaile esteka partaideen estekak berriro partekatzeko eta Olentzero Sekretuaren esleipen guztiak ikusteko"
   },
   "viewParticipant": {
     "title": "Zure Olentzero Sekretuaren Esleipena",

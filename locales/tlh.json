@@ -32,17 +32,18 @@
   "results": {
     "title": "pegh Santa chenmoHta'!",
     "adminLinkTitle": "Admin ghItlh",
-    "adminLinkHelp": "Hoch choH legh neH Admin chu' ngeH",
+    "adminLinkHelp": "ghItlh DaQorgh SoH'egh - 'uch ghItlhmey vIngeH 'ej Hoch choH vIlegh",
     "participantLinksTitle": "'uch ghItlhmey",
     "participantLinksHelp": "Hoch 'uch ghItlh ngeH",
     "copyButton": "lao'",
     "copiedButton": "✓ lao'ta'!",
     "createAnotherButton": "latlh yIchenmoH",
     "shareButton": "ngeH",
+    "shareAdminButton": "Admin ghItlh ngeH",
     "shareTitle": "QaStaHvIS Secret {name}",
     "shareText": "naDev QaStaHvIS Secret assignment link {name}",
     "shareAdminTitle": "QaStaHvIS Secret Admin Link",
-    "shareAdminText": "naDev admin link Hoch QaStaHvIS Secret assignments legh"
+    "shareAdminText": "naDev admin link 'uch ghItlhmey vIngeH 'ej Hoch QaStaHvIS Secret assignments legh"
   },
   "viewParticipant": {
     "title": "pegh Santa choH",
