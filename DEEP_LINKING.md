@@ -67,9 +67,10 @@ https://secret-santa.bombfork.net/?data=BASE64_DATA&admin=true
 ### Code Flow
 
 ```javascript
-// 1. App starts or receives deep link
-initDeepLinking((params) => {
-  // 2. Deep link event handler in main.js
+// 1. App starts: register a persistent appUrlOpen listener (warm start).
+//    Navigation waits for i18n to be ready before running.
+initDeepLinking(async (params) => {
+  await i18nReady;
   handleDeepLinkNavigation(
     params,           // {data, admin, user}
     setupViewMode,    // Existing routing logic
@@ -80,24 +81,43 @@ initDeepLinking((params) => {
   );
 });
 
-// 3. deeplink.js extracts parameters from URL
-const url = new URL(event.url);
+// 2. After i18n init, check the launch URL (cold start via App Link)
+const launchParams = await getLaunchDeepLink();
+if (launchParams) {
+  handleDeepLinkNavigation(launchParams, /* ... same arguments ... */);
+  return; // Skip normal routing
+}
+
+// 3. If no launch deep link, use normal window.location routing
+const params = parseUrlParams();
+// ... normal routing continues
+
+// 4. deeplink.js extracts parameters from any deep link URL
+const url = new URL(urlString);
 const params = {
   data: url.searchParams.get("data"),
   admin: url.searchParams.get("admin"),
   user: url.searchParams.get("user")
 };
 
-// 4. Reuses existing view.js routing logic
+// 5. Reuses existing view.js routing logic
 const viewType = setupViewMode(params, goToLanding);
 
-// 5. Shows appropriate page
+// 6. Shows appropriate page
 if (viewType === "participant") {
   showPage("viewParticipant");
 } else if (viewType === "admin") {
   showPage("viewAdmin");
 }
 ```
+
+**Cold start vs. warm start:**
+In the Capacitor webview, `window.location` never contains the link's query parameters, so the two delivery paths are handled separately:
+
+- **Cold start** (app launched by tapping a link): `App.getLaunchUrl()` returns the URL deterministically, so `init()` awaits it before falling back to normal `window.location` routing. No timeout or artificial delay is involved.
+- **Warm start** (app already running when a link is tapped): the persistent `appUrlOpen` listener navigates directly, on every event. Navigation is gated on an "i18n ready" promise so an event arriving during startup cannot run before translations are loaded.
+
+Capacitor may also emit an `appUrlOpen` event for the launch URL on cold start; `deeplink.js` remembers the launch URL it already handled and skips that duplicate. On the web (where Capacitor is not available), both helpers are no-ops and normal routing proceeds immediately.
 
 ## Setup Instructions
 

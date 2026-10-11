@@ -7,7 +7,11 @@ import { setupCreateForm, displayResults } from "./create.js";
 import { setupViewMode } from "./view.js";
 import { parseUrlParams } from "./encoder.js";
 import { initI18n, t, createLanguageSelector } from "./i18n.js";
-import { initDeepLinking, handleDeepLinkNavigation } from "./deeplink.js";
+import {
+  initDeepLinking,
+  getLaunchDeepLink,
+  handleDeepLinkNavigation,
+} from "./deeplink.js";
 
 // Page elements
 const pages = {
@@ -200,8 +204,29 @@ function updatePageText() {
  * Initialize the application
  */
 async function init() {
+  // Navigation needs translations, but the listener must be registered before
+  // any await so no early appUrlOpen event is missed; gate it on i18n readiness
+  let i18nReadyResolve;
+  const i18nReady = new Promise((resolve) => {
+    i18nReadyResolve = resolve;
+  });
+
+  // Handle deep links received while the app is running (warm start)
+  initDeepLinking(async (params) => {
+    await i18nReady;
+    handleDeepLinkNavigation(
+      params,
+      setupViewMode,
+      showPage,
+      showError,
+      goToLanding,
+      () => t("validation.invalidUrl"),
+    );
+  });
+
   // Initialize i18n system
   await initI18n();
+  i18nReadyResolve();
 
   // Setup language selector
   const languageSelectorContainer = document.getElementById(
@@ -219,20 +244,22 @@ async function init() {
     updatePageText();
   });
 
-  // Initialize deep linking for Android App Links
-  initDeepLinking((params) => {
-    // Handle deep link navigation when app is opened via URL
+  // Cold start via Android App Link: window.location has no query params in
+  // the Capacitor webview, so the launch URL must be checked explicitly
+  const launchParams = await getLaunchDeepLink();
+  if (launchParams) {
     handleDeepLinkNavigation(
-      params,
+      launchParams,
       setupViewMode,
       showPage,
       showError,
       goToLanding,
       () => t("validation.invalidUrl"),
     );
-  });
+    return;
+  }
 
-  // Parse URL parameters
+  // Parse URL parameters from window.location
   const params = parseUrlParams();
 
   // Check if we're in view mode (URL has parameters)

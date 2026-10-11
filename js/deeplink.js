@@ -3,51 +3,116 @@
  * Handles incoming URLs when the app is opened via deep links
  */
 
+// Capacitor may fire an appUrlOpen event for the launch URL that was already
+// handled via getLaunchDeepLink() on cold start. Remember it so the listener
+// can skip that one duplicate.
+let handledLaunchUrl = null;
+let handledLaunchUrlAt = 0;
+const LAUNCH_URL_DUPLICATE_WINDOW_MS = 3000;
+
 /**
- * Initialize deep link listener
- * Sets up event listener for Capacitor appUrlOpen events
- * @param {Function} onDeepLink - Callback function to handle deep link with params object
+ * Get the Capacitor App plugin if running in a mobile environment
+ * @returns {Object|null} The App plugin, or null on the web
  */
-export function initDeepLinking(onDeepLink) {
-  // Check if Capacitor App plugin is available (mobile environment)
+function getCapacitorApp() {
   if (typeof window.Capacitor === "undefined") {
     console.log("Capacitor not available - deep linking disabled");
-    return;
+    return null;
   }
 
-  // Get the App plugin from Capacitor
   const { App } = window.Capacitor.Plugins;
 
   if (!App) {
     console.log("Capacitor App plugin not available");
+    return null;
+  }
+
+  return App;
+}
+
+/**
+ * Parse a deep link URL into routing parameters
+ * @param {string} urlString - Full URL received from Capacitor
+ * @returns {Object|null} {data, admin, user} params, or null if invalid or missing data
+ */
+function parseDeepLinkUrl(urlString) {
+  try {
+    const url = new URL(urlString);
+    const params = {
+      data: url.searchParams.get("data"),
+      admin: url.searchParams.get("admin"),
+      user: url.searchParams.get("user")
+        ? decodeURIComponent(url.searchParams.get("user"))
+        : null,
+    };
+
+    if (!params.data) {
+      console.warn("Deep link missing data parameter:", urlString);
+      return null;
+    }
+
+    return params;
+  } catch (error) {
+    console.error("Error parsing deep link:", error);
+    return null;
+  }
+}
+
+/**
+ * Get the deep link the app was launched with, if any (cold start)
+ * @returns {Promise<Object|null>} Parsed {data, admin, user} params, or null
+ */
+export async function getLaunchDeepLink() {
+  const App = getCapacitorApp();
+  if (!App) {
+    return null;
+  }
+
+  try {
+    const launchUrl = await App.getLaunchUrl();
+    if (launchUrl && launchUrl.url) {
+      console.log("Launch URL detected:", launchUrl.url);
+      const params = parseDeepLinkUrl(launchUrl.url);
+      if (params) {
+        handledLaunchUrl = launchUrl.url;
+        handledLaunchUrlAt = Date.now();
+        return params;
+      }
+    }
+  } catch (error) {
+    console.log("No launch URL or error checking:", error);
+  }
+
+  return null;
+}
+
+/**
+ * Initialize deep link listener
+ * Registers a persistent listener for Capacitor appUrlOpen events, so links
+ * tapped while the app is already running (warm start) are handled every time
+ * @param {Function} onDeepLink - Callback invoked with parsed params for each deep link
+ */
+export function initDeepLinking(onDeepLink) {
+  const App = getCapacitorApp();
+  if (!App) {
     return;
   }
 
-  // Listen for app URL open events
   App.addListener("appUrlOpen", (event) => {
     console.log("Deep link received:", event.url);
 
-    try {
-      // Parse the URL to extract query parameters
-      const url = new URL(event.url);
-      const params = {
-        data: url.searchParams.get("data"),
-        admin: url.searchParams.get("admin"),
-        user: url.searchParams.get("user")
-          ? decodeURIComponent(url.searchParams.get("user"))
-          : null,
-      };
+    if (
+      event.url === handledLaunchUrl &&
+      Date.now() - handledLaunchUrlAt < LAUNCH_URL_DUPLICATE_WINDOW_MS
+    ) {
+      console.log("Skipping appUrlOpen duplicate of handled launch URL");
+      handledLaunchUrl = null;
+      return;
+    }
 
-      // Validate that we have the required data parameter
-      if (!params.data) {
-        console.warn("Deep link missing data parameter:", event.url);
-        return;
-      }
-
-      // Call the callback with the parsed parameters
+    const params = parseDeepLinkUrl(event.url);
+    if (params) {
       onDeepLink(params);
-    } catch (error) {
-      console.error("Error processing deep link:", error);
     }
   });
 
