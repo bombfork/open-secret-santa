@@ -47,6 +47,10 @@ run = "npm run format:fix"
 description = "Validate i18n JSON files against schema"
 run = "npm run validate:i18n"
 
+[tasks.test-unit]
+description = "Run unit tests for the assignment algorithm"
+run = "npm run test:unit"
+
 [tasks.validate-all]
-description = "Run all validation checks (lint, format, i18n)"
+description = "Run all validation checks (lint, format, i18n, unit tests)"
 run = "npm run validate:all"
