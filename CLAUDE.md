@@ -18,7 +18,8 @@ Open Secret Santa is a client-side Secret Santa gift exchange organizer with no 
 - **`mise run format`** - Check code formatting with Prettier
 - **`mise run format-fix`** - Fix code formatting with Prettier
 - **`mise run validate-i18n`** - Validate i18n JSON files against schema
-- **`mise run validate-all`** - Run all validation checks (lint + format + i18n)
+- **`mise run test-unit`** - Run unit tests for the assignment algorithm
+- **`mise run validate-all`** - Run all validation checks (lint + format + i18n + unit tests)
 
 ### Starting the Development Server
 
@@ -90,9 +91,11 @@ The application has two main modes determined by URL parameters:
 Located in `random.js`:
 1. Hash seed string (djb2) → numeric seed
 2. Initialize Mulberry32 PRNG with seed
-3. Fisher-Yates shuffle participants
-4. Rotate to prevent self-assignments if any occur
+3. Compute enforced minimum list distance `d` from group size via `computeMinDistance(n)`: d=1 for 3-4 participants (self-exclusion only), d=2 from 5 (adjacent entries never match), growing to a cap of d=5 for 20+
+4. Rejection sampling: Fisher-Yates shuffle until `|giverIndex - receiverIndex| >= d` for every pair (capped attempts; seeded rotation fallback guarantees the constraint)
 5. Return {giver, receiver} pairs
+
+The distance rule is always on with no UI — it ensures people entered close together in the list (couples, families) never draw each other. Unit tests live in `scripts/test-random.js` (`mise run test-unit`).
 
 ### Security Model
 

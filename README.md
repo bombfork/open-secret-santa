@@ -378,7 +378,7 @@ Each translation file contains nested objects with keys for different sections:
 
 1. **Seeded Random Generator**: Uses Mulberry32 algorithm with string hashing for reproducible randomness
 2. **Fisher-Yates Shuffle**: Fairly shuffles the participants list
-3. **Self-Assignment Prevention**: Ensures no one is assigned to themselves
+3. **Minimum List Distance**: People entered close together in the list (couples, families) never draw each other — the required distance grows with group size (adjacent entries are excluded from 5 participants up, to a maximum distance of 5 for groups of 20+). Shuffles are redrawn until one satisfies the rule; self-assignment is excluded for every group size
 
 ### Data Encoding
 

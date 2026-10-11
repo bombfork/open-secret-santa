@@ -56,9 +56,49 @@ export function shuffleArray(array, random) {
   return shuffled;
 }
 
+// Tunable minimum-distance curve: d grows with group size, capped so the
+// constraint never approaches the n >= 2d feasibility limit
+const DISTANCE_GROWTH_DIVISOR = 5;
+const MAX_MIN_DISTANCE = 5;
+const MAX_SHUFFLE_ATTEMPTS = 50000;
+
+/**
+ * Compute the enforced minimum list distance between giver and receiver
+ * @param {number} participantCount - Number of participants
+ * @returns {number} - Minimum distance (1 = only self-assignment excluded)
+ */
+export function computeMinDistance(participantCount) {
+  return Math.max(
+    1,
+    Math.min(
+      Math.floor(participantCount / DISTANCE_GROWTH_DIVISOR) + 1,
+      MAX_MIN_DISTANCE,
+      Math.floor((participantCount - 1) / 2),
+    ),
+  );
+}
+
+/**
+ * Check that every giver/receiver pair respects the minimum list distance
+ * @param {string[]} receivers - Shuffled receiver names
+ * @param {Map<string, number>} indexByName - Participant name to list index
+ * @param {number} minDistance - Minimum allowed |giverIndex - receiverIndex|
+ * @returns {boolean} - True if all pairs are valid
+ */
+function respectsMinDistance(receivers, indexByName, minDistance) {
+  for (let i = 0; i < receivers.length; i++) {
+    if (Math.abs(i - indexByName.get(receivers[i])) < minDistance) {
+      return false;
+    }
+  }
+  return true;
+}
+
 /**
  * Generate Secret Santa assignments
- * @param {string[]} participants - Array of participant names
+ * Enforces a minimum distance in the entry list between giver and receiver,
+ * so people entered close together (couples, families) never draw each other
+ * @param {string[]} participants - Array of participant names (unique)
  * @param {string} seed - Random seed string
  * @returns {Object[]} - Array of {giver, receiver} pairs
  */
@@ -67,22 +107,26 @@ export function generateAssignments(participants, seed) {
     throw new Error("Need at least 3 participants");
   }
 
+  const n = participants.length;
+  const minDistance = computeMinDistance(n);
+  const indexByName = new Map(participants.map((name, i) => [name, i]));
   const random = createSeededRandom(seed);
 
-  // Create a shuffled copy for receivers
-  const receivers = shuffleArray(participants, random);
-
-  // Ensure no one is assigned to themselves
-  // If someone got themselves, rotate the receivers
-  for (let i = 0; i < participants.length; i++) {
-    if (participants[i] === receivers[i]) {
-      // Rotate the receivers array from this point
-      const nextIndex = (i + 1) % participants.length;
-      [receivers[i], receivers[nextIndex]] = [
-        receivers[nextIndex],
-        receivers[i],
-      ];
+  // Rejection sampling: draw seeded shuffles until one respects the distance
+  let receivers = null;
+  for (let attempt = 0; attempt < MAX_SHUFFLE_ATTEMPTS; attempt++) {
+    const candidate = shuffleArray(participants, random);
+    if (respectsMinDistance(candidate, indexByName, minDistance)) {
+      receivers = candidate;
+      break;
     }
+  }
+
+  // Fallback: a rotation by k in [minDistance, n - minDistance] always
+  // satisfies the constraint and stays seed-deterministic
+  if (receivers === null) {
+    const k = minDistance + Math.floor(random() * (n - 2 * minDistance + 1));
+    receivers = participants.map((_, i) => participants[(i + k) % n]);
   }
 
   // Create assignments
