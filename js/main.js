@@ -7,7 +7,11 @@ import { setupCreateForm, displayResults } from "./create.js";
 import { setupViewMode } from "./view.js";
 import { parseUrlParams } from "./encoder.js";
 import { initI18n, t, createLanguageSelector } from "./i18n.js";
-import { initDeepLinking, handleDeepLinkNavigation } from "./deeplink.js";
+import {
+  initDeepLinking,
+  getLaunchDeepLink,
+  handleDeepLinkNavigation,
+} from "./deeplink.js";
 
 // Page elements
 const pages = {
@@ -200,18 +204,29 @@ function updatePageText() {
  * Initialize the application
  */
 async function init() {
-  // Store deep link params if received before i18n is ready
-  let pendingDeepLinkParams = null;
+  // Navigation needs translations, but the listener must be registered before
+  // any await so no early appUrlOpen event is missed; gate it on i18n readiness
+  let i18nReadyResolve;
+  const i18nReady = new Promise((resolve) => {
+    i18nReadyResolve = resolve;
+  });
 
-  // Initialize deep linking FIRST for Android App Links
-  // This must happen before i18n to prevent language detection from interfering
-  const deepLinkPromise = initDeepLinking((params) => {
-    console.log("Deep link callback triggered with params:", params);
-    pendingDeepLinkParams = params;
+  // Handle deep links received while the app is running (warm start)
+  initDeepLinking(async (params) => {
+    await i18nReady;
+    handleDeepLinkNavigation(
+      params,
+      setupViewMode,
+      showPage,
+      showError,
+      goToLanding,
+      () => t("validation.invalidUrl"),
+    );
   });
 
   // Initialize i18n system
   await initI18n();
+  i18nReadyResolve();
 
   // Setup language selector
   const languageSelectorContainer = document.getElementById(
@@ -229,35 +244,19 @@ async function init() {
     updatePageText();
   });
 
-  // Wait for potential deep link before proceeding with normal routing
-  // This prevents race condition where window.location is checked before deep link fires
-  if (deepLinkPromise) {
-    const deepLinkResult = await deepLinkPromise;
-
-    // If deep link was handled, process it now that i18n is ready
-    if (deepLinkResult.handled && pendingDeepLinkParams) {
-      console.log("Processing deep link with params:", pendingDeepLinkParams);
-
-      // Handle deep link navigation now that all dependencies are ready
-      handleDeepLinkNavigation(
-        pendingDeepLinkParams,
-        setupViewMode,
-        showPage,
-        showError,
-        goToLanding,
-        () => t("validation.invalidUrl"),
-      );
-
-      console.log("Deep link handled, skipping normal routing");
-      return;
-    }
-
-    // Otherwise, continue with normal routing
-    console.log(
-      deepLinkResult.timeout
-        ? "No deep link received, proceeding with normal routing"
-        : "Deep link not handled, proceeding with normal routing",
+  // Cold start via Android App Link: window.location has no query params in
+  // the Capacitor webview, so the launch URL must be checked explicitly
+  const launchParams = await getLaunchDeepLink();
+  if (launchParams) {
+    handleDeepLinkNavigation(
+      launchParams,
+      setupViewMode,
+      showPage,
+      showError,
+      goToLanding,
+      () => t("validation.invalidUrl"),
     );
+    return;
   }
 
   // Parse URL parameters from window.location

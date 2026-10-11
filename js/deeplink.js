@@ -3,23 +3,23 @@
  * Handles incoming URLs when the app is opened via deep links
  */
 
-// Track deep link state
-let deepLinkPromise = null;
+// Capacitor may fire an appUrlOpen event for the launch URL that was already
+// handled via getLaunchDeepLink() on cold start. Remember it so the listener
+// can skip that one duplicate.
+let handledLaunchUrl = null;
+let handledLaunchUrlAt = 0;
+const LAUNCH_URL_DUPLICATE_WINDOW_MS = 3000;
 
 /**
- * Initialize deep link listener
- * Sets up event listener for Capacitor appUrlOpen events
- * @param {Function} onDeepLink - Callback function to handle deep link with params object
- * @returns {Promise|null} Promise that resolves when deep link is processed, or null if not available
+ * Get the Capacitor App plugin if running in a mobile environment
+ * @returns {Object|null} The App plugin, or null on the web
  */
-export function initDeepLinking(onDeepLink) {
-  // Check if Capacitor App plugin is available (mobile environment)
+function getCapacitorApp() {
   if (typeof window.Capacitor === "undefined") {
     console.log("Capacitor not available - deep linking disabled");
     return null;
   }
 
-  // Get the App plugin from Capacitor
   const { App } = window.Capacitor.Plugins;
 
   if (!App) {
@@ -27,89 +27,96 @@ export function initDeepLinking(onDeepLink) {
     return null;
   }
 
-  // Create a promise that resolves when a deep link is received or times out
-  deepLinkPromise = new Promise((resolve) => {
-    // Check if there's a launch URL (for when app was opened with a link)
-    // This handles the case where the URL was used to launch the app
-    App.getLaunchUrl()
-      .then((launchUrl) => {
-        if (launchUrl && launchUrl.url) {
-          console.log("Launch URL detected:", launchUrl.url);
+  return App;
+}
 
-          // Parse the URL to extract query parameters
-          const url = new URL(launchUrl.url);
-          const params = {
-            data: url.searchParams.get("data"),
-            admin: url.searchParams.get("admin"),
-            user: url.searchParams.get("user")
-              ? decodeURIComponent(url.searchParams.get("user"))
-              : null,
-          };
+/**
+ * Parse a deep link URL into routing parameters
+ * @param {string} urlString - Full URL received from Capacitor
+ * @returns {Object|null} {data, admin, user} params, or null if invalid or missing data
+ */
+function parseDeepLinkUrl(urlString) {
+  try {
+    const url = new URL(urlString);
+    const params = {
+      data: url.searchParams.get("data"),
+      admin: url.searchParams.get("admin"),
+      user: url.searchParams.get("user")
+        ? decodeURIComponent(url.searchParams.get("user"))
+        : null,
+    };
 
-          // If we have data parameter, handle it immediately
-          if (params.data) {
-            console.log("Handling launch URL with data parameter");
-            onDeepLink(params);
-            resolve({ handled: true });
-            return;
-          }
-        }
+    if (!params.data) {
+      console.warn("Deep link missing data parameter:", urlString);
+      return null;
+    }
 
-        // If no launch URL with data, set up listener for future deep links
-        setupDeepLinkListener(resolve);
-      })
-      .catch((error) => {
-        console.log("No launch URL or error checking:", error);
-        // Set up listener even if launch URL check fails
-        setupDeepLinkListener(resolve);
-      });
-  });
+    return params;
+  } catch (error) {
+    console.error("Error parsing deep link:", error);
+    return null;
+  }
+}
 
-  // Helper function to set up the deep link listener
-  function setupDeepLinkListener(resolve) {
-    // Listen for app URL open events (for when app is already running)
-    App.addListener("appUrlOpen", (event) => {
-      console.log("Deep link received:", event.url);
-
-      try {
-        // Parse the URL to extract query parameters
-        const url = new URL(event.url);
-        const params = {
-          data: url.searchParams.get("data"),
-          admin: url.searchParams.get("admin"),
-          user: url.searchParams.get("user")
-            ? decodeURIComponent(url.searchParams.get("user"))
-            : null,
-        };
-
-        // Validate that we have the required data parameter
-        if (!params.data) {
-          console.warn("Deep link missing data parameter:", event.url);
-          resolve({ handled: false });
-          return;
-        }
-
-        // Call the callback with the parsed parameters
-        onDeepLink(params);
-
-        // Signal that deep link was handled
-        resolve({ handled: true });
-      } catch (error) {
-        console.error("Error processing deep link:", error);
-        resolve({ handled: false });
-      }
-    });
-
-    // Timeout after 500ms if no deep link is received
-    // This allows the app to proceed with normal routing
-    // Increased from 100ms to 500ms to handle slower app initialization
-    setTimeout(() => {
-      resolve({ handled: false, timeout: true });
-    }, 500);
+/**
+ * Get the deep link the app was launched with, if any (cold start)
+ * @returns {Promise<Object|null>} Parsed {data, admin, user} params, or null
+ */
+export async function getLaunchDeepLink() {
+  const App = getCapacitorApp();
+  if (!App) {
+    return null;
   }
 
+  try {
+    const launchUrl = await App.getLaunchUrl();
+    if (launchUrl && launchUrl.url) {
+      console.log("Launch URL detected:", launchUrl.url);
+      const params = parseDeepLinkUrl(launchUrl.url);
+      if (params) {
+        handledLaunchUrl = launchUrl.url;
+        handledLaunchUrlAt = Date.now();
+        return params;
+      }
+    }
+  } catch (error) {
+    console.log("No launch URL or error checking:", error);
+  }
+
+  return null;
+}
+
+/**
+ * Initialize deep link listener
+ * Registers a persistent listener for Capacitor appUrlOpen events, so links
+ * tapped while the app is already running (warm start) are handled every time
+ * @param {Function} onDeepLink - Callback invoked with parsed params for each deep link
+ */
+export function initDeepLinking(onDeepLink) {
+  const App = getCapacitorApp();
+  if (!App) {
+    return;
+  }
+
+  App.addListener("appUrlOpen", (event) => {
+    console.log("Deep link received:", event.url);
+
+    if (
+      event.url === handledLaunchUrl &&
+      Date.now() - handledLaunchUrlAt < LAUNCH_URL_DUPLICATE_WINDOW_MS
+    ) {
+      console.log("Skipping appUrlOpen duplicate of handled launch URL");
+      handledLaunchUrl = null;
+      return;
+    }
+
+    const params = parseDeepLinkUrl(event.url);
+    if (params) {
+      onDeepLink(params);
+    }
+  });
+
   console.log("Deep linking initialized");
-  return deepLinkPromise;
 }
 
 /**
