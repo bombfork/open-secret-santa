@@ -1,6 +1,7 @@
 # Plain launch with no deep link: getLaunchDeepLink() returning null must not
 # break normal routing — the landing page must show.
 appId: com.bombfork.opensecretasanta
+androidWebViewHierarchy: devtools
 tags:
   - regression
   - deeplink

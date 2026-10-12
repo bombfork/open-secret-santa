@@ -2,6 +2,7 @@
 # link must arrive via onNewIntent (launchMode singleTask) -> Capacitor
 # appUrlOpen -> initDeepLinking listener (js/main.js).
 appId: com.bombfork.opensecretasanta
+androidWebViewHierarchy: devtools
 tags:
   - regression
   - deeplink

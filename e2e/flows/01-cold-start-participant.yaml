@@ -3,6 +3,7 @@
 # router through Capacitor App.getLaunchUrl() (js/deeplink.js getLaunchDeepLink),
 # NOT through the warm-start appUrlOpen listener.
 appId: com.bombfork.opensecretasanta
+androidWebViewHierarchy: devtools
 tags:
   - regression
   - deeplink

@@ -2,6 +2,7 @@
 # just deep links. Most fragile flow (multiline textarea input) — excludable
 # via: maestro test --exclude-tags smoke
 appId: com.bombfork.opensecretasanta
+androidWebViewHierarchy: devtools
 tags:
   - smoke
 ---
