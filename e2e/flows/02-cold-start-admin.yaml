@@ -1,6 +1,5 @@
 # Cold-start deep link to the admin view, then unlock with the password.
 appId: com.bombfork.opensecretasanta
-androidWebViewHierarchy: devtools
 tags:
   - regression
   - deeplink

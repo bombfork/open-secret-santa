@@ -4,7 +4,6 @@
 # the assignment view when the duplicate event lands. Landing must stay
 # visible past the 3000ms LAUNCH_URL_DUPLICATE_WINDOW_MS (js/deeplink.js).
 appId: com.bombfork.opensecretasanta
-androidWebViewHierarchy: devtools
 tags:
   - regression
   - deeplink

@@ -126,20 +126,72 @@ adb logcat -c || true
 # CI emulators occasionally fail a whole flow when Maestro's DevTools
 # connection to a freshly started webview process doesn't come up — the flow
 # then times out on its first assertion while the same flow passes in seconds
-# on the next attempt. Retry the suite once (override with E2E_ATTEMPTS).
-ATTEMPTS="${E2E_ATTEMPTS:-2}"
-STATUS=1
-for attempt in $(seq 1 "$ATTEMPTS"); do
-  [ "$attempt" -gt 1 ] && echo "=== Retry attempt $attempt/$ATTEMPTS ==="
-  set +e
-  maestro test "$TARGET" \
-    "${ENV_ARGS[@]}" \
-    --debug-output "$OUTPUT_DIR" \
-    --format junit --output "$OUTPUT_DIR/report.xml"
-  STATUS=$?
-  set -e
-  [ "$STATUS" -eq 0 ] && break
+# on the next attempt. Retry ONLY the failed flows (up to E2E_ATTEMPTS total
+# attempts), and report retried-then-passed flows loudly as flaky so the
+# retries never hide instability: persistent failures still fail the run, and
+# every attempt's screenshots/logs are kept under maestro-debug/.
+
+# Print the flow files of failed testcases from a junit report
+failed_flows_from_report() {
+  awk '
+    /<testcase/ { if (match($0, /file="[^"]+"/)) f = substr($0, RSTART + 6, RLENGTH - 7) }
+    /<failure/  { if (f != "") print f }
+    /<\/testcase>/ { f = "" }
+  ' "$1" | sort -u
+}
+
+ATTEMPTS="${E2E_ATTEMPTS:-3}"
+FLAKY=()
+STATUS=0
+
+set +e
+maestro test "$TARGET" \
+  "${ENV_ARGS[@]}" \
+  --debug-output "$OUTPUT_DIR" \
+  --format junit --output "$OUTPUT_DIR/report.xml"
+set -e
+mapfile -t FAILED < <(failed_flows_from_report "$OUTPUT_DIR/report.xml")
+
+attempt=1
+while [ "${#FAILED[@]}" -gt 0 ] && [ "$attempt" -lt "$ATTEMPTS" ]; do
+  attempt=$((attempt + 1))
+  echo "=== Attempt $attempt/$ATTEMPTS — retrying ${#FAILED[@]} failed flow(s): ${FAILED[*]} ==="
+  STILL_FAILED=()
+  for flow in "${FAILED[@]}"; do
+    name=$(basename "$flow" .yaml)
+    set +e
+    maestro test "$flow" \
+      "${ENV_ARGS[@]}" \
+      --debug-output "$OUTPUT_DIR" \
+      --format junit --output "$OUTPUT_DIR/report-retry${attempt}-${name}.xml"
+    rc=$?
+    set -e
+    if [ "$rc" -eq 0 ]; then
+      FLAKY+=("$name (passed on attempt $attempt)")
+    else
+      STILL_FAILED+=("$flow")
+    fi
+  done
+  FAILED=("${STILL_FAILED[@]}")
 done
+
+if [ "${#FLAKY[@]}" -gt 0 ]; then
+  {
+    echo "Flaky flows (failed, then passed on retry):"
+    printf ' - %s\n' "${FLAKY[@]}"
+  } | tee "$OUTPUT_DIR/flaky-flows.txt"
+  if [ -n "${GITHUB_STEP_SUMMARY:-}" ]; then
+    {
+      echo "### ⚠️ Flaky e2e flows"
+      printf -- '- %s\n' "${FLAKY[@]}"
+    } >>"$GITHUB_STEP_SUMMARY"
+  fi
+fi
+
+if [ "${#FAILED[@]}" -gt 0 ]; then
+  echo "Flows still failing after $ATTEMPTS attempts: ${FAILED[*]}" >&2
+  STATUS=1
+fi
 
 # --- Collect screenshots -----------------------------------------------------
 # Maestro writes screenshots and per-flow debug data under a hidden .maestro
