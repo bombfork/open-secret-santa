@@ -13,3 +13,6 @@ android/app/*.iml
 android/captures
 www
 release.keystore
+
+# E2E test output (Maestro debug output, screenshots, junit report)
+e2e/output

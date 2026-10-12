@@ -1,0 +1,29 @@
+# Launch-URL deduplication: after a cold start via deep link, the duplicate
+# appUrlOpen event Capacitor fires for the launch URL must NOT re-navigate.
+# Symptom of a dedup failure: user taps "Back to Home" and gets yanked back to
+# the assignment view when the duplicate event lands. Landing must stay
+# visible past the 3000ms LAUNCH_URL_DUPLICATE_WINDOW_MS (js/deeplink.js).
+appId: com.bombfork.opensecretasanta
+tags:
+  - regression
+  - deeplink
+---
+- clearState
+- stopApp
+- openLink:
+    link: ${PARTICIPANT_URL}
+    autoVerify: true
+- extendedWaitUntil:
+    visible: "You are Secret Santa for:"
+    timeout: 15000
+- tapOn: "Back to Home"
+- assertVisible: "Create New Secret Santa"
+# Bounded sleep past the 3000ms dedup window (Maestro idiom: optional wait on
+# a never-present element).
+- extendedWaitUntil:
+    visible: "NEVER_PRESENT_SLEEP_4000MS"
+    timeout: 4000
+    optional: true
+- assertVisible: "Create New Secret Santa"
+- assertNotVisible: "You are Secret Santa for:"
+- takeScreenshot: e2e/output/05-cold-start-dedup

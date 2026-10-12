@@ -1,4 +1,5 @@
 [tools]
+"github:mobile-dev-inc/maestro" = "latest"
 java = "zulu-17"
 jq = "latest"
 node = "latest"
@@ -54,3 +55,18 @@ run = "npm run test:unit"
 [tasks.validate-all]
 description = "Run all validation checks (lint, format, i18n, unit tests)"
 run = "npm run validate:all"
+
+[tasks.e2e-build]
+description = "Build debug APK for e2e tests (web assets + cap sync + gradle)"
+run = """
+npm run cap:sync
+cd android && ./gradlew assembleDebug
+"""
+
+[tasks.e2e]
+description = "Run all Maestro e2e flows against the connected adb device/emulator"
+run = "bash e2e/run.sh"
+
+[tasks.e2e-flow]
+description = "Run a single e2e flow by name, e.g.: mise run e2e-flow 01-cold-start-participant"
+run = 'bash e2e/run.sh {{arg(name="flow")}}'

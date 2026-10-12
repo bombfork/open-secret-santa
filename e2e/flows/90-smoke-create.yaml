@@ -1,0 +1,34 @@
+# Create-flow smoke test: proves the harness can drive the webview UI, not
+# just deep links. Most fragile flow (multiline textarea input) — excludable
+# via: maestro test --exclude-tags smoke
+appId: com.bombfork.opensecretasanta
+tags:
+  - smoke
+---
+- launchApp:
+    clearState: true
+    stopApp: true
+- extendedWaitUntil:
+    visible: "Create New Secret Santa"
+    timeout: 15000
+# Navigating via the button pre-fills the seed field (js/main.js), so the
+# seed input must not be touched.
+- tapOn: "Create New Secret Santa"
+- extendedWaitUntil:
+    visible: "Participant Names"
+    timeout: 5000
+- tapOn:
+    id: "participants"
+- inputText: "Alice"
+- pressKey: Enter
+- inputText: "Bob"
+- pressKey: Enter
+- inputText: "Charlie"
+- hideKeyboard
+- tapOn: "Generate Secret Santa"
+- extendedWaitUntil:
+    visible: "Secret Santa Created!"
+    timeout: 10000
+- assertVisible: "Participant Links"
+- assertVisible: "Alice"
+- takeScreenshot: e2e/output/90-smoke-create

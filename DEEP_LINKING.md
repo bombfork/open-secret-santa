@@ -180,6 +180,10 @@ npm run cap:open:android
 
 ## Testing
 
+### Automated E2E Tests
+
+Maestro flows exercise deep-link delivery (cold start, warm start, dedup) against the real installed APK, locally and in CI. See [TESTING_E2E.md](TESTING_E2E.md). Note: the automated runs force-approve app links, so they do **not** cover Digital Asset Links verification — use the manual steps below for that.
+
 ### Manual Testing
 
 1. **Install the app** on an Android device or emulator

@@ -1,0 +1,16 @@
+# Plain launch with no deep link: getLaunchDeepLink() returning null must not
+# break normal routing — the landing page must show.
+appId: com.bombfork.opensecretasanta
+tags:
+  - regression
+  - deeplink
+---
+- launchApp:
+    clearState: true
+    stopApp: true
+- extendedWaitUntil:
+    visible: "Create New Secret Santa"
+    timeout: 15000
+- assertVisible: "View Your Assignment"
+- assertNotVisible: "You are Secret Santa for:"
+- takeScreenshot: e2e/output/04-plain-launch
