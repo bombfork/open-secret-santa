@@ -12,11 +12,16 @@ tags:
 - extendedWaitUntil:
     visible: "How it works"
     timeout: 30000
-# The landing buttons sit below the fold — scroll to them first.
-- scrollUntilVisible:
-    element:
-      text: "Create New Secret Santa"
-    direction: DOWN
+# The landing buttons sit below the fold — swipe down to them
+# (scrollUntilVisible is unreliable inside the Capacitor webview; the page
+# clamps at the bottom so overshooting is safe)
+- swipe:
+    direction: UP
+- swipe:
+    direction: UP
+- extendedWaitUntil:
+    visible: "Create New Secret Santa"
+    timeout: 5000
 # Navigating via the button pre-fills the seed field (js/main.js), so the
 # seed input must not be touched.
 - tapOn: "Create New Secret Santa"
