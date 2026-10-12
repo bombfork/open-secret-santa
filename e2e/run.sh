@@ -123,13 +123,23 @@ adb shell wm dismiss-keyguard || true
 
 adb logcat -c || true
 
-set +e
-maestro test "$TARGET" \
-  "${ENV_ARGS[@]}" \
-  --debug-output "$OUTPUT_DIR" \
-  --format junit --output "$OUTPUT_DIR/report.xml"
-STATUS=$?
-set -e
+# CI emulators occasionally fail a whole flow when Maestro's DevTools
+# connection to a freshly started webview process doesn't come up — the flow
+# then times out on its first assertion while the same flow passes in seconds
+# on the next attempt. Retry the suite once (override with E2E_ATTEMPTS).
+ATTEMPTS="${E2E_ATTEMPTS:-2}"
+STATUS=1
+for attempt in $(seq 1 "$ATTEMPTS"); do
+  [ "$attempt" -gt 1 ] && echo "=== Retry attempt $attempt/$ATTEMPTS ==="
+  set +e
+  maestro test "$TARGET" \
+    "${ENV_ARGS[@]}" \
+    --debug-output "$OUTPUT_DIR" \
+    --format junit --output "$OUTPUT_DIR/report.xml"
+  STATUS=$?
+  set -e
+  [ "$STATUS" -eq 0 ] && break
+done
 
 # --- Collect screenshots -----------------------------------------------------
 # Maestro writes screenshots and per-flow debug data under a hidden .maestro
