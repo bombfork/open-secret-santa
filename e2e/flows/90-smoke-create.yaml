@@ -1,0 +1,47 @@
+# Create-flow smoke test: proves the harness can drive the webview UI, not
+# just deep links. Most fragile flow (multiline textarea input) — excludable
+# via: maestro test --exclude-tags smoke
+appId: com.bombfork.opensecretasanta
+tags:
+  - smoke
+---
+- launchApp:
+    clearState: true
+    stopApp: true
+- extendedWaitUntil:
+    visible: "How it works"
+    timeout: 30000
+# The landing buttons sit below the fold — swipe down to them
+# (scrollUntilVisible is unreliable inside the Capacitor webview; the page
+# clamps at the bottom so overshooting is safe)
+- swipe:
+    direction: UP
+- swipe:
+    direction: UP
+- extendedWaitUntil:
+    visible: "Create New Secret Santa"
+    timeout: 5000
+# Navigating via the button pre-fills the seed field (js/main.js), so the
+# seed input must not be touched.
+- tapOn: "Create New Secret Santa"
+# Regex: the label element's text includes the nested inline help text
+- extendedWaitUntil:
+    visible: "Participant Names.*"
+    timeout: 5000
+- tapOn:
+    id: "participants"
+- inputText: "Alice"
+- pressKey: Enter
+- inputText: "Bob"
+- pressKey: Enter
+- inputText: "Charlie"
+- hideKeyboard
+- scrollUntilVisible:
+    element:
+      text: "Generate Secret Santa"
+    direction: DOWN
+- tapOn: "Generate Secret Santa"
+- extendedWaitUntil:
+    visible: "Secret Santa Created!"
+    timeout: 10000
+- takeScreenshot: e2e/output/90-smoke-create

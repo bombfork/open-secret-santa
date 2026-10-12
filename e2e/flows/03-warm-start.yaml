@@ -1,0 +1,24 @@
+# Warm-start deep link: process alive and idle on the landing page, so the
+# link must arrive via onNewIntent (launchMode singleTask) -> Capacitor
+# appUrlOpen -> initDeepLinking listener (js/main.js).
+appId: com.bombfork.opensecretasanta
+tags:
+  - regression
+  - deeplink
+---
+- launchApp:
+    clearState: true
+    stopApp: true
+# landing anchor: the landing buttons sit below the fold on small screens
+- extendedWaitUntil:
+    visible: "How it works"
+    timeout: 30000
+- openLink:
+    link: ${PARTICIPANT_URL}
+    autoVerify: true
+- extendedWaitUntil:
+    visible: "You are Secret Santa for:"
+    timeout: 15000
+- assertVisible: ${GIVER_NAME}
+- assertVisible: ${RECEIVER_NAME}
+- takeScreenshot: e2e/output/03-warm-start

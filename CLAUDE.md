@@ -20,6 +20,9 @@ Open Secret Santa is a client-side Secret Santa gift exchange organizer with no 
 - **`mise run validate-i18n`** - Validate i18n JSON files against schema
 - **`mise run test-unit`** - Run unit tests for the assignment algorithm
 - **`mise run validate-all`** - Run all validation checks (lint + format + i18n + unit tests)
+- **`mise run e2e`** - Run Android E2E tests (Maestro) against the connected adb device/emulator (see TESTING_E2E.md)
+- **`mise run e2e-flow <name>`** - Run a single E2E flow by name
+- **`mise run e2e-build`** - Build the debug APK for E2E testing
 
 ### Starting the Development Server
 

@@ -1,0 +1,39 @@
+# Cold-start deep link delivery (the PR #29 / issue #23 regression target).
+# The link must arrive as the launch intent of a fresh process and reach the
+# router through Capacitor App.getLaunchUrl() (js/deeplink.js getLaunchDeepLink),
+# NOT through the warm-start appUrlOpen listener.
+appId: com.bombfork.opensecretasanta
+tags:
+  - regression
+  - deeplink
+---
+# Variant A: fresh install state, process never started
+- clearState
+- stopApp
+- openLink:
+    link: ${PARTICIPANT_URL}
+    autoVerify: true
+- extendedWaitUntil:
+    visible: "You are Secret Santa for:"
+    timeout: 30000
+- assertVisible: ${GIVER_NAME}
+- assertVisible: ${RECEIVER_NAME}
+- takeScreenshot: e2e/output/01-cold-start-participant-fresh
+
+# Variant B: issue #23 shape — app opened before, process killed, link tapped
+# ("How it works" anchors the landing page: the landing buttons sit below the
+# fold on small screens and assertVisible only sees the viewport)
+- launchApp:
+    clearState: true
+    stopApp: true
+- extendedWaitUntil:
+    visible: "How it works"
+    timeout: 15000
+- stopApp
+- openLink:
+    link: ${PARTICIPANT_URL}
+    autoVerify: true
+- extendedWaitUntil:
+    visible: ${RECEIVER_NAME}
+    timeout: 30000
+- takeScreenshot: e2e/output/01-cold-start-participant-recents

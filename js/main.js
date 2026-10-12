@@ -11,6 +11,7 @@ import {
   initDeepLinking,
   getLaunchDeepLink,
   handleDeepLinkNavigation,
+  hasRecentlyHandledDeepLink,
 } from "./deeplink.js";
 
 // Page elements
@@ -32,6 +33,9 @@ function showPage(pageName) {
   if (pages[pageName]) {
     pages[pageName].classList.remove("hidden");
   }
+  // Pages share one document, so the previous page's scroll position would
+  // otherwise carry over and can leave the new page's heading off-screen
+  window.scrollTo(0, 0);
 }
 
 /**
@@ -256,6 +260,13 @@ async function init() {
       goToLanding,
       () => t("validation.invalidUrl"),
     );
+    return;
+  }
+
+  // The appUrlOpen listener may have already handled the launch URL (its
+  // event can arrive before getLaunchUrl resolves) — normal routing would
+  // stomp that navigation with the landing page
+  if (hasRecentlyHandledDeepLink()) {
     return;
   }
 

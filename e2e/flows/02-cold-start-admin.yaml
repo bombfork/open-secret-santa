@@ -1,0 +1,36 @@
+# Cold-start deep link to the admin view, then unlock with the password.
+appId: com.bombfork.opensecretasanta
+tags:
+  - regression
+  - deeplink
+---
+- clearState
+- stopApp
+- openLink:
+    link: ${ADMIN_URL}
+    autoVerify: true
+# "Participant Links" is the above-fold anchor of the admin view; the
+# password prompt sits below the participant links list
+- extendedWaitUntil:
+    visible: "Participant Links"
+    timeout: 30000
+# The password form sits below the participant links — swipe down to it
+# (scrollUntilVisible is unreliable inside the Capacitor webview)
+- swipe:
+    direction: UP
+- swipe:
+    direction: UP
+# Regex: the label element's text includes the nested password input
+- extendedWaitUntil:
+    visible: "Enter Admin Password.*"
+    timeout: 5000
+- tapOn:
+    id: "admin-password-input"
+- inputText: ${ADMIN_PASSWORD}
+- hideKeyboard
+- tapOn: "View All Assignments"
+- extendedWaitUntil:
+    visible: "All Secret Santa Assignments"
+    timeout: 5000
+- assertVisible: ${RECEIVER_NAME}
+- takeScreenshot: e2e/output/02-cold-start-admin

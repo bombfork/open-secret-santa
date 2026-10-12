@@ -117,7 +117,7 @@ In the Capacitor webview, `window.location` never contains the link's query para
 - **Cold start** (app launched by tapping a link): `App.getLaunchUrl()` returns the URL deterministically, so `init()` awaits it before falling back to normal `window.location` routing. No timeout or artificial delay is involved.
 - **Warm start** (app already running when a link is tapped): the persistent `appUrlOpen` listener navigates directly, on every event. Navigation is gated on an "i18n ready" promise so an event arriving during startup cannot run before translations are loaded.
 
-Capacitor may also emit an `appUrlOpen` event for the launch URL on cold start; `deeplink.js` remembers the launch URL it already handled and skips that duplicate. On the web (where Capacitor is not available), both helpers are no-ops and normal routing proceeds immediately.
+Capacitor also emits an `appUrlOpen` event for the launch URL on cold start, and that event can fire **before** the async `getLaunchUrl()` call resolves. `deeplink.js` deduplicates in either order: whichever path handles a URL first records it, and the other path skips its duplicate within a 3-second window. When the `appUrlOpen` listener wins the race, the router (`main.js`) also skips normal routing so the landing page doesn't stomp the deep-link navigation. On the web (where Capacitor is not available), both helpers are no-ops and normal routing proceeds immediately.
 
 ## Setup Instructions
 
@@ -179,6 +179,10 @@ npm run cap:open:android
 ```
 
 ## Testing
+
+### Automated E2E Tests
+
+Maestro flows exercise deep-link delivery (cold start, warm start, dedup) against the real installed APK, locally and in CI. See [TESTING_E2E.md](TESTING_E2E.md). Note: the automated runs force-approve app links, so they do **not** cover Digital Asset Links verification — use the manual steps below for that.
 
 ### Manual Testing
 
