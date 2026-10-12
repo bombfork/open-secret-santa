@@ -33,6 +33,9 @@ function showPage(pageName) {
   if (pages[pageName]) {
     pages[pageName].classList.remove("hidden");
   }
+  // Pages share one document, so the previous page's scroll position would
+  // otherwise carry over and can leave the new page's heading off-screen
+  window.scrollTo(0, 0);
 }
 
 /**

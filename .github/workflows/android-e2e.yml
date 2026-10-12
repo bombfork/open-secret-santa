@@ -34,6 +34,11 @@ on:
       - ".github/workflows/android-e2e.yml"
   workflow_dispatch:
 
+# A newer push to the same branch/PR supersedes any in-flight e2e run
+concurrency:
+  group: android-e2e-${{ github.ref }}
+  cancel-in-progress: true
+
 env:
   API_LEVEL: 34
   MAESTRO_VERSION: "2.11.0" # pin; bump deliberately (webview reading changed across versions)
@@ -97,7 +102,7 @@ jobs:
           path: |
             ~/.android/avd/*
             ~/.android/adb*
-          key: avd-api-${{ env.API_LEVEL }}-google-apis-x86_64-v1
+          key: avd-api-${{ env.API_LEVEL }}-google-apis-x86_64-pixel5-v2
 
       - name: Create AVD snapshot for caching
         if: steps.avd-cache.outputs.cache-hit != 'true'
@@ -106,6 +111,7 @@ jobs:
           api-level: ${{ env.API_LEVEL }}
           target: google_apis
           arch: x86_64
+          profile: pixel_5
           force-avd-creation: false
           emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
           disable-animations: false
@@ -118,7 +124,7 @@ jobs:
           path: |
             ~/.android/avd/*
             ~/.android/adb*
-          key: avd-api-${{ env.API_LEVEL }}-google-apis-x86_64-v1
+          key: avd-api-${{ env.API_LEVEL }}-google-apis-x86_64-pixel5-v2
 
       - name: Run Maestro flows
         uses: reactivecircus/android-emulator-runner@v2
@@ -128,6 +134,7 @@ jobs:
           api-level: ${{ env.API_LEVEL }}
           target: google_apis
           arch: x86_64
+          profile: pixel_5
           force-avd-creation: false
           emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
           disable-animations: true
