@@ -117,6 +117,10 @@ if [ $# -ge 1 ]; then
   fi
 fi
 
+# A sleeping/locked screen makes every visibility assertion fail
+adb shell input keyevent KEYCODE_WAKEUP || true
+adb shell wm dismiss-keyguard || true
+
 adb logcat -c || true
 
 set +e

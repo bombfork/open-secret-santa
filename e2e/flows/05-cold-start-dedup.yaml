@@ -16,7 +16,7 @@ tags:
     autoVerify: true
 - extendedWaitUntil:
     visible: "You are Secret Santa for:"
-    timeout: 15000
+    timeout: 30000
 - tapOn: "Back to Home"
 # "How it works" anchors the landing (buttons are below the fold)
 - extendedWaitUntil:

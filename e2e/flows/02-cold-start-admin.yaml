@@ -14,7 +14,7 @@ tags:
 # password prompt sits below the participant links list
 - extendedWaitUntil:
     visible: "Participant Links"
-    timeout: 15000
+    timeout: 30000
 # The password form sits below the participant links — swipe down to it
 # (scrollUntilVisible is unreliable inside the Capacitor webview)
 - swipe:

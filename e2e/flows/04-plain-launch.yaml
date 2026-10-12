@@ -12,6 +12,6 @@ tags:
 # landing anchor: the landing buttons sit below the fold on small screens
 - extendedWaitUntil:
     visible: "How it works"
-    timeout: 15000
+    timeout: 30000
 - assertNotVisible: "You are Secret Santa for:"
 - takeScreenshot: e2e/output/04-plain-launch

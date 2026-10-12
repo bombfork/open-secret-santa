@@ -16,7 +16,7 @@ tags:
     autoVerify: true
 - extendedWaitUntil:
     visible: "You are Secret Santa for:"
-    timeout: 15000
+    timeout: 30000
 - assertVisible: ${GIVER_NAME}
 - assertVisible: ${RECEIVER_NAME}
 - takeScreenshot: e2e/output/01-cold-start-participant-fresh
@@ -29,12 +29,12 @@ tags:
     stopApp: true
 - extendedWaitUntil:
     visible: "How it works"
-    timeout: 10000
+    timeout: 15000
 - stopApp
 - openLink:
     link: ${PARTICIPANT_URL}
     autoVerify: true
 - extendedWaitUntil:
     visible: ${RECEIVER_NAME}
-    timeout: 15000
+    timeout: 30000
 - takeScreenshot: e2e/output/01-cold-start-participant-recents

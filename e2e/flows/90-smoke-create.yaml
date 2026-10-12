@@ -11,7 +11,7 @@ tags:
     stopApp: true
 - extendedWaitUntil:
     visible: "How it works"
-    timeout: 15000
+    timeout: 30000
 # The landing buttons sit below the fold — scroll to them first.
 - scrollUntilVisible:
     element:

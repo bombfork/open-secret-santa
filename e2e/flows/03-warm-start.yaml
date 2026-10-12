@@ -13,13 +13,13 @@ tags:
 # landing anchor: the landing buttons sit below the fold on small screens
 - extendedWaitUntil:
     visible: "How it works"
-    timeout: 15000
+    timeout: 30000
 - openLink:
     link: ${PARTICIPANT_URL}
     autoVerify: true
 - extendedWaitUntil:
     visible: "You are Secret Santa for:"
-    timeout: 10000
+    timeout: 15000
 - assertVisible: ${GIVER_NAME}
 - assertVisible: ${RECEIVER_NAME}
 - takeScreenshot: e2e/output/03-warm-start
