@@ -1,6 +1,6 @@
 [tools]
 "github:mobile-dev-inc/maestro" = "latest"
-java = "zulu-17"
+java = "zulu-21"
 jq = "latest"
 node = "latest"
 

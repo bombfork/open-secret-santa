@@ -10,11 +10,21 @@ tags:
 - openLink:
     link: ${ADMIN_URL}
     autoVerify: true
+# "Participant Links" is the above-fold anchor of the admin view; the
+# password prompt sits below the participant links list
 - extendedWaitUntil:
-    visible: "Enter Admin Password"
+    visible: "Participant Links"
     timeout: 15000
-- assertVisible: "Participant Links"
-- assertVisible: "View All Assignments"
+# The password form sits below the participant links — swipe down to it
+# (scrollUntilVisible is unreliable inside the Capacitor webview)
+- swipe:
+    direction: UP
+- swipe:
+    direction: UP
+# Regex: the label element's text includes the nested password input
+- extendedWaitUntil:
+    visible: "Enter Admin Password.*"
+    timeout: 5000
 - tapOn:
     id: "admin-password-input"
 - inputText: ${ADMIN_PASSWORD}

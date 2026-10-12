@@ -3,12 +3,39 @@
  * Handles incoming URLs when the app is opened via deep links
  */
 
-// Capacitor may fire an appUrlOpen event for the launch URL that was already
-// handled via getLaunchDeepLink() on cold start. Remember it so the listener
-// can skip that one duplicate.
-let handledLaunchUrl = null;
-let handledLaunchUrlAt = 0;
+// On cold start Capacitor delivers the same URL twice: an appUrlOpen event
+// (which can fire BEFORE the async getLaunchUrl() bridge call resolves) and
+// the getLaunchUrl() result. Whichever path handles the URL first records it
+// so the other path skips its duplicate within the window — the dedup must
+// work in either order.
+let handledUrl = null;
+let handledUrlAt = 0;
 const LAUNCH_URL_DUPLICATE_WINDOW_MS = 3000;
+
+function wasJustHandled(url) {
+  return (
+    url === handledUrl &&
+    Date.now() - handledUrlAt < LAUNCH_URL_DUPLICATE_WINDOW_MS
+  );
+}
+
+function markHandled(url) {
+  handledUrl = url;
+  handledUrlAt = Date.now();
+}
+
+/**
+ * Whether any deep link was handled within the dedup window.
+ * Lets the router skip normal routing when the appUrlOpen listener already
+ * navigated (its event can win the race against getLaunchUrl on cold start).
+ * @returns {boolean}
+ */
+export function hasRecentlyHandledDeepLink() {
+  return (
+    handledUrl !== null &&
+    Date.now() - handledUrlAt < LAUNCH_URL_DUPLICATE_WINDOW_MS
+  );
+}
 
 /**
  * Get the Capacitor App plugin if running in a mobile environment
@@ -72,10 +99,13 @@ export async function getLaunchDeepLink() {
     const launchUrl = await App.getLaunchUrl();
     if (launchUrl && launchUrl.url) {
       console.log("Launch URL detected:", launchUrl.url);
+      if (wasJustHandled(launchUrl.url)) {
+        console.log("Skipping launch URL already handled by appUrlOpen");
+        return null;
+      }
       const params = parseDeepLinkUrl(launchUrl.url);
       if (params) {
-        handledLaunchUrl = launchUrl.url;
-        handledLaunchUrlAt = Date.now();
+        markHandled(launchUrl.url);
         return params;
       }
     }
@@ -101,17 +131,14 @@ export function initDeepLinking(onDeepLink) {
   App.addListener("appUrlOpen", (event) => {
     console.log("Deep link received:", event.url);
 
-    if (
-      event.url === handledLaunchUrl &&
-      Date.now() - handledLaunchUrlAt < LAUNCH_URL_DUPLICATE_WINDOW_MS
-    ) {
-      console.log("Skipping appUrlOpen duplicate of handled launch URL");
-      handledLaunchUrl = null;
+    if (wasJustHandled(event.url)) {
+      console.log("Skipping appUrlOpen duplicate of handled URL");
       return;
     }
 
     const params = parseDeepLinkUrl(event.url);
     if (params) {
+      markHandled(event.url);
       onDeepLink(params);
     }
   });

@@ -127,13 +127,25 @@ maestro test "$TARGET" \
 STATUS=$?
 set -e
 
+# --- Collect screenshots -----------------------------------------------------
+# Maestro writes screenshots and per-flow debug data under a hidden .maestro
+# directory; rename it so CI artifact upload (which skips hidden files) and
+# humans can see it. Also sweep any stray PNGs into OUTPUT_DIR.
+
+if [ -d "$OUTPUT_DIR/.maestro" ]; then
+  rm -rf "$OUTPUT_DIR/maestro-debug"
+  mv "$OUTPUT_DIR/.maestro" "$OUTPUT_DIR/maestro-debug"
+fi
+find e2e/flows -name "*.png" -exec mv -f {} "$OUTPUT_DIR/" \; 2>/dev/null || true
+find . -maxdepth 1 -name "*.png" -exec mv -f {} "$OUTPUT_DIR/" \; 2>/dev/null || true
+
 # --- Diagnostics on failure --------------------------------------------------
 
 if [ "$STATUS" -ne 0 ]; then
+  adb logcat -d >"$OUTPUT_DIR/logcat-full.txt" 2>/dev/null || true
   echo
-  echo "=== Deep-link related logcat excerpt (full output: $OUTPUT_DIR) ==="
-  adb logcat -d 2>/dev/null \
-    | grep -iE "appUrlOpen|launch url|deep link|Capacitor" \
+  echo "=== Deep-link related logcat excerpt (full log: $OUTPUT_DIR/logcat-full.txt) ==="
+  grep -iE "appUrlOpen|launch url|deep link|Capacitor/Console" "$OUTPUT_DIR/logcat-full.txt" 2>/dev/null \
     | tail -50 \
     | tee "$OUTPUT_DIR/logcat-excerpt.txt" \
     || true

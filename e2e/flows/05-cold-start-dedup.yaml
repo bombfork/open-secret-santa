@@ -18,13 +18,16 @@ tags:
     visible: "You are Secret Santa for:"
     timeout: 15000
 - tapOn: "Back to Home"
-- assertVisible: "Create New Secret Santa"
+# "How it works" anchors the landing (buttons are below the fold)
+- extendedWaitUntil:
+    visible: "How it works"
+    timeout: 5000
 # Bounded sleep past the 3000ms dedup window (Maestro idiom: optional wait on
 # a never-present element).
 - extendedWaitUntil:
     visible: "NEVER_PRESENT_SLEEP_4000MS"
     timeout: 4000
     optional: true
-- assertVisible: "Create New Secret Santa"
+- assertVisible: "How it works"
 - assertNotVisible: "You are Secret Santa for:"
 - takeScreenshot: e2e/output/05-cold-start-dedup

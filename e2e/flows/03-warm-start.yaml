@@ -10,8 +10,9 @@ tags:
 - launchApp:
     clearState: true
     stopApp: true
+# landing anchor: the landing buttons sit below the fold on small screens
 - extendedWaitUntil:
-    visible: "Create New Secret Santa"
+    visible: "How it works"
     timeout: 15000
 - openLink:
     link: ${PARTICIPANT_URL}

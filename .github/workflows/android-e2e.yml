@@ -36,7 +36,7 @@ on:
 
 env:
   API_LEVEL: 34
-  MAESTRO_VERSION: "2.9.0" # pin; bump deliberately (webview reading changed across versions)
+  MAESTRO_VERSION: "2.11.0" # pin; bump deliberately (webview reading changed across versions)
 
 jobs:
   e2e:
@@ -87,8 +87,11 @@ jobs:
           curl -fsSL "https://get.maestro.mobile.dev" | bash
           echo "$HOME/.maestro/bin" >> "$GITHUB_PATH"
 
-      - name: Cache AVD
-        uses: actions/cache@v4
+      # actions/cache only saves on job success, so a failing e2e run would
+      # rebuild the AVD forever — split restore/save and save explicitly
+      # before the flows run.
+      - name: Restore AVD cache
+        uses: actions/cache/restore@v4
         id: avd-cache
         with:
           path: |
@@ -108,6 +111,15 @@ jobs:
           disable-animations: false
           script: echo "Generated AVD snapshot for caching"
 
+      - name: Save AVD cache
+        if: steps.avd-cache.outputs.cache-hit != 'true'
+        uses: actions/cache/save@v4
+        with:
+          path: |
+            ~/.android/avd/*
+            ~/.android/adb*
+          key: avd-api-${{ env.API_LEVEL }}-google-apis-x86_64-v1
+
       - name: Run Maestro flows
         uses: reactivecircus/android-emulator-runner@v2
         env:
@@ -126,5 +138,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: e2e-output-${{ github.sha }}
-          path: e2e/output/
+          path: |
+            e2e/output/
+            /home/runner/.maestro/tests/
           retention-days: 14

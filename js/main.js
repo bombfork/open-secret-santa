@@ -11,6 +11,7 @@ import {
   initDeepLinking,
   getLaunchDeepLink,
   handleDeepLinkNavigation,
+  hasRecentlyHandledDeepLink,
 } from "./deeplink.js";
 
 // Page elements
@@ -256,6 +257,13 @@ async function init() {
       goToLanding,
       () => t("validation.invalidUrl"),
     );
+    return;
+  }
+
+  // The appUrlOpen listener may have already handled the launch URL (its
+  // event can arrive before getLaunchUrl resolves) — normal routing would
+  // stomp that navigation with the landing page
+  if (hasRecentlyHandledDeepLink()) {
     return;
   }
 

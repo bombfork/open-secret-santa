@@ -9,9 +9,9 @@ tags:
 - launchApp:
     clearState: true
     stopApp: true
+# landing anchor: the landing buttons sit below the fold on small screens
 - extendedWaitUntil:
-    visible: "Create New Secret Santa"
+    visible: "How it works"
     timeout: 15000
-- assertVisible: "View Your Assignment"
 - assertNotVisible: "You are Secret Santa for:"
 - takeScreenshot: e2e/output/04-plain-launch

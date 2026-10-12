@@ -22,10 +22,14 @@ tags:
 - takeScreenshot: e2e/output/01-cold-start-participant-fresh
 
 # Variant B: issue #23 shape — app opened before, process killed, link tapped
+# ("How it works" anchors the landing page: the landing buttons sit below the
+# fold on small screens and assertVisible only sees the viewport)
 - launchApp:
     clearState: true
     stopApp: true
-- assertVisible: "Create New Secret Santa"
+- extendedWaitUntil:
+    visible: "How it works"
+    timeout: 10000
 - stopApp
 - openLink:
     link: ${PARTICIPANT_URL}

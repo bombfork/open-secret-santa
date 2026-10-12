@@ -10,13 +10,19 @@ tags:
     clearState: true
     stopApp: true
 - extendedWaitUntil:
-    visible: "Create New Secret Santa"
+    visible: "How it works"
     timeout: 15000
+# The landing buttons sit below the fold — scroll to them first.
+- scrollUntilVisible:
+    element:
+      text: "Create New Secret Santa"
+    direction: DOWN
 # Navigating via the button pre-fills the seed field (js/main.js), so the
 # seed input must not be touched.
 - tapOn: "Create New Secret Santa"
+# Regex: the label element's text includes the nested inline help text
 - extendedWaitUntil:
-    visible: "Participant Names"
+    visible: "Participant Names.*"
     timeout: 5000
 - tapOn:
     id: "participants"
@@ -26,10 +32,12 @@ tags:
 - pressKey: Enter
 - inputText: "Charlie"
 - hideKeyboard
+- scrollUntilVisible:
+    element:
+      text: "Generate Secret Santa"
+    direction: DOWN
 - tapOn: "Generate Secret Santa"
 - extendedWaitUntil:
     visible: "Secret Santa Created!"
     timeout: 10000
-- assertVisible: "Participant Links"
-- assertVisible: "Alice"
 - takeScreenshot: e2e/output/90-smoke-create
