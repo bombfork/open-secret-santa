@@ -23,9 +23,17 @@ tags:
 # Variant B: issue #23 shape — app opened before, process killed, link tapped
 # ("How it works" anchors the landing page: the landing buttons sit below the
 # fold on small screens and assertVisible only sees the viewport)
-- launchApp:
-    clearState: true
-    stopApp: true
+# Clear/stop/start as separate steps: the bundled launchApp
+# {clearState, stopApp} races ActivityManager's remove-task destroy timeout
+# on slow emulators — the fresh process gets killed ("start not valid") and
+# the app window stays blank
+- clearState
+- stopApp
+- extendedWaitUntil:
+    visible: "NEVER_PRESENT_SLEEP_2000MS"
+    timeout: 2000
+    optional: true
+- launchApp
 - extendedWaitUntil:
     visible: "How it works"
     timeout: 15000
