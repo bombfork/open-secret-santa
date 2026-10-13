@@ -248,6 +248,40 @@ async function init() {
     updatePageText();
   });
 
+  // Landing and create-form listeners must be wired on every entry path: a
+  // deep-link start routes straight to a view page, but "Back to Home" can
+  // still land the user here
+  document.getElementById("create-btn").addEventListener("click", () => {
+    // Pre-fill seed with random value
+    const seedInput = document.getElementById("seed");
+    if (!seedInput.value) {
+      const randomSeed = Math.random().toString(36).substring(2, 15);
+      seedInput.value = randomSeed;
+    }
+    showPage("create");
+  });
+
+  document.getElementById("view-btn").addEventListener("click", () => {
+    alert(t("alerts.viewInstructions"));
+  });
+
+  // Setup create form
+  setupCreateForm(
+    // On success
+    (result) => {
+      displayResults(result, () => {
+        // Reset form and go back to landing
+        document.getElementById("create-form").reset();
+        goToLanding();
+      });
+      showPage("results");
+    },
+    // On back
+    () => {
+      showPage("landing");
+    },
+  );
+
   // Cold start via Android App Link: window.location has no query params in
   // the Capacitor webview, so the launch URL must be checked explicitly
   const launchParams = await getLaunchDeepLink();
@@ -293,38 +327,6 @@ async function init() {
 
   // Normal flow - show landing page
   showPage("landing");
-
-  // Setup landing page buttons
-  document.getElementById("create-btn").addEventListener("click", () => {
-    // Pre-fill seed with random value
-    const seedInput = document.getElementById("seed");
-    if (!seedInput.value) {
-      const randomSeed = Math.random().toString(36).substring(2, 15);
-      seedInput.value = randomSeed;
-    }
-    showPage("create");
-  });
-
-  document.getElementById("view-btn").addEventListener("click", () => {
-    alert(t("alerts.viewInstructions"));
-  });
-
-  // Setup create form
-  setupCreateForm(
-    // On success
-    (result) => {
-      displayResults(result, () => {
-        // Reset form and go back to landing
-        document.getElementById("create-form").reset();
-        goToLanding();
-      });
-      showPage("results");
-    },
-    // On back
-    () => {
-      showPage("landing");
-    },
-  );
 }
 
 // Start the application when DOM is ready
