@@ -9,7 +9,7 @@ Automated E2E tests drive the **real installed APK** with [Maestro](https://docs
   curl -fsSL "https://get.maestro.mobile.dev" | bash
   ```
 - **Android SDK** at `~/Android/Sdk` (platform-tools, emulator, a system image) — the project `.mise.toml` exports `ANDROID_HOME` and puts `platform-tools`, `emulator`, and `cmdline-tools` on the PATH, so no manual exports are needed inside the repo
-- One connected device or emulator (`adb devices`)
+- One connected device or emulator (`adb devices`) — `mise run emulator-start` boots the local `e2e-api34` AVD headless and waits for full boot (`EMULATOR_WINDOW=1` for a visible window; `mise run emulator-stop` / `emulator-list` to manage it)
 - Standard project tooling (`mise`, node) — `maestro` and Java 21 are provided by `mise install`
 
 ## Running

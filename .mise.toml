@@ -76,6 +76,38 @@ cd android && ./gradlew assembleDebug
 description = "Run all Maestro e2e flows against the connected adb device/emulator"
 run = "bash e2e/run.sh"
 
+[tasks.emulator-start]
+description = "Boot the e2e Android emulator headless and wait for full boot (default AVD: e2e-api34; set EMULATOR_WINDOW=1 for a visible window)"
+run = """
+AVD="{{arg(name="avd", default="e2e-api34")}}"
+if [ "$(adb get-state 2>/dev/null)" = "device" ]; then
+  echo "A device is already connected:"
+  adb devices
+  exit 0
+fi
+WINDOW_ARGS="-no-window -gpu swiftshader_indirect"
+[ -n "${EMULATOR_WINDOW:-}" ] && WINDOW_ARGS=""
+echo "Booting AVD $AVD..."
+nohup emulator -avd "$AVD" $WINDOW_ARGS -no-audio -no-boot-anim \
+  > /tmp/emulator-$AVD.log 2>&1 &
+adb wait-for-device shell 'while [ "$(getprop sys.boot_completed)" != "1" ]; do sleep 2; done'
+echo "Emulator booted (log: /tmp/emulator-$AVD.log)"
+"""
+
+[tasks.emulator-stop]
+description = "Shut down the running Android emulator"
+run = "adb emu kill"
+
+[tasks.emulator-list]
+description = "List available AVDs and connected devices"
+run = """
+echo "AVDs:"
+emulator -list-avds
+echo
+echo "Connected:"
+adb devices
+"""
+
 [tasks.e2e-flow]
 description = "Run a single e2e flow by name, e.g.: mise run e2e-flow 01-cold-start-participant"
 run = 'bash e2e/run.sh {{arg(name="flow")}}'
