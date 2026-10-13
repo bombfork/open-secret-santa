@@ -6,9 +6,19 @@ tags:
   - regression
   - deeplink
 ---
-- launchApp:
-    clearState: true
-    stopApp: true
+# Clear/stop/start as separate steps: the bundled launchApp
+# {clearState, stopApp} races ActivityManager's remove-task destroy timeout
+# on slow emulators — the fresh process gets killed ("start not valid") and
+# the app window stays blank
+- clearState
+- stopApp
+# Bounded settle so AM finishes removing the old task before the fresh start
+# (Maestro idiom: optional wait on a never-present element)
+- extendedWaitUntil:
+    visible: "NEVER_PRESENT_SLEEP_2000MS"
+    timeout: 2000
+    optional: true
+- launchApp
 # landing anchor: the landing buttons sit below the fold on small screens
 - extendedWaitUntil:
     visible: "How it works"
