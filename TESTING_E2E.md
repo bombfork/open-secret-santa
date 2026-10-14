@@ -39,6 +39,10 @@ Environment variables:
 | `03-warm-start` | App alive on landing — link arrives via `onNewIntent` → `appUrlOpen` listener |
 | `04-plain-launch` | No link: landing page must show (null launch URL must not break routing) |
 | `05-cold-start-dedup` | Duplicate `appUrlOpen` for the launch URL must not re-navigate after "Back to Home" (3000ms dedup window in `js/deeplink.js`) |
+| `06-back-home-landing-buttons` | Landing buttons and create form must be wired even when the app started via a deep link |
+| `07-system-back` | System back pops the in-app page history; at the history root (cold-start deep link) it leaves the app |
+| `08-offline` | Airplane mode on: cold start, full create flow, and deep-link resolution must all work with zero network |
+| `09-language-persistence` | Language switch through the native `<select>` dialog survives an app restart (localStorage) |
 | `90-smoke-create` | Create flow through the webview UI (tagged `smoke`; exclude with `maestro test --exclude-tags smoke` if flaky) |
 
 Fixtures are generated at runtime by `e2e/fixtures/generate-fixtures.mjs`, which reuses the production `js/encoder.js` and `js/random.js` — the URLs always match the current data format. A hardcoded `EXPECTED` assignment map makes the generator fail loudly if the assignment algorithm changes; update it deliberately when that happens.
