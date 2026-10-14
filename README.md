@@ -2,6 +2,7 @@
 
 [![Android Build](https://github.com/bombfork/open-secret-santa/actions/workflows/android-build.yml/badge.svg)](https://github.com/bombfork/open-secret-santa/actions/workflows/android-build.yml)
 [![Lint & Format](https://github.com/bombfork/open-secret-santa/actions/workflows/lint-and-format.yml/badge.svg)](https://github.com/bombfork/open-secret-santa/actions/workflows/lint-and-format.yml)
+[![Android E2E](https://github.com/bombfork/open-secret-santa/actions/workflows/android-e2e.yml/badge.svg?branch=main)](https://github.com/bombfork/open-secret-santa/actions/workflows/android-e2e.yml?query=branch%3Amain)
 
 A simple, client-side Secret Santa gift exchange organizer. No backend required - all data is encoded in shareable URLs!
 
