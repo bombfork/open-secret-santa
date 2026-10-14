@@ -5,22 +5,15 @@ name: Android E2E (Maestro)
 # exercise real App Links verification (links are force-approved — debug
 # builds can never pass assetlinks.json verification). See TESTING_E2E.md.
 #
-# Cost control: path filters keep this off docs-only changes. To cut cost
-# further, replace the pull_request trigger with push-to-main only — the
-# workflow_dispatch trigger stays available for on-demand runs.
+# Runs on every PR (no path filter) so it can be a required check — a check
+# skipped by path filtering never reports and would block merging. Pushes to
+# main keep the path filter: the PR run already covered the merge commit's
+# content, so docs-only merges skip the ~7 min emulator job.
 
 on:
   pull_request:
     branches:
       - main
-    paths:
-      - "js/**"
-      - "index.html"
-      - "locales/**"
-      - "android/**"
-      - "capacitor.config.json"
-      - "e2e/**"
-      - ".github/workflows/android-e2e.yml"
   push:
     branches:
       - main
@@ -41,7 +34,9 @@ concurrency:
 
 env:
   API_LEVEL: 34
-  MAESTRO_VERSION: "2.11.0" # pin; bump deliberately (webview reading changed across versions)
+  # Runner's preinstalled SDK; mise-action exports the dev-machine ANDROID_HOME
+  # from .mise.toml, which must be overridden back (see the repoint step)
+  RUNNER_SDK: /usr/local/lib/android/sdk
 
 jobs:
   e2e:
@@ -60,18 +55,36 @@ jobs:
           sudo udevadm control --reload-rules
           sudo udevadm trigger --name-match=kvm
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: "20"
-          cache: "npm"
+      # Installs node, java, and the pinned Maestro from .mise.toml, with the
+      # tool installs cached on the .mise.toml hash
+      - name: Setup mise tools (node, java, maestro — cached)
+        uses: jdx/mise-action@v2
 
-      - name: Setup Java 21
-        uses: actions/setup-java@v4
+      # mise puts java on PATH but gradle resolves the JDK via JAVA_HOME,
+      # which still points at the runner's default JDK — export mise's
+      - name: Align toolchain env (JAVA_HOME, Android SDK)
+        run: |
+          {
+            echo "JAVA_HOME=$(mise where java)"
+            echo "ANDROID_HOME=$RUNNER_SDK"
+            echo "ANDROID_SDK_ROOT=$RUNNER_SDK"
+          } >> "$GITHUB_ENV"
+
+      - name: Cache npm
+        uses: actions/cache@v4
         with:
-          distribution: "temurin"
-          java-version: "21"
-          cache: "gradle"
+          path: ~/.npm
+          key: npm-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
+          restore-keys: npm-${{ runner.os }}-
+
+      - name: Cache Gradle
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: gradle-${{ runner.os }}-${{ hashFiles('android/**/*.gradle', 'android/gradle/wrapper/gradle-wrapper.properties') }}
+          restore-keys: gradle-${{ runner.os }}-
 
       - name: Install dependencies
         run: npm ci
@@ -87,14 +100,9 @@ jobs:
           cd android
           ./gradlew assembleDebug --no-daemon
 
-      - name: Install Maestro
-        run: |
-          curl -fsSL "https://get.maestro.mobile.dev" | bash
-          echo "$HOME/.maestro/bin" >> "$GITHUB_PATH"
-
       # actions/cache only saves on job success, so a failing e2e run would
-      # rebuild the AVD forever — split restore/save and save explicitly
-      # before the flows run.
+      # rebuild the AVD and re-download the system image forever — split
+      # restore/save and save explicitly before the flows run.
       - name: Restore AVD cache
         uses: actions/cache/restore@v4
         id: avd-cache
@@ -103,6 +111,13 @@ jobs:
             ~/.android/avd/*
             ~/.android/adb*
           key: avd-api-${{ env.API_LEVEL }}-google-apis-x86_64-pixel5-v2
+
+      - name: Restore Android system image cache
+        uses: actions/cache/restore@v4
+        id: sysimg-cache
+        with:
+          path: /usr/local/lib/android/sdk/system-images
+          key: sysimg-api-${{ env.API_LEVEL }}-google-apis-x86_64-v1
 
       - name: Create AVD snapshot for caching
         if: steps.avd-cache.outputs.cache-hit != 'true'
@@ -125,6 +140,13 @@ jobs:
             ~/.android/avd/*
             ~/.android/adb*
           key: avd-api-${{ env.API_LEVEL }}-google-apis-x86_64-pixel5-v2
+
+      - name: Save Android system image cache
+        if: steps.sysimg-cache.outputs.cache-hit != 'true'
+        uses: actions/cache/save@v4
+        with:
+          path: /usr/local/lib/android/sdk/system-images
+          key: sysimg-api-${{ env.API_LEVEL }}-google-apis-x86_64-v1
 
       - name: Run Maestro flows
         uses: reactivecircus/android-emulator-runner@v2

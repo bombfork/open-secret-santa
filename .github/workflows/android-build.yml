@@ -31,18 +31,37 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-          cache: 'npm'
+      # Installs node and java from .mise.toml, tool installs cached on its hash
+      - name: Setup mise tools (node, java — cached)
+        uses: jdx/mise-action@v2
 
-      - name: Setup Java 21
-        uses: actions/setup-java@v4
+      # mise-action exports the dev-machine ANDROID_HOME from .mise.toml;
+      # point it back at the runner's preinstalled SDK
+      # mise puts java on PATH but gradle resolves the JDK via JAVA_HOME,
+      # which still points at the runner's default JDK — export mise's
+      - name: Align toolchain env (JAVA_HOME, Android SDK)
+        run: |
+          {
+            echo "JAVA_HOME=$(mise where java)"
+            echo "ANDROID_HOME=/usr/local/lib/android/sdk"
+            echo "ANDROID_SDK_ROOT=/usr/local/lib/android/sdk"
+          } >> "$GITHUB_ENV"
+
+      - name: Cache npm
+        uses: actions/cache@v4
         with:
-          distribution: 'temurin'
-          java-version: '21'
-          cache: 'gradle'
+          path: ~/.npm
+          key: npm-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
+          restore-keys: npm-${{ runner.os }}-
+
+      - name: Cache Gradle
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: gradle-${{ runner.os }}-${{ hashFiles('android/**/*.gradle', 'android/gradle/wrapper/gradle-wrapper.properties') }}
+          restore-keys: gradle-${{ runner.os }}-
 
       - name: Install dependencies
         run: npm ci
@@ -121,18 +140,37 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-          cache: 'npm'
+      # Installs node and java from .mise.toml, tool installs cached on its hash
+      - name: Setup mise tools (node, java — cached)
+        uses: jdx/mise-action@v2
 
-      - name: Setup Java 21
-        uses: actions/setup-java@v4
+      # mise-action exports the dev-machine ANDROID_HOME from .mise.toml;
+      # point it back at the runner's preinstalled SDK
+      # mise puts java on PATH but gradle resolves the JDK via JAVA_HOME,
+      # which still points at the runner's default JDK — export mise's
+      - name: Align toolchain env (JAVA_HOME, Android SDK)
+        run: |
+          {
+            echo "JAVA_HOME=$(mise where java)"
+            echo "ANDROID_HOME=/usr/local/lib/android/sdk"
+            echo "ANDROID_SDK_ROOT=/usr/local/lib/android/sdk"
+          } >> "$GITHUB_ENV"
+
+      - name: Cache npm
+        uses: actions/cache@v4
         with:
-          distribution: 'temurin'
-          java-version: '21'
-          cache: 'gradle'
+          path: ~/.npm
+          key: npm-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
+          restore-keys: npm-${{ runner.os }}-
+
+      - name: Cache Gradle
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: gradle-${{ runner.os }}-${{ hashFiles('android/**/*.gradle', 'android/gradle/wrapper/gradle-wrapper.properties') }}
+          restore-keys: gradle-${{ runner.os }}-
 
       - name: Install dependencies
         run: npm ci
@@ -218,7 +256,7 @@ jobs:
           echo "apk_size=$APK_SIZE" >> $GITHUB_OUTPUT
 
       - name: Create GitHub Release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         with:
           files: ${{ steps.apk-info.outputs.apk_path }}
           body: |

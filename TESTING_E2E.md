@@ -76,7 +76,7 @@ Caveats:
 
 `.github/workflows/android-e2e.yml` runs the flows on every PR and main push that touches app code (path-filtered), plus `workflow_dispatch`. It builds the debug APK, boots an API 34 emulator (`reactivecircus/android-emulator-runner` with KVM + AVD snapshot caching), and runs `e2e/run.sh` with `E2E_SKIP_BUILD=1`. Test output is uploaded as a workflow artifact (`e2e-output-<sha>`), including screenshots and a logcat excerpt on failure. First uncached run takes ~10-15 min; warm runs ~5-7 min.
 
-Maestro is pinned via `MAESTRO_VERSION` in the workflow — bump it deliberately, since webview element reading has changed between versions.
+Maestro is pinned in `.mise.toml` (`github:mobile-dev-inc/maestro`), which both the local harness and CI (`jdx/mise-action`) install from — bump it deliberately, since webview element reading has changed between versions, and re-run the full suite.
 
 ## Adding a flow
 
