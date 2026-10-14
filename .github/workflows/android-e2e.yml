@@ -60,10 +60,15 @@ jobs:
       - name: Setup mise tools (node, java, maestro — cached)
         uses: jdx/mise-action@v2
 
-      - name: Repoint Android SDK env at the runner's SDK
+      # mise puts java on PATH but gradle resolves the JDK via JAVA_HOME,
+      # which still points at the runner's default JDK — export mise's
+      - name: Align toolchain env (JAVA_HOME, Android SDK)
         run: |
-          echo "ANDROID_HOME=$RUNNER_SDK" >> "$GITHUB_ENV"
-          echo "ANDROID_SDK_ROOT=$RUNNER_SDK" >> "$GITHUB_ENV"
+          {
+            echo "JAVA_HOME=$(mise where java)"
+            echo "ANDROID_HOME=$RUNNER_SDK"
+            echo "ANDROID_SDK_ROOT=$RUNNER_SDK"
+          } >> "$GITHUB_ENV"
 
       - name: Cache npm
         uses: actions/cache@v4

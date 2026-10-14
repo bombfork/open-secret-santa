@@ -37,10 +37,15 @@ jobs:
 
       # mise-action exports the dev-machine ANDROID_HOME from .mise.toml;
       # point it back at the runner's preinstalled SDK
-      - name: Repoint Android SDK env at the runner's SDK
+      # mise puts java on PATH but gradle resolves the JDK via JAVA_HOME,
+      # which still points at the runner's default JDK — export mise's
+      - name: Align toolchain env (JAVA_HOME, Android SDK)
         run: |
-          echo "ANDROID_HOME=/usr/local/lib/android/sdk" >> "$GITHUB_ENV"
-          echo "ANDROID_SDK_ROOT=/usr/local/lib/android/sdk" >> "$GITHUB_ENV"
+          {
+            echo "JAVA_HOME=$(mise where java)"
+            echo "ANDROID_HOME=/usr/local/lib/android/sdk"
+            echo "ANDROID_SDK_ROOT=/usr/local/lib/android/sdk"
+          } >> "$GITHUB_ENV"
 
       - name: Cache npm
         uses: actions/cache@v4
@@ -141,10 +146,15 @@ jobs:
 
       # mise-action exports the dev-machine ANDROID_HOME from .mise.toml;
       # point it back at the runner's preinstalled SDK
-      - name: Repoint Android SDK env at the runner's SDK
+      # mise puts java on PATH but gradle resolves the JDK via JAVA_HOME,
+      # which still points at the runner's default JDK — export mise's
+      - name: Align toolchain env (JAVA_HOME, Android SDK)
         run: |
-          echo "ANDROID_HOME=/usr/local/lib/android/sdk" >> "$GITHUB_ENV"
-          echo "ANDROID_SDK_ROOT=/usr/local/lib/android/sdk" >> "$GITHUB_ENV"
+          {
+            echo "JAVA_HOME=$(mise where java)"
+            echo "ANDROID_HOME=/usr/local/lib/android/sdk"
+            echo "ANDROID_SDK_ROOT=/usr/local/lib/android/sdk"
+          } >> "$GITHUB_ENV"
 
       - name: Cache npm
         uses: actions/cache@v4
