@@ -65,6 +65,10 @@ run = "npm run test:unit"
 description = "Run all validation checks (lint, format, i18n, unit tests)"
 run = "npm run validate:all"
 
+[tasks.icons]
+description = "Regenerate all Android icon/splash assets from the pixel-art master (scripts/generate-icons.mjs)"
+run = "node scripts/generate-icons.mjs"
+
 [tasks.e2e-build]
 description = "Build debug APK for e2e tests (web assets + cap sync + gradle)"
 run = """
