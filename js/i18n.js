@@ -177,6 +177,8 @@ export function createLanguageSelector(container, onChange) {
   wrapper.setAttribute("aria-label", "Language selector");
 
   const select = document.createElement("select");
+  // Chromium exposes HTML ids as resource-ids, which the e2e flows tap on
+  select.id = "language-select";
   select.className = "language-dropdown";
   select.setAttribute("aria-label", "Select language");
 
