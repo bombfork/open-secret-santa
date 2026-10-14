@@ -1,0 +1,55 @@
+# System back (gesture/nav-bar/key all inject KEYCODE_BACK): in-app back must
+# pop to the previous page via history state + popstate; back at the history
+# root (cold-start deep link) must leave the app (Capacitor default when the
+# webview can't go back). Regression shape: the URL changed but the UI didn't.
+appId: com.bombfork.opensecretasanta
+tags:
+  - regression
+---
+# Variant A: landing → create → back → landing
+- launchApp:
+    clearState: true
+    stopApp: true
+- extendedWaitUntil:
+    visible: "How it works"
+    timeout: 30000
+# The landing buttons sit below the fold — swipe down to them
+# (scrollUntilVisible is unreliable inside the Capacitor webview)
+- swipe:
+    direction: UP
+- swipe:
+    direction: UP
+# Chromium exposes HTML ids as resource-ids
+- tapOn:
+    id: "create-btn"
+# Regex: the label element's text includes the nested inline help text
+- extendedWaitUntil:
+    visible: "Participant Names.*"
+    timeout: 5000
+- pressKey: Back
+# showPage scrolls to top, so the landing anchor is above the fold again
+- extendedWaitUntil:
+    visible: "How it works"
+    timeout: 5000
+- assertNotVisible: "Participant Names.*"
+- takeScreenshot: e2e/output/07-system-back-in-app
+
+# Variant B: cold-start deep link is the history root — back leaves the app
+# Settle after clearState/stopApp: launching too soon races ActivityManager's
+# remove-task destroy timeout on slow emulators (see 01-cold-start-participant)
+- clearState
+- stopApp
+- extendedWaitUntil:
+    visible: "NEVER_PRESENT_SLEEP_2000MS"
+    timeout: 2000
+    optional: true
+- openLink:
+    link: ${PARTICIPANT_URL}
+    autoVerify: true
+- extendedWaitUntil:
+    visible: "You are Secret Santa for:"
+    timeout: 30000
+- pressKey: Back
+- extendedWaitUntil:
+    notVisible: "You are Secret Santa for:"
+    timeout: 5000

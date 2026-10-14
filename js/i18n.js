@@ -146,10 +146,11 @@ export async function setLanguage(lang) {
   // Save to localStorage
   localStorage.setItem(STORAGE_KEY, lang);
 
-  // Update URL parameter (without reloading)
+  // Update URL parameter (without reloading); keep the {page} history state
+  // used by back navigation
   const url = new URL(window.location);
   url.searchParams.set("lang", lang);
-  window.history.replaceState({}, "", url);
+  window.history.replaceState(window.history.state, "", url);
 
   // Dispatch custom event for language change
   window.dispatchEvent(new CustomEvent("languagechange", { detail: { lang } }));

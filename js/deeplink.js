@@ -147,38 +147,74 @@ export function initDeepLinking(onDeepLink) {
 }
 
 /**
+ * Initialize system back button handling (Android)
+ * Without a listener, the App plugin's OnBackPressedCallback swallows the
+ * press entirely once the webview can't go back — the app can never be left
+ * via back. Registering one disables that default, so both directions must be
+ * handled: pop the in-app history, or hand the root press back to Android.
+ */
+export function initNativeBackButton() {
+  const App = getCapacitorApp();
+  if (!App) {
+    return;
+  }
+
+  App.addListener("backButton", ({ canGoBack }) => {
+    if (canGoBack) {
+      window.history.back();
+    } else {
+      // moveTaskToBack, like the system default for a root back press
+      App.minimizeApp();
+    }
+  });
+}
+
+/**
  * Handle deep link navigation
- * Routes to the appropriate view based on URL parameters
- * This is a helper function that integrates with the existing routing logic
+ * Routes to the appropriate view based on URL parameters, syncing the webview
+ * URL and history state so later back navigation restores the right page
  * @param {Object} params - Parsed URL parameters {data, admin, user}
- * @param {Function} setupViewMode - The setupViewMode function from view.js
- * @param {Function} showPage - The showPage function from main.js
- * @param {Function} showError - The showError function from main.js
- * @param {Function} goToLanding - The goToLanding function from main.js
- * @param {Function} getErrorMessage - Function to get localized error message
+ * @param {Object} options
+ * @param {Function} options.setupViewMode - The setupViewMode function from view.js
+ * @param {Function} options.navigate - The navigateTo function from main.js
+ * @param {Function} options.showError - The showError function from main.js
+ * @param {Function} options.goToLanding - The goToLanding function from main.js
+ * @param {Function} options.getErrorMessage - Function to get localized error message
+ * @param {boolean} options.replace - Replace the current history entry (cold start) instead of pushing (warm start)
  */
 export function handleDeepLinkNavigation(
   params,
-  setupViewMode,
-  showPage,
-  showError,
-  goToLanding,
-  getErrorMessage,
+  { setupViewMode, navigate, showError, goToLanding, getErrorMessage, replace },
 ) {
   try {
     // Use the existing setupViewMode logic from view.js
     const viewType = setupViewMode(params, goToLanding);
 
-    // Navigate to the appropriate page
-    if (viewType === "participant") {
-      showPage("viewParticipant");
-    } else if (viewType === "admin") {
-      showPage("viewAdmin");
+    if (viewType === "participant" || viewType === "admin") {
+      // Mirror the deep link's params onto the webview URL so a later
+      // back/forward to this entry re-exposes them
+      const url = new URL(window.location);
+      const lang = url.searchParams.get("lang");
+      url.search = "";
+      if (lang) {
+        url.searchParams.set("lang", lang);
+      }
+      url.searchParams.set("data", params.data);
+      if (params.user) {
+        // Double-encoded to match generateParticipantUrl/parseUrlParams
+        url.searchParams.set("user", encodeURIComponent(params.user));
+      } else if (params.admin) {
+        url.searchParams.set("admin", params.admin);
+      }
+      navigate(viewType === "participant" ? "viewParticipant" : "viewAdmin", {
+        url: url.pathname + url.search,
+        replace,
+      });
     } else {
-      showError(getErrorMessage());
+      showError(getErrorMessage(), { replace });
     }
   } catch (error) {
     console.error("Error handling deep link navigation:", error);
-    showError(error.message);
+    showError(error.message, { replace });
   }
 }

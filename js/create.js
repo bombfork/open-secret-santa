@@ -169,7 +169,8 @@ export function displayResults(result, onCreateAnother) {
   setupCopyButtons();
   setupShareButtons();
 
-  // Setup create another button
+  // Setup create another button; plain assignment stays idempotent across
+  // repeated setups and revisits via history back/forward
   const createAnotherBtn = document.getElementById("create-another");
-  createAnotherBtn.addEventListener("click", onCreateAnother, { once: true });
+  createAnotherBtn.onclick = onCreateAnother;
 }
