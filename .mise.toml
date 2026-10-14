@@ -1,8 +1,10 @@
 [tools]
-"github:mobile-dev-inc/maestro" = "latest"
+# Pinned: Maestro's webview element reading changes across versions, and CI
+# installs from this file — bump deliberately, then re-run the e2e suite
+"github:mobile-dev-inc/maestro" = "cli-2.11.0"
 java = "zulu-21"
 jq = "latest"
-node = "latest"
+node = "24"
 
 [env]
 ANDROID_HOME = "{{env.HOME}}/Android/Sdk"

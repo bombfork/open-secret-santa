@@ -6,6 +6,11 @@ on:
     branches:
       - main
 
+  # Keep the main-branch badge/history current
+  push:
+    branches:
+      - main
+
   # Allow manual trigger
   workflow_dispatch:
 
@@ -18,11 +23,15 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      - name: Setup mise tools (node, cached)
+        uses: jdx/mise-action@v2
+
+      - name: Cache npm
+        uses: actions/cache@v4
         with:
-          node-version: '20'
-          cache: 'npm'
+          path: ~/.npm
+          key: npm-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
+          restore-keys: npm-${{ runner.os }}-
 
       - name: Install dependencies
         run: npm ci
