@@ -178,33 +178,13 @@ jobs:
             exit 1
           fi
 
-          # Create signing config
+          # Signing config consumed natively by android/app/build.gradle
           cat > android/keystore.properties << EOF
           storeFile=release.keystore
           storePassword=$ANDROID_KEYSTORE_PASSWORD
           keyAlias=$ANDROID_KEY_ALIAS
           keyPassword=$ANDROID_KEY_PASSWORD
           EOF
-
-      - name: Configure signing in build.gradle
-        run: |
-          # Add signing configuration to app/build.gradle
-          sed -i '/android {/a\
-              signingConfigs {\
-                  release {\
-                      def keystorePropertiesFile = rootProject.file("keystore.properties")\
-                      def keystoreProperties = new Properties()\
-                      keystoreProperties.load(new FileInputStream(keystorePropertiesFile))\
-                      storeFile file(keystoreProperties["storeFile"])\
-                      storePassword keystoreProperties["storePassword"]\
-                      keyAlias keystoreProperties["keyAlias"]\
-                      keyPassword keystoreProperties["keyPassword"]\
-                  }\
-              }' android/app/build.gradle
-
-          # Update release buildType to use signing config
-          sed -i '/buildTypes {/,/release {/a\
-              signingConfig signingConfigs.release' android/app/build.gradle
 
       - name: Make gradlew executable
         run: chmod +x android/gradlew
