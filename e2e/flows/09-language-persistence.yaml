@@ -1,0 +1,31 @@
+# Language persistence (issue #14): switching language must survive an app
+# restart via localStorage. The webview <select> opens Android's native option
+# dialog, so the option is tapped by its visible text.
+appId: com.bombfork.opensecretasanta
+tags:
+  - regression
+---
+- launchApp:
+    clearState: true
+    stopApp: true
+- extendedWaitUntil:
+    visible: "How it works"
+    timeout: 30000
+# Option text is "🇫🇷 Français" — Maestro matches the full string, so regex
+- tapOn:
+    id: "language-select"
+- extendedWaitUntil:
+    visible: ".*Français.*"
+    timeout: 5000
+- tapOn: ".*Français.*"
+- extendedWaitUntil:
+    visible: "Comment ça marche"
+    timeout: 5000
+
+# Restart without clearing state: the choice must persist
+- stopApp
+- launchApp
+- extendedWaitUntil:
+    visible: "Comment ça marche"
+    timeout: 15000
+- takeScreenshot: e2e/output/09-language-persistence
