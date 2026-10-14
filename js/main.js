@@ -9,6 +9,7 @@ import { parseUrlParams } from "./encoder.js";
 import { initI18n, t, createLanguageSelector } from "./i18n.js";
 import {
   initDeepLinking,
+  initNativeBackButton,
   getLaunchDeepLink,
   handleDeepLinkNavigation,
   hasRecentlyHandledDeepLink,
@@ -39,30 +40,43 @@ function showPage(pageName) {
 }
 
 /**
+ * Show a page and record it in session history so back navigation can
+ * restore it (the popstate handler reads the {page} state back out)
+ * @param {string} pageName - Name of page to show
+ * @param {Object} [options]
+ * @param {string|null} [options.url] - New URL for the entry; null keeps the current URL
+ * @param {boolean} [options.replace] - Replace the current entry instead of pushing
+ */
+function navigateTo(pageName, { url = null, replace = false } = {}) {
+  const method = replace ? "replaceState" : "pushState";
+  window.history[method]({ page: pageName }, "", url);
+  showPage(pageName);
+}
+
+/**
  * Navigate to landing page and clear URL
  */
 function goToLanding() {
   // Clear URL parameters but keep lang
   const url = new URL(window.location);
   const lang = url.searchParams.get("lang");
-  window.history.pushState(
-    {},
-    "",
-    window.location.pathname + (lang ? `?lang=${lang}` : ""),
-  );
-  showPage("landing");
+  navigateTo("landing", {
+    url: window.location.pathname + (lang ? `?lang=${lang}` : ""),
+  });
 }
 
 /**
  * Show error page
  * @param {string} message - Error message to display
+ * @param {Object} [options]
+ * @param {boolean} [options.replace] - Replace the current history entry
  */
-function showError(message) {
+function showError(message, { replace = false } = {}) {
   document.getElementById("error-message").textContent = message;
-  showPage("error");
+  navigateTo("error", { replace });
 
   const backBtn = document.getElementById("back-from-error");
-  backBtn.addEventListener("click", goToLanding, { once: true });
+  backBtn.onclick = goToLanding;
 }
 
 /**
@@ -208,6 +222,20 @@ function updatePageText() {
  * Initialize the application
  */
 async function init() {
+  // Pages are restored by showing them again, so the browser's own
+  // same-document scroll restore would race showPage's scrollTo(0,0)
+  window.history.scrollRestoration = "manual";
+
+  // System/browser back: restore the page recorded in the entry's state. Only
+  // show — pushing or replacing here would corrupt the history stack
+  window.addEventListener("popstate", (event) => {
+    const page = event.state?.page;
+    showPage(page && pages[page] ? page : "landing");
+  });
+
+  // Android system back: pop the in-app history or minimize at its root
+  initNativeBackButton();
+
   // Navigation needs translations, but the listener must be registered before
   // any await so no early appUrlOpen event is missed; gate it on i18n readiness
   let i18nReadyResolve;
@@ -215,17 +243,21 @@ async function init() {
     i18nReadyResolve = resolve;
   });
 
-  // Handle deep links received while the app is running (warm start)
+  // Handle deep links received while the app is running (warm start): push a
+  // new entry so back returns to the page the user was on
   initDeepLinking(async (params) => {
     await i18nReady;
-    handleDeepLinkNavigation(
-      params,
+    handleDeepLinkNavigation(params, {
       setupViewMode,
-      showPage,
+      navigate: navigateTo,
       showError,
       goToLanding,
-      () => t("validation.invalidUrl"),
-    );
+      getErrorMessage: () => t("validation.invalidUrl"),
+      // No {page} state means this event won the cold-start race against
+      // getLaunchUrl: we're still on the initial entry, so replace it and the
+      // deep-linked view stays the history root
+      replace: !window.history.state?.page,
+    });
   });
 
   // Initialize i18n system
@@ -258,7 +290,7 @@ async function init() {
       const randomSeed = Math.random().toString(36).substring(2, 15);
       seedInput.value = randomSeed;
     }
-    showPage("create");
+    navigateTo("create");
   });
 
   document.getElementById("view-btn").addEventListener("click", () => {
@@ -274,11 +306,13 @@ async function init() {
         document.getElementById("create-form").reset();
         goToLanding();
       });
-      showPage("results");
+      navigateTo("results");
     },
     // On back
     () => {
-      showPage("landing");
+      // The create page is only ever pushed from landing, so the previous
+      // entry is always landing; popping avoids growing the history stack
+      window.history.back();
     },
   );
 
@@ -286,14 +320,16 @@ async function init() {
   // the Capacitor webview, so the launch URL must be checked explicitly
   const launchParams = await getLaunchDeepLink();
   if (launchParams) {
-    handleDeepLinkNavigation(
-      launchParams,
+    // Replace: the deep-linked view is the history root, so system back
+    // minimizes the app instead of walking to a never-shown landing entry
+    handleDeepLinkNavigation(launchParams, {
       setupViewMode,
-      showPage,
+      navigate: navigateTo,
       showError,
       goToLanding,
-      () => t("validation.invalidUrl"),
-    );
+      getErrorMessage: () => t("validation.invalidUrl"),
+      replace: true,
+    });
     return;
   }
 
@@ -313,20 +349,20 @@ async function init() {
       const viewType = setupViewMode(params, goToLanding);
 
       if (viewType === "participant") {
-        showPage("viewParticipant");
+        navigateTo("viewParticipant", { replace: true });
       } else if (viewType === "admin") {
-        showPage("viewAdmin");
+        navigateTo("viewAdmin", { replace: true });
       } else {
-        showError(t("validation.invalidUrl"));
+        showError(t("validation.invalidUrl"), { replace: true });
       }
     } catch (error) {
-      showError(error.message);
+      showError(error.message, { replace: true });
     }
     return;
   }
 
   // Normal flow - show landing page
-  showPage("landing");
+  navigateTo("landing", { replace: true });
 }
 
 // Start the application when DOM is ready

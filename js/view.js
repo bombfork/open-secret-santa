@@ -44,9 +44,10 @@ export function setupParticipantView(encodedData, participantName, onBack) {
     document.getElementById("participant-name").textContent = assignment.giver;
     document.getElementById("assigned-to").textContent = assignment.receiver;
 
-    // Setup back button
+    // Setup back button; plain assignment stays idempotent across repeated
+    // setups (warm deep links) and revisits via history back/forward
     const backBtn = document.getElementById("back-from-view");
-    backBtn.addEventListener("click", onBack, { once: true });
+    backBtn.onclick = onBack;
   } catch (error) {
     throw new Error(t("validation.failedToLoad", { error: error.message }));
   }
@@ -138,8 +139,9 @@ export function setupAdminView(encodedData, onBack) {
     }
   });
 
-  // Setup back button
-  backBtn.addEventListener("click", onBack, { once: true });
+  // Setup back button; plain assignment stays idempotent across repeated
+  // setups (warm deep links) and revisits via history back/forward
+  backBtn.onclick = onBack;
 }
 
 /**
