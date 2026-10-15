@@ -5,7 +5,7 @@
 
 set -e
 
-PACKAGE_NAME="com.bombfork.opensecretasanta"
+PACKAGE_NAME="com.bombfork.opensecretsanta"
 DEFAULT_TEST_URL="https://secret-santa.bombfork.net/?data=eyJzZWVkIjoidGVzdCIsImFzc2lnbm1lbnRzIjoiW3tcImdpdmVyXCI6XCJBbGljZVwiLFwicmVjZWl2ZXJcIjpcIkJvYlwifV0iLCJwYXNzd29yZEhhc2giOiIxMjM0NTYifQ&user=Alice"
 
 TEST_URL="${1:-$DEFAULT_TEST_URL}"

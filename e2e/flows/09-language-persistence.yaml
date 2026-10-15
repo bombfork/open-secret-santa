@@ -1,7 +1,7 @@
 # Language persistence (issue #14): switching language must survive an app
 # restart via localStorage. The webview <select> opens Android's native option
 # dialog, so the option is tapped by its visible text.
-appId: com.bombfork.opensecretasanta
+appId: com.bombfork.opensecretsanta
 tags:
   - regression
 ---

@@ -2,7 +2,7 @@
 # outside e2e/flows/ so e2e/config.yaml's glob (and mise run e2e) never picks
 # it up. Run manually against an emulator:
 #   e2e/screenshots/capture.sh
-appId: com.bombfork.opensecretasanta
+appId: com.bombfork.opensecretsanta
 ---
 # Shot 1: landing page, fresh start
 - launchApp:

@@ -12,11 +12,12 @@ F-Droid builds the app **from source** on its own buildserver and signs the APK 
 
 ## Build recipe
 
-Proposed content for `metadata/com.bombfork.opensecretasanta.yml` in an fdroiddata fork:
+Proposed content for `metadata/com.bombfork.opensecretsanta.yml` in an fdroiddata fork:
 
 ```yaml
 Categories:
-  - Time
+  - Messaging
+  - Social Network
 License: MIT
 AuthorName: bombfork
 WebSite: https://secret-santa.bombfork.net
@@ -30,10 +31,11 @@ RepoType: git
 Repo: https://github.com/bombfork/open-secret-santa.git
 
 Builds:
-  - versionName: 0.2.0
-    versionCode: 2
-    # full hash of the v0.2.0 tag — fdroiddata requires hashes, not tag names
-    commit: 809cf77f55738ca7ae45c11d6e5fe586b60bad22
+  - versionName: 0.2.1
+    versionCode: 3
+    # full hash of the release tag (git rev-list -n1 v0.2.1) —
+    # fdroiddata requires hashes, not tag names
+    commit: <FULL_COMMIT_HASH_OF_v0.2.1>
     subdir: android
     sudo:
       - apt-get update
@@ -50,8 +52,8 @@ Builds:
 
 AutoUpdateMode: Version
 UpdateCheckMode: Tags ^v[0-9]+\.[0-9]+\.[0-9]+$
-CurrentVersion: 0.2.0
-CurrentVersionCode: 2
+CurrentVersion: 0.2.1
+CurrentVersionCode: 3
 ```
 
 Recipe design notes:
@@ -63,14 +65,14 @@ Recipe design notes:
 
 ## Submitting (manual steps)
 
-1. Fork [fdroiddata](https://gitlab.com/fdroid/fdroiddata) on gitlab.com and create a branch named `com.bombfork.opensecretasanta`.
-2. Add the recipe above as `metadata/com.bombfork.opensecretasanta.yml`. The filename **is** the applicationId — it must match `applicationId` in [android/app/build.gradle](android/app/build.gradle) exactly (`opensecretasanta`, with the extra `a`), or the built APK fails verification.
+1. Fork [fdroiddata](https://gitlab.com/fdroid/fdroiddata) on gitlab.com and create a branch named `com.bombfork.opensecretsanta`.
+2. Add the recipe above as `metadata/com.bombfork.opensecretsanta.yml`. The filename **is** the applicationId — it must match `applicationId` in [android/app/build.gradle](android/app/build.gradle) exactly, or the built APK fails verification.
 3. Optional but recommended, from the fdroiddata checkout (needs [fdroidserver](https://f-droid.org/docs/Installing_the_Server_and_Repo_Tools/)):
 
    ```bash
    fdroid readmeta
-   fdroid lint com.bombfork.opensecretasanta
-   fdroid build -v -l com.bombfork.opensecretasanta   # full build test, needs Android SDK
+   fdroid lint com.bombfork.opensecretsanta
+   fdroid build -v -l com.bombfork.opensecretsanta   # full build test, needs Android SDK
    ```
 
 4. Open a merge request against fdroiddata using their [**App inclusion** template](https://gitlab.com/fdroid/fdroiddata/-/blob/master/.gitlab/merge_request_templates/App%20inclusion.md) (the "Choose a template" dropdown in the MR form), titled `New app: Open Secret Santa`. In the description:

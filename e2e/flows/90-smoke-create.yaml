@@ -1,7 +1,7 @@
 # Create-flow smoke test: proves the harness can drive the webview UI, not
 # just deep links. Most fragile flow (multiline textarea input) — excludable
 # via: maestro test --exclude-tags smoke
-appId: com.bombfork.opensecretasanta
+appId: com.bombfork.opensecretsanta
 tags:
   - smoke
 ---

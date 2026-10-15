@@ -82,13 +82,13 @@ If App Links are not working:
 
 2. **Test with adb**: Use the App Links Assistant in Android Studio or test manually:
    ```bash
-   adb shell pm get-app-links com.bombfork.opensecretasanta
+   adb shell pm get-app-links com.bombfork.opensecretsanta
    ```
 
 3. **Clear Verification**: If needed, clear and re-verify:
    ```bash
-   adb shell pm set-app-links --package com.bombfork.opensecretasanta 0 all
-   adb shell pm verify-app-links --re-verify com.bombfork.opensecretasanta
+   adb shell pm set-app-links --package com.bombfork.opensecretsanta 0 all
+   adb shell pm verify-app-links --re-verify com.bombfork.opensecretsanta
    ```
 
 4. **Check Logs**: Monitor logcat for verification errors:

@@ -2,7 +2,7 @@
 # The link must arrive as the launch intent of a fresh process and reach the
 # router through Capacitor App.getLaunchUrl() (js/deeplink.js getLaunchDeepLink),
 # NOT through the warm-start appUrlOpen listener.
-appId: com.bombfork.opensecretasanta
+appId: com.bombfork.opensecretsanta
 tags:
   - regression
   - deeplink

@@ -68,7 +68,7 @@ Does **not** catch (by construction):
 This is where issue-#23-class bugs reproduce. Plug in a phone with USB debugging enabled, then `mise run e2e`.
 
 Caveats:
-- Debug and release builds share the applicationId — **uninstall the release/Play build first** (`adb uninstall com.bombfork.opensecretasanta`) or the install fails with a signature mismatch.
+- Debug and release builds share the applicationId — **uninstall the release/Play build first** (`adb uninstall com.bombfork.opensecretsanta`) or the install fails with a signature mismatch.
 - Flows assert English UI strings as secondary signals; set the device language to English or expect those assertions to fail (fixture names Alice/Bob are the primary, locale-independent assertions).
 - To have a debug build pass *real* verification on your dev phone, append your debug keystore's SHA-256 fingerprint to the `sha256_cert_fingerprints` array in `.well-known/assetlinks.json` (it accepts multiple entries) and redeploy.
 

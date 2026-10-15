@@ -1,4 +1,4 @@
-package com.bombfork.opensecretasanta;
+package com.bombfork.opensecretsanta;
 
 import com.getcapacitor.BridgeActivity;
 

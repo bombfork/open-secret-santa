@@ -1,7 +1,7 @@
 # Warm-start deep link: process alive and idle on the landing page, so the
 # link must arrive via onNewIntent (launchMode singleTask) -> Capacitor
 # appUrlOpen -> initDeepLinking listener (js/main.js).
-appId: com.bombfork.opensecretasanta
+appId: com.bombfork.opensecretsanta
 tags:
   - regression
   - deeplink
