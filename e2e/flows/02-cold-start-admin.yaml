@@ -1,5 +1,5 @@
 # Cold-start deep link to the admin view, then unlock with the password.
-appId: com.bombfork.opensecretasanta
+appId: com.bombfork.opensecretsanta
 tags:
   - regression
   - deeplink

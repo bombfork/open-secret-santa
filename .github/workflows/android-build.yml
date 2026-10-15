@@ -275,7 +275,7 @@ jobs:
 
             **Version:** ${{ steps.apk-info.outputs.version }}
             **Size:** ${{ steps.apk-info.outputs.apk_size }}
-            **Package:** com.bombfork.opensecretasanta
+            **Package:** com.bombfork.opensecretsanta
 
             ### Installation
 

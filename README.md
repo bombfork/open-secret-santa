@@ -125,7 +125,7 @@ The project is configured with Capacitor to build native Android applications. F
 ### Setup
 
 The Android platform has been initialized with:
-- **App ID**: `com.bombfork.opensecretasanta`
+- **App ID**: `com.bombfork.opensecretsanta`
 - **App Name**: `Open Secret Santa`
 - **Server Hostname**: `secret-santa.bombfork.net`
 

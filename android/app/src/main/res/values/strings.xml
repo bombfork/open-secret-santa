@@ -2,6 +2,6 @@
 <resources>
     <string name="app_name">Open Secret Santa</string>
     <string name="title_activity_main">Open Secret Santa</string>
-    <string name="package_name">com.bombfork.opensecretasanta</string>
-    <string name="custom_url_scheme">com.bombfork.opensecretasanta</string>
+    <string name="package_name">com.bombfork.opensecretsanta</string>
+    <string name="custom_url_scheme">com.bombfork.opensecretsanta</string>
 </resources>

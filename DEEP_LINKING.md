@@ -199,12 +199,12 @@ Maestro flows exercise deep-link delivery (cold start, warm start, dedup) agains
 
 Check domain verification status:
 ```bash
-adb shell pm get-app-links com.bombfork.opensecretasanta
+adb shell pm get-app-links com.bombfork.opensecretsanta
 ```
 
 Expected output:
 ```
-com.bombfork.opensecretasanta:
+com.bombfork.opensecretsanta:
   ID: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
   Signatures: [...]
   Domain verification state:
@@ -217,12 +217,12 @@ com.bombfork.opensecretasanta:
 
 1. **Check verification status**:
    ```bash
-   adb shell pm get-app-links com.bombfork.opensecretasanta
+   adb shell pm get-app-links com.bombfork.opensecretsanta
    ```
 
 2. **Re-verify the domain**:
    ```bash
-   adb shell pm verify-app-links --re-verify com.bombfork.opensecretasanta
+   adb shell pm verify-app-links --re-verify com.bombfork.opensecretsanta
    ```
 
 3. **Check logs**:
@@ -243,8 +243,8 @@ com.bombfork.opensecretasanta:
 
 2. **Force verification**:
    ```bash
-   adb shell pm set-app-links --package com.bombfork.opensecretasanta 0 all
-   adb shell pm verify-app-links --re-verify com.bombfork.opensecretasanta
+   adb shell pm set-app-links --package com.bombfork.opensecretsanta 0 all
+   adb shell pm verify-app-links --re-verify com.bombfork.opensecretsanta
    ```
 
 #### Deep Link Not Routing Correctly

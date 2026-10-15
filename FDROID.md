@@ -12,11 +12,12 @@ F-Droid builds the app **from source** on its own buildserver and signs the APK 
 
 ## Build recipe
 
-Proposed content for `metadata/com.bombfork.opensecretasanta.yml` in an fdroiddata fork:
+Proposed content for `metadata/com.bombfork.opensecretsanta.yml` in an fdroiddata fork:
 
 ```yaml
 Categories:
-  - Time
+  - Messaging
+  - Social Network
 License: MIT
 AuthorName: bombfork
 WebSite: https://secret-santa.bombfork.net
@@ -30,9 +31,11 @@ RepoType: git
 Repo: https://github.com/bombfork/open-secret-santa.git
 
 Builds:
-  - versionName: 0.2.0
-    versionCode: 2
-    commit: v0.2.0
+  - versionName: 0.2.1
+    versionCode: 3
+    # full hash of the release tag (git rev-list -n1 v0.2.1) —
+    # fdroiddata requires hashes, not tag names
+    commit: <FULL_COMMIT_HASH_OF_v0.2.1>
     subdir: android
     sudo:
       - apt-get update
@@ -43,35 +46,36 @@ Builds:
     gradle:
       - yes
     prebuild:
-      - cd .. && npm ci --omit=dev
-      - cd .. && npm run cap:sync
+      # single item: fdroidserver joins list entries into one shell, so a cd
+      # in one entry leaks into the next
+      - cd .. && npm ci --omit=dev && npm run cap:sync
 
 AutoUpdateMode: Version
 UpdateCheckMode: Tags ^v[0-9]+\.[0-9]+\.[0-9]+$
-CurrentVersion: 0.2.0
-CurrentVersionCode: 2
+CurrentVersion: 0.2.1
+CurrentVersionCode: 3
 ```
 
 Recipe design notes:
 
 - **`sudo` Node install**: the buildserver's Debian ships Node 18; Capacitor 7 requires Node >= 20, so a pinned tarball is installed with checksum verification (same pattern as other Capacitor apps in fdroiddata, e.g. `ca.leradar.app`). When bumping the Node version, take the SHA-256 for `node-vX.Y.Z-linux-x64.tar.gz` from `https://nodejs.org/dist/vX.Y.Z/SHASUMS256.txt`.
-- **`prebuild` runs with `subdir` (`android/`) as working directory**, hence the `cd ..`. `npm ci --omit=dev` is deliberate: the dev-dependency chain (`@capacitor/assets` → `@trapezedev/gradle-parse`) ships `.jar` files that would trip F-Droid's binary scanner; the production install contains none, and everything `cap sync` needs (including the Capacitor CLI) is in `dependencies`.
+- **`prebuild` runs with `subdir` (`android/`) as working directory**, hence the `cd ..` — and it must stay a **single list item**: fdroidserver concatenates the list into one shell invocation, so a `cd` in one entry changes the directory for the entries after it. `npm ci --omit=dev` is deliberate: the dev-dependency chain (`@capacitor/assets` → `@trapezedev/gradle-parse`) ships `.jar` files that would trip F-Droid's binary scanner; the production install contains none, and everything `cap sync` needs (including the Capacitor CLI) is in `dependencies`.
 - `npm run cap:sync` recreates the gitignored `www/` from the repo sources and syncs it into `android/app/src/main/assets`. Unlike our release CI it does not copy `.well-known/` into the APK — App Links verification uses the hosted file on the domain, not APK contents.
 - The release build is unsigned without `android/keystore.properties` (see [android/app/build.gradle](android/app/build.gradle)), which is exactly what F-Droid wants — they sign the output themselves.
 
 ## Submitting (manual steps)
 
-1. Fork [fdroiddata](https://gitlab.com/fdroid/fdroiddata) on gitlab.com and create a branch named `com.bombfork.opensecretasanta`.
-2. Add the recipe above as `metadata/com.bombfork.opensecretasanta.yml`.
+1. Fork [fdroiddata](https://gitlab.com/fdroid/fdroiddata) on gitlab.com and create a branch named `com.bombfork.opensecretsanta`.
+2. Add the recipe above as `metadata/com.bombfork.opensecretsanta.yml`. The filename **is** the applicationId — it must match `applicationId` in [android/app/build.gradle](android/app/build.gradle) exactly, or the built APK fails verification.
 3. Optional but recommended, from the fdroiddata checkout (needs [fdroidserver](https://f-droid.org/docs/Installing_the_Server_and_Repo_Tools/)):
 
    ```bash
    fdroid readmeta
-   fdroid lint com.bombfork.opensecretasanta
-   fdroid build -v -l com.bombfork.opensecretasanta   # full build test, needs Android SDK
+   fdroid lint com.bombfork.opensecretsanta
+   fdroid build -v -l com.bombfork.opensecretsanta   # full build test, needs Android SDK
    ```
 
-4. Open a merge request against fdroiddata using their **New App** template. In the description:
+4. Open a merge request against fdroiddata using their [**App inclusion** template](https://gitlab.com/fdroid/fdroiddata/-/blob/master/.gitlab/merge_request_templates/App%20inclusion.md) (the "Choose a template" dropdown in the MR form), titled `New app: Open Secret Santa`. In the description:
    - Link the source repo and the live site.
    - State the native value-add (F-Droid's webview-app policy): fully offline with bundled assets, **no INTERNET permission**, native share and clipboard plugins, Android App Links deep linking.
    - Note zero anti-features: no network access, no tracking, no proprietary dependencies.

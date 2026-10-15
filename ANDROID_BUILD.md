@@ -68,7 +68,7 @@ Edit `.well-known/assetlinks.json` and add your SHA-256 fingerprint:
     "relation": ["delegate_permission/common.handle_all_urls"],
     "target": {
       "namespace": "android_app",
-      "package_name": "com.bombfork.opensecretasanta",
+      "package_name": "com.bombfork.opensecretsanta",
       "sha256_cert_fingerprints": [
         "11:22:33:44:55:66:77:88:99:AA:BB:CC:DD:EE:FF:00:11:22:33:44:55:66:77:88:99:AA:BB:CC:DD:EE:FF:00"
       ]

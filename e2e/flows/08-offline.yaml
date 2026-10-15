@@ -1,7 +1,7 @@
 # Offline operation (issue #14 critical test): with airplane mode on, the app
 # must serve its bundled assets, run the full create flow, and resolve deep
 # links locally — no network involved at any point.
-appId: com.bombfork.opensecretasanta
+appId: com.bombfork.opensecretsanta
 tags:
   - regression
 ---

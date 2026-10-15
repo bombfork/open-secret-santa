@@ -2,7 +2,7 @@
 # init() must still wire the landing page buttons and the create form. Symptom
 # of the regression: tap "Back to Home" from the assignment view, landing shows,
 # but "Create New Secret Santa" / "View Your Assignment" do nothing.
-appId: com.bombfork.opensecretasanta
+appId: com.bombfork.opensecretsanta
 tags:
   - regression
   - deeplink

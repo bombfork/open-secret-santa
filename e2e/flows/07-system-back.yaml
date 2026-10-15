@@ -2,7 +2,7 @@
 # pop to the previous page via history state + popstate; back at the history
 # root (cold-start deep link) must leave the app (Capacitor default when the
 # webview can't go back). Regression shape: the URL changed but the UI didn't.
-appId: com.bombfork.opensecretasanta
+appId: com.bombfork.opensecretsanta
 tags:
   - regression
 ---

@@ -16,7 +16,7 @@ set -euo pipefail
 
 cd "$(dirname "$0")/.."
 
-APP_ID="com.bombfork.opensecretasanta"
+APP_ID="com.bombfork.opensecretsanta"
 APP_HOST="secret-santa.bombfork.net"
 APK="android/app/build/outputs/apk/debug/app-debug.apk"
 OUTPUT_DIR="e2e/output"
