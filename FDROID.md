@@ -49,6 +49,8 @@ Builds:
       # single item: fdroidserver joins list entries into one shell, so a cd
       # in one entry leaks into the next
       - cd .. && npm ci --omit=dev && npm run cap:sync
+    scandelete:
+      - node_modules
 
 AutoUpdateMode: Version
 UpdateCheckMode: Tags ^v[0-9]+\.[0-9]+\.[0-9]+$
@@ -61,6 +63,7 @@ Recipe design notes:
 - **`sudo` Node install**: the buildserver's Debian ships Node 18; Capacitor 7 requires Node >= 20, so a pinned tarball is installed with checksum verification (same pattern as other Capacitor apps in fdroiddata, e.g. `ca.leradar.app`). When bumping the Node version, take the SHA-256 for `node-vX.Y.Z-linux-x64.tar.gz` from `https://nodejs.org/dist/vX.Y.Z/SHASUMS256.txt`.
 - **`prebuild` runs with `subdir` (`android/`) as working directory**, hence the `cd ..` — and it must stay a **single list item**: fdroidserver concatenates the list into one shell invocation, so a `cd` in one entry changes the directory for the entries after it. `npm ci --omit=dev` is deliberate: the dev-dependency chain (`@capacitor/assets` → `@trapezedev/gradle-parse`) ships `.jar` files that would trip F-Droid's binary scanner; the production install contains none, and everything `cap sync` needs (including the Capacitor CLI) is in `dependencies`.
 - `npm run cap:sync` recreates the gitignored `www/` from the repo sources and syncs it into `android/app/src/main/assets`. Unlike our release CI it does not copy `.well-known/` into the APK — App Links verification uses the hosted file on the domain, not APK contents.
+- **`scandelete: node_modules`** (same as `ca.leradar.app`): the scanner flags the template tarballs shipped in `node_modules/@capacitor/cli/assets/` even on a prod-only install. `scandelete` removes only the *flagged* files under the listed path, after prebuild has already consumed them (`cap sync` runs in prebuild), so the `@capacitor/android` sources gradle builds from stay intact.
 - The release build is unsigned without `android/keystore.properties` (see [android/app/build.gradle](android/app/build.gradle)), which is exactly what F-Droid wants — they sign the output themselves.
 
 ## Submitting (manual steps)
