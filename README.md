@@ -114,7 +114,7 @@ Then visit `http://localhost:8000`
 
 ## Android Development
 
-The project is configured with Capacitor to build native Android applications.
+The project is configured with Capacitor to build native Android applications. For release signing and CI see [ANDROID_BUILD.md](ANDROID_BUILD.md); for F-Droid distribution see [FDROID.md](FDROID.md).
 
 ### Prerequisites
 

@@ -201,6 +201,7 @@ Note: For local release builds, you need to configure signing in `android/app/bu
 
 ## Additional Resources
 
+- [FDROID.md](FDROID.md) — F-Droid build recipe, submission process, and release discipline
 - [Android App Signing Documentation](https://developer.android.com/studio/publish/app-signing)
 - [GitHub Actions Secrets](https://docs.github.com/en/actions/security-guides/encrypted-secrets)
 - [Capacitor Android Documentation](https://capacitorjs.com/docs/android)

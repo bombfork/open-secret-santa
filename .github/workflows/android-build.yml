@@ -140,6 +140,17 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      # F-Droid's update checker reads versionName from build.gradle at the
+      # tagged commit, so the tag and gradle version must never diverge
+      - name: Verify tag matches versionName
+        run: |
+          TAG_VERSION=${GITHUB_REF_NAME#v}
+          GRADLE_VERSION=$(grep -oP 'versionName\s+"\K[^"]+' android/app/build.gradle)
+          if [ "$TAG_VERSION" != "$GRADLE_VERSION" ]; then
+            echo "::error::Tag v${TAG_VERSION} != versionName \"${GRADLE_VERSION}\" in android/app/build.gradle — bump build.gradle before tagging"
+            exit 1
+          fi
+
       # Installs node and java from .mise.toml, tool installs cached on its hash
       - name: Setup mise tools (node, java — cached)
         uses: jdx/mise-action@v2
@@ -282,7 +293,7 @@ jobs:
 
             ### Requirements
 
-            - Android 7.0 (API 24) or higher
+            - Android 6.0 (API 23) or higher
             - ~${{ steps.apk-info.outputs.apk_size }} storage space
 
             ---

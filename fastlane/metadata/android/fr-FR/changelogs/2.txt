@@ -1,0 +1,7 @@
+Première version F-Droid.
+
+• Organisateur de Père Noël Secret entièrement hors ligne, sans permission INTERNET
+• Liens d'attribution à partager, avec partage natif et presse-papiers
+• Liens profonds : les URL secret-santa.bombfork.net s'ouvrent dans l'application
+• Tirage intelligent : couples et familles ne se tirent jamais mutuellement
+• 18 langues d'interface

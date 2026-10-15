@@ -1,0 +1,55 @@
+# Store-listing screenshot capture for fastlane/metadata. NOT a test — lives
+# outside e2e/flows/ so e2e/config.yaml's glob (and mise run e2e) never picks
+# it up. Run manually against an emulator:
+#   e2e/screenshots/capture.sh
+appId: com.bombfork.opensecretasanta
+---
+# Shot 1: landing page, fresh start
+- launchApp:
+    clearState: true
+    stopApp: true
+- extendedWaitUntil:
+    visible: "How it works"
+    timeout: 30000
+- takeScreenshot: "1"
+
+# Shot 2: create form with participants filled in
+# (same navigation as flows/90-smoke-create.yaml: landing buttons sit below
+# the fold, swipe is the reliable way down inside the Capacitor webview)
+- swipe:
+    direction: UP
+- swipe:
+    direction: UP
+- extendedWaitUntil:
+    visible: "Create New Secret Santa"
+    timeout: 5000
+- tapOn: "Create New Secret Santa"
+- extendedWaitUntil:
+    visible: "Participant Names.*"
+    timeout: 5000
+- tapOn:
+    id: "participants"
+- inputText: "Alice"
+- pressKey: Enter
+- inputText: "Bob"
+- pressKey: Enter
+- inputText: "Charlie"
+- pressKey: Enter
+- inputText: "Diana"
+- hideKeyboard
+- scrollUntilVisible:
+    element:
+      text: "Generate Secret Santa"
+    direction: DOWN
+- takeScreenshot: "2"
+
+# Shot 3: participant assignment reveal via deep link
+- stopApp
+- openLink:
+    link: ${PARTICIPANT_URL}
+    autoVerify: true
+- extendedWaitUntil:
+    visible: "You are Secret Santa for:"
+    timeout: 30000
+- assertVisible: ${RECEIVER_NAME}
+- takeScreenshot: "3"

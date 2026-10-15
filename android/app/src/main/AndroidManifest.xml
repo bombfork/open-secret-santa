@@ -40,7 +40,8 @@
         </provider>
     </application>
 
-    <!-- Permissions -->
+    <!-- No permissions: the app is fully offline — all assets are bundled and
+         the Capacitor webview serves them via request interception, so even
+         android.permission.INTERNET (the Capacitor default) is not needed -->
 
-    <uses-permission android:name="android.permission.INTERNET" />
 </manifest>
