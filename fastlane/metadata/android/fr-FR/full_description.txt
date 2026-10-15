@@ -1,0 +1,27 @@
+Père Noël Secret est un organisateur d'échange de cadeaux qui fonctionne entièrement sur votre appareil. Pas de serveur, pas de compte, pas d'accès réseau — l'application ne demande même pas la permission INTERNET. Toutes les données sont encodées dans des liens à partager.
+
+<b>Fonctionnalités</b>
+
+<ul>
+<li><b>Créez un Père Noël Secret</b> : ajoutez les participants, définissez une graine aléatoire et générez les attributions</li>
+<li><b>Liens à partager</b> : chaque participant reçoit un lien unique qui ne montre que sa propre attribution</li>
+<li><b>Vue administrateur</b> : un lien protégé par mot de passe pour voir toutes les attributions</li>
+<li><b>Reproductible</b> : les mêmes participants et la même graine produisent toujours les mêmes attributions</li>
+<li><b>Tirage intelligent</b> : les personnes saisies côte à côte dans la liste (couples, familles) ne se tirent jamais mutuellement</li>
+<li><b>Partage natif</b> : partagez les liens via n'importe quelle application, avec intégration du presse-papiers</li>
+<li><b>Liens profonds</b> : les liens vers secret-santa.bombfork.net s'ouvrent directement dans l'application</li>
+<li><b>18 langues</b> : dont des langues régionales et quelques langues fantaisistes</li>
+</ul>
+
+<b>Comment ça marche</b>
+
+<ol>
+<li>Saisissez les noms des participants, une graine aléatoire et un mot de passe administrateur</li>
+<li>Envoyez à chaque participant son lien unique</li>
+<li>Chaque participant ouvre son lien pour découvrir à qui il offre un cadeau</li>
+<li>Le lien administrateur révèle toutes les attributions avec le mot de passe</li>
+</ol>
+
+<b>Pour joueurs fair-play</b>
+
+Cette application fonctionne sur le principe de l'honneur. Les liens sont encodés, pas chiffrés — idéal pour des groupes de confiance (famille, amis, collègues) où tout le monde joue le jeu. Si vous avez besoin d'une sécurité maximale, ce n'est peut-être pas l'app qu'il vous faut ! 😊

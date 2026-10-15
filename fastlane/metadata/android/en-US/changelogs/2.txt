@@ -1,0 +1,7 @@
+First F-Droid release.
+
+• Fully offline Secret Santa organizer, no INTERNET permission
+• Shareable assignment links with native share and clipboard integration
+• Deep links: secret-santa.bombfork.net URLs open in the app
+• Smart matching keeps couples and families from drawing each other
+• 18 interface languages

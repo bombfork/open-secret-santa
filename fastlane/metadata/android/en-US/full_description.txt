@@ -1,0 +1,27 @@
+Open Secret Santa is a simple Secret Santa gift exchange organizer that runs entirely on your device. No backend, no account, no network access — the app doesn't even request the INTERNET permission. All data is encoded in shareable links.
+
+<b>Features</b>
+
+<ul>
+<li><b>Create a Secret Santa</b>: add participants, set a random seed, and generate assignments</li>
+<li><b>Shareable links</b>: each participant gets a unique link showing only their own assignment</li>
+<li><b>Admin view</b>: password-protected link to see all assignments</li>
+<li><b>Reproducible</b>: the same participants and seed always produce the same assignments</li>
+<li><b>Smart matching</b>: people entered next to each other in the list (couples, families) never draw each other</li>
+<li><b>Native sharing</b>: share links through any app, with clipboard integration</li>
+<li><b>Deep links</b>: Secret Santa links to secret-santa.bombfork.net open directly in the app</li>
+<li><b>18 languages</b>: including regional and a few fantasy ones</li>
+</ul>
+
+<b>How it works</b>
+
+<ol>
+<li>Enter participant names, a random seed, and an admin password</li>
+<li>Send each participant their unique link</li>
+<li>Participants open their link to see who they're gifting to</li>
+<li>The admin link reveals all assignments with the password</li>
+</ol>
+
+<b>Made for fair players</b>
+
+This app works on the honor system. Links are encoded, not encrypted — perfect for friendly groups (family, friends, coworkers) where everyone plays by the rules. If you need Fort Knox security, this might not be your app! 😊
