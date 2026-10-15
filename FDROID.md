@@ -32,7 +32,8 @@ Repo: https://github.com/bombfork/open-secret-santa.git
 Builds:
   - versionName: 0.2.0
     versionCode: 2
-    commit: v0.2.0
+    # full hash of the v0.2.0 tag — fdroiddata requires hashes, not tag names
+    commit: 809cf77f55738ca7ae45c11d6e5fe586b60bad22
     subdir: android
     sudo:
       - apt-get update
@@ -71,7 +72,7 @@ Recipe design notes:
    fdroid build -v -l com.bombfork.opensecretasanta   # full build test, needs Android SDK
    ```
 
-4. Open a merge request against fdroiddata using their **New App** template. In the description:
+4. Open a merge request against fdroiddata using their [**App inclusion** template](https://gitlab.com/fdroid/fdroiddata/-/blob/master/.gitlab/merge_request_templates/App%20inclusion.md) (the "Choose a template" dropdown in the MR form), titled `New app: Open Secret Santa`. In the description:
    - Link the source repo and the live site.
    - State the native value-add (F-Droid's webview-app policy): fully offline with bundled assets, **no INTERNET permission**, native share and clipboard plugins, Android App Links deep linking.
    - Note zero anti-features: no network access, no tracking, no proprietary dependencies.
