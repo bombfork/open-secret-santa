@@ -5,9 +5,16 @@ tags:
   - regression
   - deeplink
 ---
-- launchApp:
-    clearState: true
-    stopApp: true
+# Separate steps, not bundled launchApp{clearState,stopApp}: the bundled form
+# launches inside AM's 1s remove-task destroy timeout and the fresh process
+# gets killed (see TESTING_E2E.md)
+- clearState
+- stopApp
+- extendedWaitUntil:
+    visible: "NEVER_PRESENT_SLEEP_2000MS"
+    timeout: 2000
+    optional: true
+- launchApp
 # landing anchor: the landing buttons sit below the fold on small screens
 - extendedWaitUntil:
     visible: "How it works"

@@ -5,9 +5,15 @@ appId: com.bombfork.opensecretsanta
 tags:
   - regression
 ---
-- launchApp:
-    clearState: true
-    stopApp: true
+# Separate steps + settle instead of bundled launchApp{clearState,stopApp}:
+# AM's 1s remove-task destroy timeout kills a too-early launch (TESTING_E2E.md)
+- clearState
+- stopApp
+- extendedWaitUntil:
+    visible: "NEVER_PRESENT_SLEEP_2000MS"
+    timeout: 2000
+    optional: true
+- launchApp
 - extendedWaitUntil:
     visible: "How it works"
     timeout: 30000
@@ -18,12 +24,18 @@ tags:
     visible: ".*Français.*"
     timeout: 5000
 - tapOn: ".*Français.*"
+# i18n swap re-renders the whole page via JS — slower than a normal paint
 - extendedWaitUntil:
     visible: "Comment ça marche"
-    timeout: 5000
+    timeout: 10000
 
 # Restart without clearing state: the choice must persist
 - stopApp
+# stopApp alone also tears the task down — settle before relaunching
+- extendedWaitUntil:
+    visible: "NEVER_PRESENT_SLEEP_2000MS"
+    timeout: 2000
+    optional: true
 - launchApp
 - extendedWaitUntil:
     visible: "Comment ça marche"

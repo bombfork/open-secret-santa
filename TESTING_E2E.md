@@ -47,6 +47,30 @@ Environment variables:
 
 Fixtures are generated at runtime by `e2e/fixtures/generate-fixtures.mjs`, which reuses the production `js/encoder.js` and `js/random.js` — the URLs always match the current data format. A hardcoded `EXPECTED` assignment map makes the generator fail loudly if the assignment algorithm changes; update it deliberately when that happens.
 
+## The teardown race (why every flow settles after clearState/stopApp)
+
+The dominant CI flake (issue #41, root-caused from CI logcat + local reproduction) is an ActivityManager race, not slow rendering:
+
+1. `clearState`/`stopApp` on a running app schedules the old task's removal with ActivityTaskManager's **fixed 1s destroy timeout** (AOSP constant).
+2. If the next `launchApp`/`openLink` spawns the fresh process **inside ~0.7–1.0s** after the clear, the timeout fires and kills the *new* process by uid-match before it attaches. Logcat signature: `Destroy timeout of remove-task` → `Killing <pid> … remove task` → `failed to attach`.
+3. The window stays blank and the flow's first `extendedWaitUntil` times out.
+
+Counterintuitively, **faster runners hit this more** — quick step dispatch lands inside the window; slow dispatch sails past it. Local measurement: launching 0.8s after clear killed the process in 5/10 iterations; at 0.5s or 1.0s, 0/10.
+
+Rules that follow (enforced in every flow and `e2e/screenshots/capture.yaml`):
+
+- Never use the bundled `launchApp: {clearState: true, stopApp: true}` — it launches inside the window by construction.
+- After any `clearState` and/or `stopApp`, insert the bounded settle before the next launch/openLink:
+
+  ```yaml
+  - extendedWaitUntil:
+      visible: "NEVER_PRESENT_SLEEP_2000MS"
+      timeout: 2000
+      optional: true
+  ```
+
+  The 2s is not a guess: the destroy timeout is fixed at 1s, so 2s is a deterministic upper bound, and Maestro offers no shell access for a positive "task gone" poll.
+
 ## What the harness can and cannot catch
 
 **The emulator runs (CI and local) force-approve app links** via `pm set-app-links`, because debug builds are signed with a debug cert that is not in `.well-known/assetlinks.json` and can therefore *never* pass real App Links verification.

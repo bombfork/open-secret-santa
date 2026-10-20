@@ -6,6 +6,11 @@ tags:
 ---
 - clearState
 - stopApp
+# Settle past AM's 1s remove-task destroy timeout (see TESTING_E2E.md)
+- extendedWaitUntil:
+    visible: "NEVER_PRESENT_SLEEP_2000MS"
+    timeout: 2000
+    optional: true
 - openLink:
     link: ${ADMIN_URL}
     autoVerify: true
