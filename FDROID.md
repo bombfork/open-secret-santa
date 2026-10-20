@@ -35,7 +35,7 @@ Builds:
     versionCode: 4
     # full hash of the release tag (git rev-list -n1 v0.2.2) —
     # fdroiddata requires hashes, not tag names
-    commit: <FULL_COMMIT_HASH_OF_v0.2.2>
+    commit: e3c74cee7ab8dc1675dd6acff65cb5815065bfd0
     subdir: android/app
     sudo:
       - apt-get update
