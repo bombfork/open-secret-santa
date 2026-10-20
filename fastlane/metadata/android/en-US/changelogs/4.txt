@@ -1,0 +1,4 @@
+F-Droid review fixes.
+
+• Release builds are now R8-minified (smaller APK)
+• Store icon available in all metadata locales

@@ -1,0 +1,4 @@
+Correctifs de la revue F-Droid.
+
+• Les builds de release sont désormais minifiés avec R8 (APK plus léger)
+• Icône disponible dans toutes les langues des métadonnées

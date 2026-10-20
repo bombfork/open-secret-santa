@@ -31,18 +31,15 @@ RepoType: git
 Repo: https://github.com/bombfork/open-secret-santa.git
 
 Builds:
-  - versionName: 0.2.1
-    versionCode: 3
-    # full hash of the release tag (git rev-list -n1 v0.2.1) —
+  - versionName: 0.2.2
+    versionCode: 4
+    # full hash of the release tag (git rev-list -n1 v0.2.2) —
     # fdroiddata requires hashes, not tag names
-    commit: 155928dc709f4f2113fd2a5449896ebe82aff776
+    commit: <FULL_COMMIT_HASH_OF_v0.2.2>
     subdir: android/app
     sudo:
       - apt-get update
-      - apt-get install -y --no-install-recommends curl ca-certificates
-      - curl -Lo /tmp/node.tar.gz https://nodejs.org/dist/v20.19.5/node-v20.19.5-linux-x64.tar.gz
-      - echo "4eba5fbe1fb10753bc06e42f001a91c5cec16798b7764a3e9257adc59af47fe1  /tmp/node.tar.gz" | sha256sum -c -
-      - tar xzf /tmp/node.tar.gz -C /usr/local --strip-components=1
+      - apt-get install -y --no-install-recommends nodejs npm
     gradle:
       - yes
     output: build/outputs/apk/release/app-release-unsigned.apk
@@ -55,13 +52,13 @@ Builds:
 
 AutoUpdateMode: Version
 UpdateCheckMode: Tags ^v[0-9]+\.[0-9]+\.[0-9]+$
-CurrentVersion: 0.2.1
-CurrentVersionCode: 3
+CurrentVersion: 0.2.2
+CurrentVersionCode: 4
 ```
 
 Recipe design notes:
 
-- **`sudo` Node install**: the buildserver's Debian ships Node 18; Capacitor 7 requires Node >= 20, so a pinned tarball is installed with checksum verification (same pattern as other Capacitor apps in fdroiddata, e.g. `ca.leradar.app`). When bumping the Node version, take the SHA-256 for `node-vX.Y.Z-linux-x64.tar.gz` from `https://nodejs.org/dist/vX.Y.Z/SHASUMS256.txt`.
+- **`sudo` Node install from Debian**: the buildserver runs Debian trixie+, whose `nodejs` (20.19) satisfies Capacitor 7's `>=20` engine requirement — plain `apt-get install nodejs npm`, no pinned tarball (reviewer-requested on the inclusion MR).
 - **`subdir` points at the app module (`android/app`), not the gradle root**: fdroidserver only finds the built APK via the `output` path relative to `subdir` ("Failed to find any output apks" otherwise), and `output` must name the module's own build dir. Same shape as `ca.leradar.app`. `prebuild` runs with `subdir` as working directory, hence the `cd ../..` — and it must stay a **single list item**: fdroidserver concatenates the list into one shell invocation, so a `cd` in one entry changes the directory for the entries after it. `npm ci --omit=dev` is deliberate: the dev-dependency chain (`@capacitor/assets` → `@trapezedev/gradle-parse`) ships `.jar` files that would trip F-Droid's binary scanner; the production install contains none, and everything `cap sync` needs (including the Capacitor CLI) is in `dependencies`.
 - `npm run cap:sync` recreates the gitignored `www/` from the repo sources and syncs it into `android/app/src/main/assets`. Unlike our release CI it does not copy `.well-known/` into the APK — App Links verification uses the hosted file on the domain, not APK contents.
 - **`scandelete: node_modules`** (same as `ca.leradar.app`): the scanner flags the template tarballs shipped in `node_modules/@capacitor/cli/assets/` even on a prod-only install. `scandelete` removes only the *flagged* files under the listed path, after prebuild has already consumed them (`cap sync` runs in prebuild), so the `@capacitor/android` sources gradle builds from stay intact.
