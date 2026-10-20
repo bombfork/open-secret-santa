@@ -7,9 +7,15 @@ tags:
   - regression
 ---
 # Variant A: landing → create → back → landing
-- launchApp:
-    clearState: true
-    stopApp: true
+# Separate steps + settle instead of bundled launchApp{clearState,stopApp}:
+# AM's 1s remove-task destroy timeout kills a too-early launch (TESTING_E2E.md)
+- clearState
+- stopApp
+- extendedWaitUntil:
+    visible: "NEVER_PRESENT_SLEEP_2000MS"
+    timeout: 2000
+    optional: true
+- launchApp
 - extendedWaitUntil:
     visible: "How it works"
     timeout: 30000
@@ -36,7 +42,7 @@ tags:
 
 # Variant B: cold-start deep link is the history root — back leaves the app
 # Settle after clearState/stopApp: launching too soon races ActivityManager's
-# remove-task destroy timeout on slow emulators (see 01-cold-start-participant)
+# remove-task destroy timeout (see TESTING_E2E.md)
 - clearState
 - stopApp
 - extendedWaitUntil:

@@ -10,6 +10,14 @@ tags:
 # Variant A: fresh install state, process never started
 - clearState
 - stopApp
+# Settle ≥2s: clearState/stopApp schedule the old task's removal with AM's
+# fixed 1s destroy timeout; a launch landing inside that window gets the
+# fresh process killed ("remove task" → "failed to attach") at any emulator
+# speed — faster dispatch hits it more. 2s is past the window by design.
+- extendedWaitUntil:
+    visible: "NEVER_PRESENT_SLEEP_2000MS"
+    timeout: 2000
+    optional: true
 - openLink:
     link: ${PARTICIPANT_URL}
     autoVerify: true
@@ -23,10 +31,7 @@ tags:
 # Variant B: issue #23 shape — app opened before, process killed, link tapped
 # ("How it works" anchors the landing page: the landing buttons sit below the
 # fold on small screens and assertVisible only sees the viewport)
-# Clear/stop/start as separate steps: the bundled launchApp
-# {clearState, stopApp} races ActivityManager's remove-task destroy timeout
-# on slow emulators — the fresh process gets killed ("start not valid") and
-# the app window stays blank
+# Clear/stop/settle/start as separate steps — see variant A for the settle
 - clearState
 - stopApp
 - extendedWaitUntil:
@@ -38,6 +43,11 @@ tags:
     visible: "How it works"
     timeout: 15000
 - stopApp
+# stopApp alone also tears the task down — same settle before relaunching
+- extendedWaitUntil:
+    visible: "NEVER_PRESENT_SLEEP_2000MS"
+    timeout: 2000
+    optional: true
 - openLink:
     link: ${PARTICIPANT_URL}
     autoVerify: true

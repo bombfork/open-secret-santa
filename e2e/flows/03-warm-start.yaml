@@ -6,14 +6,10 @@ tags:
   - regression
   - deeplink
 ---
-# Clear/stop/start as separate steps: the bundled launchApp
-# {clearState, stopApp} races ActivityManager's remove-task destroy timeout
-# on slow emulators — the fresh process gets killed ("start not valid") and
-# the app window stays blank
+# Clear/stop/settle/start as separate steps: launching inside AM's 1s
+# remove-task destroy timeout gets the fresh process killed (TESTING_E2E.md)
 - clearState
 - stopApp
-# Bounded settle so AM finishes removing the old task before the fresh start
-# (Maestro idiom: optional wait on a never-present element)
 - extendedWaitUntil:
     visible: "NEVER_PRESENT_SLEEP_2000MS"
     timeout: 2000

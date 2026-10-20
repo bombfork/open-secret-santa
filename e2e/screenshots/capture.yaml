@@ -5,9 +5,15 @@
 appId: com.bombfork.opensecretsanta
 ---
 # Shot 1: landing page, fresh start
-- launchApp:
-    clearState: true
-    stopApp: true
+# Separate steps + settle instead of bundled launchApp{clearState,stopApp}:
+# AM's 1s remove-task destroy timeout kills a too-early launch (TESTING_E2E.md)
+- clearState
+- stopApp
+- extendedWaitUntil:
+    visible: "NEVER_PRESENT_SLEEP_2000MS"
+    timeout: 2000
+    optional: true
+- launchApp
 - extendedWaitUntil:
     visible: "How it works"
     timeout: 30000
@@ -45,6 +51,11 @@ appId: com.bombfork.opensecretsanta
 
 # Shot 3: participant assignment reveal via deep link
 - stopApp
+# stopApp alone also tears the task down — settle before relaunching
+- extendedWaitUntil:
+    visible: "NEVER_PRESENT_SLEEP_2000MS"
+    timeout: 2000
+    optional: true
 - openLink:
     link: ${PARTICIPANT_URL}
     autoVerify: true
