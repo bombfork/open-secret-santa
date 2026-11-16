@@ -42,7 +42,7 @@ Builds:
     versionCode: 6
     # full hash of the release tag (git rev-list -n1 v0.2.4) —
     # fdroiddata requires hashes, not tag names
-    commit: <FULL_COMMIT_HASH_OF_v0.2.4>
+    commit: 6e27591933a37934053ab44e810350bf750f5c54
     subdir: android/app
     sudo:
       - apt-get update
@@ -101,3 +101,5 @@ Every release must keep four things in sync (the release workflow enforces 1 and
 4. **Reproducibility**: the `Verify release is reproducible` step rebuilds unsigned from a clean tree and runs `apksigcopier compare` against the signed APK; a mismatch fails the release (F-Droid would otherwise skip the version silently). Keep the release job's web-asset steps identical to the recipe's prebuild (`npm ci --omit=dev && npm run cap:sync`) and don't add build inputs that F-Droid's rebuild won't have.
 
 With `AutoUpdateMode: Version` and `UpdateCheckMode: Tags`, F-Droid detects new `vX.Y.Z` tags automatically and adds builds to the recipe on its own — no fdroiddata MR needed after the first inclusion. Each new build is verified against the matching GitHub-release APK via `Binaries` before being published.
+
+`mise run fdroid-recipe-info` prints the current `versionName`/`versionCode`/`commit` triple for the recipe (reads build.gradle and resolves the matching tag) — use it whenever the recipe or this document needs the values.

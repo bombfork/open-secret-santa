@@ -117,3 +117,12 @@ adb devices
 [tasks.e2e-flow]
 description = "Run a single e2e flow by name, e.g.: mise run e2e-flow 01-cold-start-participant"
 run = 'bash e2e/run.sh {{arg(name="flow")}}'
+
+[tasks.fdroid-recipe-info]
+description = "Print the versionName/versionCode/commit fields for the fdroiddata recipe, from build.gradle and the matching release tag"
+run = """
+V=$(grep -oP 'versionName\\s+"\\K[^"]+' android/app/build.gradle)
+C=$(grep -oP 'versionCode\\s+\\K\\d+' android/app/build.gradle)
+H=$(git rev-list -n1 "v$V" 2>/dev/null || echo "<tag v$V not found — tag and push first>")
+printf 'versionName: %s\nversionCode: %s\ncommit: %s\n' "$V" "$C" "$H"
+"""
