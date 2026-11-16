@@ -4,11 +4,12 @@ How Open Secret Santa gets published on [F-Droid](https://f-droid.org), and what
 
 ## Overview
 
-F-Droid builds the app **from source** on its own buildserver and signs the APK with **F-Droid's key** (not ours). Consequences:
+The app uses F-Droid's **reproducible builds** flow: F-Droid rebuilds each release from source on its buildserver, verifies the rebuild is byte-identical to our published APK (`apksigcopier`), and then distributes **our developer-signed APK** — F-Droid never signs it with their own key. Consequences:
 
 - The build recipe lives in the [fdroiddata](https://gitlab.com/fdroid/fdroiddata) repository (one YAML file per app), not here.
 - Store listing content (descriptions, changelogs, icon, screenshots) is read from this repo's `fastlane/metadata/android/` tree at the tagged commit.
-- App Links verification is per-signing-key: until F-Droid's certificate fingerprint is added to [.well-known/assetlinks.json](.well-known/assetlinks.json), links to secret-santa.bombfork.net open in the browser instead of the app for F-Droid installs. See [Post-inclusion follow-up](#post-inclusion-follow-up).
+- App Links to secret-santa.bombfork.net work out of the box on F-Droid installs: the published APK carries the same signature already listed in [.well-known/assetlinks.json](.well-known/assetlinks.json), and GitHub-release and F-Droid installs can update over each other.
+- The flip side: a release whose rebuild does not match byte-for-byte is **silently skipped** by F-Droid. The release workflow therefore verifies reproducibility (clean rebuild + `apksigcopier compare`) before publishing, and fails the release loudly instead.
 
 ## Build recipe
 
@@ -30,12 +31,18 @@ AutoName: Open Secret Santa
 RepoType: git
 Repo: https://github.com/bombfork/open-secret-santa.git
 
+# Reproducible builds: F-Droid downloads this APK, rebuilds from source,
+# verifies byte-identity, and publishes the developer-signed binary
+Binaries: https://github.com/bombfork/open-secret-santa/releases/download/v%v/open-secret-santa-%v.apk
+
+AllowedAPKSigningKeys: bf2338049f8f0ba8085ac82ba9b8adf72dc87cecdbf10e0eeb938b1a271f7b8c
+
 Builds:
-  - versionName: 0.2.2
-    versionCode: 4
-    # full hash of the release tag (git rev-list -n1 v0.2.2) —
+  - versionName: 0.2.3
+    versionCode: 5
+    # full hash of the release tag (git rev-list -n1 v0.2.3) —
     # fdroiddata requires hashes, not tag names
-    commit: <FULL_COMMIT_HASH_OF_v0.2.2>
+    commit: <FULL_COMMIT_HASH_OF_v0.2.3>
     subdir: android/app
     sudo:
       - apt-get update
@@ -52,8 +59,8 @@ Builds:
 
 AutoUpdateMode: Version
 UpdateCheckMode: Tags ^v[0-9]+\.[0-9]+\.[0-9]+$
-CurrentVersion: 0.2.2
-CurrentVersionCode: 4
+CurrentVersion: 0.2.3
+CurrentVersionCode: 5
 ```
 
 Recipe design notes:
@@ -62,7 +69,8 @@ Recipe design notes:
 - **`subdir` points at the app module (`android/app`), not the gradle root**: fdroidserver only finds the built APK via the `output` path relative to `subdir` ("Failed to find any output apks" otherwise), and `output` must name the module's own build dir. Same shape as `ca.leradar.app`. `prebuild` runs with `subdir` as working directory, hence the `cd ../..` — and it must stay a **single list item**: fdroidserver concatenates the list into one shell invocation, so a `cd` in one entry changes the directory for the entries after it. `npm ci --omit=dev` is deliberate: the dev-dependency chain (`@capacitor/assets` → `@trapezedev/gradle-parse`) ships `.jar` files that would trip F-Droid's binary scanner; the production install contains none, and everything `cap sync` needs (including the Capacitor CLI) is in `dependencies`.
 - `npm run cap:sync` recreates the gitignored `www/` from the repo sources and syncs it into `android/app/src/main/assets`. Unlike our release CI it does not copy `.well-known/` into the APK — App Links verification uses the hosted file on the domain, not APK contents.
 - **`scandelete: node_modules`** (same as `ca.leradar.app`): the scanner flags the template tarballs shipped in `node_modules/@capacitor/cli/assets/` even on a prod-only install. `scandelete` removes only the *flagged* files under the listed path, after prebuild has already consumed them (`cap sync` runs in prebuild), so the `@capacitor/android` sources gradle builds from stay intact.
-- The release build is unsigned without `android/keystore.properties` (see [android/app/build.gradle](android/app/build.gradle)), which is exactly what F-Droid wants — they sign the output themselves.
+- The release build is unsigned without `android/keystore.properties` (see [android/app/build.gradle](android/app/build.gradle)) — F-Droid's rebuild stays unsigned and gets our signature copied onto it (`apksigcopier`) after byte-identity is verified.
+- **`Binaries` + `AllowedAPKSigningKeys`** enable the reproducible flow. `AllowedAPKSigningKeys` is our release cert's SHA-256 (the same fingerprint as in `.well-known/assetlinks.json`, lowercase, colons stripped). Reproducibility was validated empirically: two clean-clone builds are byte-identical (R8 included), output is identical across zulu-21 and openjdk-21, and AGP-signed APKs pass `apksigcopier compare`.
 
 ## Submitting (manual steps)
 
@@ -84,25 +92,11 @@ Recipe design notes:
 
 ## Release discipline
 
-Every release must keep three things in sync (the release workflow enforces the first):
+Every release must keep four things in sync (the release workflow enforces 1 and 4):
 
 1. **Tag ↔ versionName**: `versionName` in [android/app/build.gradle](android/app/build.gradle) must equal the tag without the `v` prefix. The `Verify tag matches versionName` step in [.github/workflows/android-build.yml](.github/workflows/android-build.yml) fails the release build otherwise.
 2. **versionCode**: bump by at least 1 in the same commit; Android and F-Droid compare this value, never versionName.
 3. **Changelog**: add `fastlane/metadata/android/en-US/changelogs/<versionCode>.txt` (max 500 characters) for the new versionCode, plus the fr-FR counterpart.
+4. **Reproducibility**: the `Verify release is reproducible` step rebuilds unsigned from a clean tree and runs `apksigcopier compare` against the signed APK; a mismatch fails the release (F-Droid would otherwise skip the version silently). Keep the release job's web-asset steps identical to the recipe's prebuild (`npm ci --omit=dev && npm run cap:sync`) and don't add build inputs that F-Droid's rebuild won't have.
 
-With `AutoUpdateMode: Version` and `UpdateCheckMode: Tags`, F-Droid detects new `vX.Y.Z` tags automatically and adds builds to the recipe on its own — no fdroiddata MR needed after the first inclusion.
-
-## Post-inclusion follow-up
-
-After F-Droid publishes its first build, App Links must be fixed for F-Droid installs:
-
-1. Download the APK from the app's f-droid.org page.
-2. Extract F-Droid's signing certificate fingerprint:
-
-   ```bash
-   apksigner verify --print-certs open-secret-santa.apk | grep SHA-256
-   ```
-
-3. **Append** the fingerprint to the `sha256_cert_fingerprints` array in [.well-known/assetlinks.json](.well-known/assetlinks.json) — keep the existing entry, the array supports multiple keys. Merging to main deploys it via GitHub Pages, and verification starts passing for both signing keys.
-
-Track this in a dedicated issue so it isn't forgotten once the fdroiddata MR merges.
+With `AutoUpdateMode: Version` and `UpdateCheckMode: Tags`, F-Droid detects new `vX.Y.Z` tags automatically and adds builds to the recipe on its own — no fdroiddata MR needed after the first inclusion. Each new build is verified against the matching GitHub-release APK via `Binaries` before being published.

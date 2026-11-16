@@ -1,0 +1,4 @@
+Reproducible builds.
+
+• Releases are now built reproducibly and verified in CI — F-Droid distributes the developer-signed APK
+• App Links (secret-santa.bombfork.net) work out of the box on F-Droid installs
