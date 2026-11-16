@@ -38,11 +38,11 @@ Binaries: https://github.com/bombfork/open-secret-santa/releases/download/v%v/op
 AllowedAPKSigningKeys: bf2338049f8f0ba8085ac82ba9b8adf72dc87cecdbf10e0eeb938b1a271f7b8c
 
 Builds:
-  - versionName: 0.2.3
-    versionCode: 5
-    # full hash of the release tag (git rev-list -n1 v0.2.3) —
+  - versionName: 0.2.4
+    versionCode: 6
+    # full hash of the release tag (git rev-list -n1 v0.2.4) —
     # fdroiddata requires hashes, not tag names
-    commit: <FULL_COMMIT_HASH_OF_v0.2.3>
+    commit: <FULL_COMMIT_HASH_OF_v0.2.4>
     subdir: android/app
     sudo:
       - apt-get update
@@ -59,8 +59,8 @@ Builds:
 
 AutoUpdateMode: Version
 UpdateCheckMode: Tags ^v[0-9]+\.[0-9]+\.[0-9]+$
-CurrentVersion: 0.2.3
-CurrentVersionCode: 5
+CurrentVersion: 0.2.4
+CurrentVersionCode: 6
 ```
 
 Recipe design notes:
@@ -70,6 +70,7 @@ Recipe design notes:
 - `npm run cap:sync` recreates the gitignored `www/` from the repo sources and syncs it into `android/app/src/main/assets`. Unlike our release CI it does not copy `.well-known/` into the APK — App Links verification uses the hosted file on the domain, not APK contents.
 - **`scandelete: node_modules`** (same as `ca.leradar.app`): the scanner flags the template tarballs shipped in `node_modules/@capacitor/cli/assets/` even on a prod-only install. `scandelete` removes only the *flagged* files under the listed path, after prebuild has already consumed them (`cap sync` runs in prebuild), so the `@capacitor/android` sources gradle builds from stay intact.
 - The release build is unsigned without `android/keystore.properties` (see [android/app/build.gradle](android/app/build.gradle)) — F-Droid's rebuild stays unsigned and gets our signature copied onto it (`apksigcopier`) after byte-identity is verified.
+- **`dependenciesInfo` is disabled** in [android/app/build.gradle](android/app/build.gradle): AGP otherwise embeds a Google-encrypted dependency list in the APK Signing Block, and F-Droid rejects binaries carrying that block (`found extra signing block 'Dependency metadata'`).
 - **`Binaries` + `AllowedAPKSigningKeys`** enable the reproducible flow. `AllowedAPKSigningKeys` is our release cert's SHA-256 (the same fingerprint as in `.well-known/assetlinks.json`, lowercase, colons stripped). Reproducibility was validated empirically: two clean-clone builds are byte-identical (R8 included), output is identical across zulu-21 and openjdk-21, and AGP-signed APKs pass `apksigcopier compare`.
 
 ## Submitting (manual steps)

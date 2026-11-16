@@ -1,0 +1,1 @@
+• Remove the opaque Google Play dependency-metadata block from release APKs (F-Droid compliance)
