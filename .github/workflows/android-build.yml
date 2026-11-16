@@ -183,23 +183,14 @@ jobs:
           key: gradle-${{ runner.os }}-${{ hashFiles('android/**/*.gradle', 'android/gradle/wrapper/gradle-wrapper.properties') }}
           restore-keys: gradle-${{ runner.os }}-
 
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Build web assets
+      # Exact same commands as the F-Droid recipe's prebuild — the published
+      # APK must be byte-identical to F-Droid's rebuild for reproducible
+      # verification, so no extra assets (no .well-known: App Links
+      # verification uses the hosted domain file, never APK contents)
+      - name: Install dependencies and sync web assets (recipe parity)
         run: |
-          # Create www directory if it doesn't exist
-          mkdir -p www
-          # Copy web assets to www directory for Capacitor
-          cp index.html www/
-          cp -r js www/
-          cp -r styles www/
-          cp -r locales www/
-          cp -r assets www/
-          cp -r .well-known www/
-
-      - name: Sync Capacitor
-        run: npx cap sync android
+          npm ci --omit=dev
+          npm run cap:sync
 
       - name: Decode keystore
         env:
@@ -248,6 +239,29 @@ jobs:
           VERSION=${GITHUB_REF#refs/tags/v}
           cp android/app/build/outputs/apk/release/app-release.apk \
              android/app/build/outputs/apk/release/open-secret-santa-${VERSION}.apk
+
+      # F-Droid rebuilds from source and only publishes our signed APK if its
+      # rebuild is byte-identical (apksigcopier). A non-reproducible release
+      # would be silently skipped there — fail loudly here instead.
+      - name: Verify release is reproducible
+        run: |
+          VERSION=${GITHUB_REF#refs/tags/v}
+          SIGNED_APK="$RUNNER_TEMP/open-secret-santa-${VERSION}.apk"
+          cp "android/app/build/outputs/apk/release/open-secret-santa-${VERSION}.apk" "$SIGNED_APK"
+          # independent rebuild without signing material, from a clean tree
+          rm -f android/keystore.properties android/app/release.keystore
+          rm -rf android/app/build www
+          npm run cap:sync
+          cd android && ./gradlew assembleRelease --no-daemon && cd ..
+          UNSIGNED_APK="$PWD/android/app/build/outputs/apk/release/app-release-unsigned.apk"
+          pipx install apksigcopier
+          # apksigcopier shells out to apksigner from the SDK build-tools
+          export PATH="$(dirname "$(ls "$ANDROID_HOME"/build-tools/*/apksigner | sort -V | tail -1)"):$PATH"
+          apksigcopier compare "$SIGNED_APK" --unsigned "$UNSIGNED_APK"
+          echo "✅ Release APK is reproducible (signed and clean rebuild match)"
+          # the rebuild wiped the output dir — put the signed APK back for the
+          # upload and release steps that follow
+          cp "$SIGNED_APK" android/app/build/outputs/apk/release/
 
       - name: Upload release APK artifact
         uses: actions/upload-artifact@v4
