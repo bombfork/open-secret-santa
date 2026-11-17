@@ -49,7 +49,6 @@ Builds:
       - apt-get install -y --no-install-recommends nodejs npm
     gradle:
       - yes
-    output: build/outputs/apk/release/app-release-unsigned.apk
     prebuild:
       # single item: fdroidserver joins list entries into one shell, so a cd
       # in one entry leaks into the next
@@ -66,7 +65,7 @@ CurrentVersionCode: 6
 Recipe design notes:
 
 - **`sudo` Node install from Debian**: the buildserver runs Debian trixie+, whose `nodejs` (20.19) satisfies Capacitor 7's `>=20` engine requirement — plain `apt-get install nodejs npm`, no pinned tarball (reviewer-requested on the inclusion MR).
-- **`subdir` points at the app module (`android/app`), not the gradle root**: fdroidserver only finds the built APK via the `output` path relative to `subdir` ("Failed to find any output apks" otherwise), and `output` must name the module's own build dir. Same shape as `ca.leradar.app`. `prebuild` runs with `subdir` as working directory, hence the `cd ../..` — and it must stay a **single list item**: fdroidserver concatenates the list into one shell invocation, so a `cd` in one entry changes the directory for the entries after it. `npm ci --omit=dev` is deliberate: the dev-dependency chain (`@capacitor/assets` → `@trapezedev/gradle-parse`) ships `.jar` files that would trip F-Droid's binary scanner; the production install contains none, and everything `cap sync` needs (including the Capacitor CLI) is in `dependencies`.
+- **`subdir` points at the app module (`android/app`), not the gradle root**: fdroidserver's default APK discovery searches the module's own `build/outputs/apk/` under `subdir` — with the gradle root as `subdir` it finds nothing ("Failed to find any output apks"), and no `output:` override is needed with the module shape (reviewer-requested removal). `prebuild` runs with `subdir` as working directory, hence the `cd ../..` — and it must stay a **single list item**: fdroidserver concatenates the list into one shell invocation, so a `cd` in one entry changes the directory for the entries after it. `npm ci --omit=dev` is deliberate: the dev-dependency chain (`@capacitor/assets` → `@trapezedev/gradle-parse`) ships `.jar` files that would trip F-Droid's binary scanner; the production install contains none, and everything `cap sync` needs (including the Capacitor CLI) is in `dependencies`.
 - `npm run cap:sync` recreates the gitignored `www/` from the repo sources and syncs it into `android/app/src/main/assets`. Unlike our release CI it does not copy `.well-known/` into the APK — App Links verification uses the hosted file on the domain, not APK contents.
 - **`scandelete: node_modules`** (same as `ca.leradar.app`): the scanner flags the template tarballs shipped in `node_modules/@capacitor/cli/assets/` even on a prod-only install. `scandelete` removes only the *flagged* files under the listed path, after prebuild has already consumed them (`cap sync` runs in prebuild), so the `@capacitor/android` sources gradle builds from stay intact.
 - The release build is unsigned without `android/keystore.properties` (see [android/app/build.gradle](android/app/build.gradle)) — F-Droid's rebuild stays unsigned and gets our signature copied onto it (`apksigcopier`) after byte-identity is verified.
